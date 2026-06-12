@@ -1,0 +1,28 @@
+{
+  "title": "MapTiler Geolocation API Example",
+  "description": "Example request and response for the MapTiler Geolocation API IP-based location endpoint.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.maptiler.com/geolocation/ip.json?key=YOUR_MAPTILER_API_KEY",
+    "parameters": {
+      "key": "YOUR_MAPTILER_API_KEY"
+    }
+  },
+  "response": {
+    "country": "Switzerland",
+    "country_code": "CH",
+    "country_bounds": [5.95538, 45.818852, 10.490936, 47.809357],
+    "country_languages": ["de", "fr", "it"],
+    "continent": "Europe",
+    "continent_code": "EU",
+    "eu": false,
+    "city": "Zurich",
+    "latitude": 47.36667,
+    "longitude": 8.55,
+    "postal": "8000",
+    "region": "Zurich",
+    "region_code": "ZH",
+    "timezone": "Europe/Zurich",
+    "elevation": 433
+  }
+}

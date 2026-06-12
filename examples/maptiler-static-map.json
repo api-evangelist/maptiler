@@ -1,0 +1,30 @@
+{
+  "title": "MapTiler Static Maps API Example",
+  "description": "Example requests for the MapTiler Static Maps API, generating non-interactive PNG map images.",
+  "examples": [
+    {
+      "name": "Center-based static map",
+      "description": "Render a 512x512 PNG map centered on Zurich at zoom level 12.",
+      "request": {
+        "method": "GET",
+        "url": "https://api.maptiler.com/maps/streets-v2/static/8.5417,47.3769,12/512x512.png?key=YOUR_MAPTILER_API_KEY"
+      }
+    },
+    {
+      "name": "Bounding-box static map",
+      "description": "Render a 800x600 PNG map showing Switzerland's bounding box.",
+      "request": {
+        "method": "GET",
+        "url": "https://api.maptiler.com/maps/streets-v2/static/5.9559,45.818,10.4921,47.8084/800x600.png?key=YOUR_MAPTILER_API_KEY"
+      }
+    },
+    {
+      "name": "Auto-fitted static map with marker",
+      "description": "Render a 600x400 PNG that auto-fits to markers placed on the map.",
+      "request": {
+        "method": "GET",
+        "url": "https://api.maptiler.com/maps/streets-v2/static/auto/600x400.png?markers=2.3514992,48.8566101&key=YOUR_MAPTILER_API_KEY"
+      }
+    }
+  ]
+}

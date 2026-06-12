@@ -1,0 +1,21 @@
+{
+  "title": "MapTiler Elevation API Example",
+  "description": "Example request and response for the MapTiler Elevation API, returning altitude above mean sea level for up to 50 coordinate pairs.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.maptiler.com/elevation/8.5280,47.3774.json?key=YOUR_MAPTILER_API_KEY",
+    "parameters": {
+      "key": "YOUR_MAPTILER_API_KEY"
+    }
+  },
+  "note": "For batch requests, provide up to 50 comma-separated coordinate pairs in the path: /elevation/{lon1},{lat1}|{lon2},{lat2}|....json",
+  "response": {
+    "results": [
+      {
+        "longitude": 8.528,
+        "latitude": 47.3774,
+        "elevation": 408
+      }
+    ]
+  }
+}

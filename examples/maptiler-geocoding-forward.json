@@ -1,0 +1,53 @@
+{
+  "title": "MapTiler Forward Geocoding Example",
+  "description": "Example request and response for the MapTiler Geocoding API forward geocoding endpoint.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.maptiler.com/geocoding/paris.json?key=YOUR_MAPTILER_API_KEY",
+    "parameters": {
+      "key": "YOUR_MAPTILER_API_KEY",
+      "language": "en",
+      "limit": 5
+    }
+  },
+  "response": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "id": "municipality.46425",
+        "text": "Paris",
+        "place_name": "Paris, Île-de-France, France",
+        "place_type": ["municipality"],
+        "place_type_name": ["City"],
+        "relevance": 1.0,
+        "bbox": [2.224122, 48.8155755, 2.4697602, 48.902156],
+        "center": [2.3514992, 48.8566101],
+        "geometry": {
+          "type": "Point",
+          "coordinates": [2.3514992, 48.8566101]
+        },
+        "properties": {
+          "ref": "osm:r71525",
+          "country_code": "fr",
+          "kind": "admin_area"
+        },
+        "context": [
+          {
+            "id": "region.12",
+            "text": "Île-de-France",
+            "country_code": "fr",
+            "ref": "osm:r8649"
+          },
+          {
+            "id": "country.France",
+            "text": "France",
+            "country_code": "fr"
+          }
+        ]
+      }
+    ],
+    "query": ["paris"],
+    "attribution": "<a href=\"https://www.maptiler.com/copyright/\" target=\"_blank\">&copy; MapTiler</a> <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">&copy; OpenStreetMap contributors</a>"
+  }
+}

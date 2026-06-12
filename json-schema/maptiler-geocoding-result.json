@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.maptiler.com/schemas/geocoding-result",
+  "title": "SearchResults",
+  "description": "Geocoding search result represented by a GeoJSON FeatureCollection where every item is a GeoJSON Feature with place metadata.",
+  "type": "object",
+  "required": ["type", "features", "query", "attribution"],
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "FeatureCollection",
+      "description": "GeoJSON type identifier."
+    },
+    "features": {
+      "type": "array",
+      "description": "Array of geocoding result features.",
+      "items": {
+        "type": "object",
+        "required": ["type", "properties", "geometry", "bbox", "center", "place_name", "place_type", "place_type_name", "relevance"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "Feature"
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique feature ID.",
+            "example": "municipality.46425"
+          },
+          "text": {
+            "type": "string",
+            "description": "Localized feature name.",
+            "example": "Paris"
+          },
+          "place_name": {
+            "type": "string",
+            "description": "Formatted and localized full feature name including hierarchy."
+          },
+          "matching_place_name": {
+            "type": "string",
+            "description": "A string analogous to place_name that matches the query."
+          },
+          "matching_text": {
+            "type": "string",
+            "description": "A string analogous to text that matches the query."
+          },
+          "place_type": {
+            "type": "array",
+            "description": "Array of feature type classifications.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "continental_marine", "country", "major_landform", "region",
+                "subregion", "county", "joint_municipality", "joint_submunicipality",
+                "municipality", "municipal_district", "locality", "neighbourhood",
+                "place", "postal_code", "address", "road", "poi"
+              ]
+            }
+          },
+          "place_type_name": {
+            "type": "array",
+            "description": "Localized type names matching place_type.",
+            "items": { "type": "string" }
+          },
+          "relevance": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Score from 0 to 1 indicating how well the result matches the query."
+          },
+          "bbox": {
+            "type": "array",
+            "description": "Bounding box [west, south, east, north] in WGS84 degrees.",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": { "type": "number" }
+          },
+          "center": {
+            "type": "array",
+            "description": "Feature centroid as [longitude, latitude].",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": { "type": "number" }
+          },
+          "address": {
+            "type": "string",
+            "description": "Address number, if applicable."
+          },
+          "geometry": {
+            "description": "GeoJSON geometry of the feature.",
+            "oneOf": [
+              {
+                "type": "object",
+                "title": "Point",
+                "required": ["type", "coordinates"],
+                "properties": {
+                  "type": { "type": "string", "const": "Point" },
+                  "coordinates": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": { "type": "number" }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "Polygon",
+                "required": ["type", "coordinates"],
+                "properties": {
+                  "type": { "type": "string", "const": "Polygon" },
+                  "coordinates": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "minItems": 4,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": { "type": "number" }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "description": "Feature properties including country_code, kind, categories, and experimental fields.",
+            "properties": {
+              "ref": {
+                "type": "string",
+                "description": "External reference for debugging purposes.",
+                "example": "osm:r71525"
+              },
+              "country_code": {
+                "type": "string",
+                "description": "ISO 3166-1 alpha-2 country code.",
+                "example": "fr"
+              },
+              "kind": {
+                "type": "string",
+                "enum": ["road", "road_relation", "admin_area", "place", "street", "virtual_street"]
+              },
+              "categories": {
+                "type": "array",
+                "description": "POI categories, only for poi type.",
+                "items": { "type": "string" }
+              }
+            }
+          },
+          "context": {
+            "type": "array",
+            "description": "Hierarchy of containing places.",
+            "items": { "type": "object" }
+          }
+        }
+      }
+    },
+    "query": {
+      "type": "array",
+      "description": "Tokenized search query.",
+      "items": { "type": "string" }
+    },
+    "attribution": {
+      "type": "string",
+      "description": "Attribution text for the geocoding data.",
+      "example": "<a href=\"https://www.maptiler.com/copyright/\" target=\"_blank\">&copy; MapTiler</a> <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">&copy; OpenStreetMap contributors</a>"
+    }
+  }
+}

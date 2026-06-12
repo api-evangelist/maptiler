@@ -1,0 +1,194 @@
+vocabulary:
+  provider: MapTiler
+  description: >
+    Domain vocabulary for the MapTiler Cloud API covering maps, tiles, geocoding,
+    elevation, geolocation, coordinate transformation, static maps, and weather services.
+  terms:
+    - term: mapId
+      definition: >
+        Unique identifier for a map style hosted on MapTiler Cloud, used to
+        retrieve style configurations, tile sets, and OGC-compatible endpoints.
+      type: string
+      used_in:
+        - Maps API
+        - Static Maps API
+
+    - term: tilesId
+      definition: >
+        Unique identifier for a tile dataset (e.g., satellite, terrain, or custom
+        vector tiles) available through the MapTiler Tiles API.
+      type: string
+      used_in:
+        - Tiles API
+
+    - term: dataId
+      definition: >
+        Unique identifier for a GeoJSON data source hosted on MapTiler Cloud,
+        used to retrieve vector features via the Data API.
+      type: string
+      used_in:
+        - Data API
+
+    - term: imageId
+      definition: >
+        Unique identifier for a raster image tileset hosted on MapTiler Cloud.
+      type: string
+      used_in:
+        - Images API
+
+    - term: spriteId
+      definition: >
+        Unique identifier for a sprite sheet used in map styling, containing
+        map symbols and icons in PNG and JSON descriptor formats.
+      type: string
+      used_in:
+        - Sprites API
+
+    - term: TileJSON
+      definition: >
+        A JSON metadata document describing a tile layer, including its bounds,
+        zoom levels, attribution, and tile URL template. Based on the TileJSON
+        specification at https://github.com/maptiler/tilejson-spec.
+      type: object
+      used_in:
+        - Maps API
+        - Tiles API
+
+    - term: StyleJSON
+      definition: >
+        A Mapbox GL / MapLibre GL style specification document that defines the
+        visual appearance of a map, including sources, layers, fonts, and sprites.
+      type: object
+      used_in:
+        - Maps API
+
+    - term: GeoJSON
+      definition: >
+        A standard format (RFC 7946) for encoding geographic data structures
+        using JSON, including points, lines, polygons, and feature collections.
+      type: object
+      used_in:
+        - Geocoding API
+        - Data API
+
+    - term: placeType
+      definition: >
+        Classification of a geocoding result indicating the administrative or
+        geographic category of the found place (e.g., country, municipality,
+        address, poi, postal_code).
+      type: string
+      enum:
+        - continental_marine
+        - country
+        - major_landform
+        - region
+        - subregion
+        - county
+        - joint_municipality
+        - joint_submunicipality
+        - municipality
+        - municipal_district
+        - locality
+        - neighbourhood
+        - place
+        - postal_code
+        - address
+        - road
+        - poi
+      used_in:
+        - Geocoding API
+
+    - term: bbox
+      definition: >
+        Bounding box expressed as a four-element array [west, south, east, north]
+        in WGS84 decimal degrees, representing the spatial extent of a geographic
+        feature or search result.
+      type: array
+      used_in:
+        - Geocoding API
+        - Static Maps API
+        - Coordinates API
+
+    - term: coordinates
+      definition: >
+        A longitude/latitude pair expressed as a two-element array [longitude, latitude]
+        in WGS84 decimal degrees.
+      type: array
+      used_in:
+        - Geocoding API
+        - Elevation API
+        - Coordinates API
+
+    - term: GeolocationResult
+      definition: >
+        Response object from the Geolocation API containing country, city,
+        coordinates, timezone, continent, and optional elevation data inferred
+        from the request's IP address.
+      type: object
+      used_in:
+        - Geolocation API
+
+    - term: APIKey
+      definition: >
+        A MapTiler Cloud API key object containing the token, name, description,
+        allowed origins, user agent restrictions, and timestamps for creation
+        and last modification.
+      type: object
+      used_in:
+        - Authentication
+
+    - term: tileMatrixSet
+      definition: >
+        An OGC-standard definition of a gridded tile scheme including spatial
+        reference system, bounds, and per-zoom-level matrix parameters.
+      type: object
+      used_in:
+        - Maps API
+        - Tiles API
+
+    - term: relevance
+      definition: >
+        A numeric score from 0 to 1 indicating how closely a geocoding result
+        matches the submitted query. A score of 1 indicates an exact match.
+      type: number
+      used_in:
+        - Geocoding API
+
+    - term: WeatherCatalogResult
+      definition: >
+        Response object listing all available weather forecast variables including
+        their tileset definitions, keyframes, and decoding parameters for
+        rendering weather data as map tiles.
+      type: object
+      used_in:
+        - Weather API
+
+    - term: TilesetDefinition
+      definition: >
+        Metadata object describing a weather or data tileset including its
+        spatial reference system, bounds, tile format, tile matrix set, and
+        associated metadata such as weather variable parameters.
+      type: object
+      used_in:
+        - Weather API
+
+    - term: EPSG
+      definition: >
+        European Petroleum Survey Group — the authority that maintains a
+        standardized database of coordinate reference systems (CRS). MapTiler's
+        Coordinates API supports searching and transforming between EPSG-registered
+        projections.
+      type: string
+      used_in:
+        - Coordinates API
+
+    - term: WMTSCapabilities
+      definition: >
+        An OGC Web Map Tile Service (WMTS) capabilities XML document describing
+        the available tile layers, CRS options, and tile matrix sets for a
+        given MapTiler map or tileset.
+      type: string
+      format: xml
+      used_in:
+        - Maps API
+        - Tiles API

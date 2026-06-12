@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.maptiler.com/schemas/geolocation-result",
+  "title": "GeolocationResult",
+  "description": "Response from the MapTiler Geolocation API containing geographic location data inferred from the request IP address.",
+  "type": "object",
+  "properties": {
+    "country": {
+      "type": "string",
+      "description": "Name of the country.",
+      "example": "Switzerland"
+    },
+    "country_code": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 two-letter country code.",
+      "example": "CH"
+    },
+    "country_bounds": {
+      "type": "array",
+      "description": "Bounding box of the country in WGS84 degrees [west, south, east, north].",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": { "type": "number" },
+      "example": [5.95538, 45.818852, 10.490936, 47.809357]
+    },
+    "country_languages": {
+      "type": "array",
+      "description": "Official country languages in ISO 639-1 format.",
+      "items": { "type": "string" },
+      "example": ["de", "fr", "it"]
+    },
+    "continent": {
+      "type": "string",
+      "description": "Name of the continent.",
+      "example": "Europe"
+    },
+    "continent_code": {
+      "type": "string",
+      "description": "Two-letter continent code.",
+      "example": "EU"
+    },
+    "eu": {
+      "type": "boolean",
+      "description": "Indicates whether the country is part of the European Union.",
+      "example": false
+    },
+    "city": {
+      "type": "string",
+      "description": "Name of the city.",
+      "example": "Zurich"
+    },
+    "latitude": {
+      "type": "number",
+      "description": "Latitude of the inferred location.",
+      "example": 47.36667
+    },
+    "longitude": {
+      "type": "number",
+      "description": "Longitude of the inferred location.",
+      "example": 8.55
+    },
+    "postal": {
+      "type": "string",
+      "description": "Postal code.",
+      "example": "8000"
+    },
+    "region": {
+      "type": "string",
+      "description": "ISO 3166-2 name for the first level region.",
+      "example": "Zurich"
+    },
+    "region_code": {
+      "type": "string",
+      "description": "ISO 3166-2 code for the first level region.",
+      "example": "ZH"
+    },
+    "timezone": {
+      "type": "string",
+      "description": "Name of the timezone in IANA format.",
+      "example": "Europe/Zurich"
+    },
+    "elevation": {
+      "type": "number",
+      "description": "Elevation of the location in meters above mean sea level.",
+      "example": 433
+    }
+  }
+}

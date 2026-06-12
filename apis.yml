@@ -141,6 +141,24 @@ common:
     url: rate-limits/maptiler-rate-limits.yml
   - type: FinOps
     url: finops/maptiler-finops.yml
+  - type: OpenAPI
+    url: openapi/maptiler-maptiler-openapi.yml
+  - type: Vocabulary
+    url: vocabulary/maptiler-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/maptiler-context.jsonld
+  - type: JSONSchema
+    url: json-schema/maptiler-geocoding-result.json
+  - type: JSONSchema
+    url: json-schema/maptiler-geolocation-result.json
+  - type: Example
+    url: examples/maptiler-geocoding-forward.json
+  - type: Example
+    url: examples/maptiler-geolocation-ip.json
+  - type: Example
+    url: examples/maptiler-elevation.json
+  - type: Example
+    url: examples/maptiler-static-map.json
 maintainers:
   - name: Kin Lane
     email: kin@apievangelist.com
