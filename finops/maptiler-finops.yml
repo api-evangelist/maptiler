@@ -1,0 +1,162 @@
+specificationVersion: '1.0'
+name: MapTiler FinOps
+description: >
+  FinOps Framework FOCUS-aligned cost management guidance for MapTiler Cloud
+  API usage. Covers cost visibility, allocation, optimization, and governance
+  practices for engineering and finance teams consuming geospatial APIs.
+url: https://www.maptiler.com/cloud/pricing/
+provider: MapTiler
+currency: USD
+framework: FinOps FOCUS 1.0
+costDimensions:
+  - name: Map Sessions
+    description: >
+      Interactive map page loads. Each time a user loads a page with an
+      interactive map, one session is consumed. High-traffic pages with maps
+      are the primary driver of session costs.
+    unit: session
+    pricingModel: tiered-monthly-quota
+    plans:
+      - plan: Flex
+        included: 25000
+        overageRate: 0.002
+        overageUnit: session
+      - plan: Unlimited
+        included: 300000
+        overageRate: 0.0015
+        overageUnit: session
+  - name: API Requests
+    description: >
+      All programmatic API calls including tiles, geocoding, elevation,
+      geolocation, static maps, and coordinate transformation. Request costs
+      vary by operation type — static map images are 15x the cost of a
+      single vector tile request.
+    unit: request
+    pricingModel: tiered-monthly-quota
+    plans:
+      - plan: Flex
+        included: 500000
+        overageRate: 0.0001
+        overageUnit: request
+      - plan: Unlimited
+        included: 5000000
+        overageRate: 0.00008
+        overageUnit: request
+  - name: Data Storage
+    description: >
+      Hosted geospatial file storage for custom tile sets, GeoJSON, and
+      raster data. Measured in GB with per-plan file count limits.
+    unit: GB
+    pricingModel: included-in-plan
+    plans:
+      - plan: Free
+        included: 0.1 GB
+        fileLimit: 1
+      - plan: Flex
+        included: 10 GB
+        fileLimit: 10
+      - plan: Unlimited
+        included: 100 GB
+        fileLimit: 1000
+      - plan: Custom
+        included: Unlimited
+        fileLimit: Unlimited
+costOptimization:
+  - category: Session Reduction
+    practices:
+      - name: Lazy Map Initialization
+        description: >
+          Delay map initialization until the user scrolls the map into view
+          using Intersection Observer. Prevents sessions from being counted
+          for maps never actually viewed.
+      - name: Single Page Application Architecture
+        description: >
+          SPAs count a session only on initial page load. Multi-page sites
+          accumulate sessions per page navigation.
+      - name: Disable Maps on Non-Critical Pages
+        description: >
+          Audit pages with low engagement and replace maps with static
+          images where interactivity is not required. Static images cost
+          15 requests once but avoid recurring sessions.
+  - category: Request Reduction
+    practices:
+      - name: Tile Caching
+        description: >
+          Enable browser-level tile caching. MapTiler SDK v2+ caches tiles
+          and fonts by default, reducing repeat requests on subsequent page
+          loads.
+      - name: Appropriate Zoom Levels
+        description: >
+          Limit maximum zoom levels to what users actually need. Higher
+          zoom levels require exponentially more tiles to cover the same
+          geographic area.
+      - name: Static Maps for Non-Interactive Use Cases
+        description: >
+          Use the Static Maps API for email, PDF reports, and thumbnail
+          images instead of embedding interactive maps. One static image
+          request (15 units) replaces dozens of session-based tile loads.
+      - name: Geocoding Cache
+        description: >
+          Cache geocoding results server-side for repeated address lookups.
+          A single address searched 1,000 times only needs one API call.
+      - name: Batch Geocoding
+        description: >
+          Use batch geocoding (up to 50 queries per request) for bulk
+          address processing instead of sequential single queries.
+  - category: Plan Right-Sizing
+    practices:
+      - name: Monitor Monthly Usage Dashboard
+        description: >
+          Review the MapTiler Cloud dashboard monthly to compare actual
+          session and request consumption against plan limits.
+          url: https://docs.maptiler.com/guides/maps-apis/maps-platform/how-to-control-expenses-in-your-user-account/
+      - name: Set Usage Alerts
+        description: >
+          Configure spending alerts and usage notifications in the MapTiler
+          Cloud account to catch unexpected spikes before they generate
+          large overage invoices.
+      - name: Upgrade Before Overage
+        description: >
+          The per-unit overage rate is always more expensive than the
+          included quota on the next tier. If regularly exceeding limits,
+          upgrading the plan reduces total cost.
+costAllocation:
+  - name: API Key Segmentation
+    description: >
+      Create separate MapTiler API keys per application, team, or environment
+      (dev/staging/production). Monitor per-key usage in the dashboard to
+      attribute costs to business units or products.
+  - name: Environment Isolation
+    description: >
+      Use distinct API keys and potentially separate MapTiler accounts for
+      development and production. Development tile loads and geocoding tests
+      should not consume production quota.
+  - name: Tagging Strategy
+    description: >
+      Label API keys by project or team in the MapTiler dashboard to enable
+      cost reporting by organizational unit.
+governance:
+  - name: Overage Budget Controls
+    description: >
+      Free plan users have hard cutoffs (service suspended at quota). Paid
+      plans accumulate overages — set dashboard alerts at 80% and 95% of
+      monthly quota to trigger human review before runaway costs occur.
+  - name: Custom Plan Soft Limits
+    description: >
+      Enterprise customers on the Custom plan benefit from soft limits that
+      prevent automatic overage charges. Usage spikes are reviewed with the
+      account manager rather than auto-billed.
+  - name: Reseller Cost Management
+    description: >
+      Custom plan permits reselling. Resellers should build per-customer
+      usage tracking into their platform to allocate costs accurately and
+      ensure margin coverage on geospatial API consumption.
+references:
+  - name: MapTiler Pricing Page
+    url: https://www.maptiler.com/cloud/pricing/
+  - name: Manage Costs Guide
+    url: https://www.maptiler.com/news/2019/11/manage-your-costs-with-maptiler-cloud/
+  - name: Control Expenses Guide
+    url: https://docs.maptiler.com/guides/maps-apis/maps-platform/how-to-control-expenses-in-your-user-account/
+  - name: Sessions vs Requests Guide
+    url: https://docs.maptiler.com/guides/maps-apis/maps-platform/tile-requests-and-map-sessions-compared/

@@ -1,0 +1,146 @@
+aid: maptiler
+name: MapTiler
+description: >
+  MapTiler is a map hosting and geospatial API platform providing vector tiles,
+  satellite imagery, geocoding, reverse geocoding, static maps, elevation data,
+  geolocation, and coordinate transformation via REST APIs and SDKs for web,
+  mobile, and server-side developers.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/maptiler/refs/heads/main/apis.yml
+created: '2026-06-12'
+modified: '2026-06-12'
+specificationVersion: '0.19'
+tags:
+  - Maps
+  - Geospatial
+  - Tiles
+  - Vector Tiles
+  - Satellite Imagery
+  - Geocoding
+  - Reverse Geocoding
+  - Static Maps
+  - Elevation
+  - Geolocation
+  - Coordinate Transformation
+  - GIS
+  - Mapping Platform
+apis:
+  - name: MapTiler Maps API
+    description: >
+      Provides access to MapTiler Cloud map styles including embeddable viewers,
+      style configuration, raster tiles, and OGC-compatible endpoints for
+      rendering and serving customizable map styles.
+    tags:
+      - Maps
+      - Tiles
+      - Vector Tiles
+      - Raster Tiles
+      - OGC
+    properties:
+      - type: Documentation
+        url: https://docs.maptiler.com/cloud/api/maps/
+  - name: MapTiler Tiles API
+    description: >
+      Delivers map tile datasets including satellite imagery, terrain, and
+      other raster or vector tile collections via XYZ, OGC API - Tiles, and
+      WMTS-compatible endpoints.
+    tags:
+      - Tiles
+      - Satellite Imagery
+      - Vector Tiles
+      - Raster Tiles
+      - WMTS
+    properties:
+      - type: Documentation
+        url: https://docs.maptiler.com/cloud/api/tiles/
+  - name: MapTiler Geocoding API
+    description: >
+      Enables forward and reverse geocoding to search for places and addresses
+      anywhere on Earth and convert coordinates to location data. Supports batch
+      geocoding of up to 50 queries per request with filtering by country,
+      language, and place type.
+    tags:
+      - Geocoding
+      - Forward Geocoding
+      - Reverse Geocoding
+      - Address Search
+    properties:
+      - type: Documentation
+        url: https://docs.maptiler.com/cloud/api/geocoding/
+  - name: MapTiler Static Maps API
+    description: >
+      Generates static non-interactive map images in PNG, JPG, or WebP formats.
+      Supports center-based, bounding-box-based, and auto-fitted viewports with
+      optional markers and path overlays. Requires a paid plan.
+    tags:
+      - Static Maps
+      - Images
+      - Maps
+    properties:
+      - type: Documentation
+        url: https://docs.maptiler.com/cloud/api/static-maps/
+  - name: MapTiler Elevation API
+    description: >
+      Provides accurate altitude above mean sea level for any location on Earth.
+      Accepts up to 50 coordinate pairs per request and returns elevation in
+      meters or feet.
+    tags:
+      - Elevation
+      - Terrain
+      - Geospatial
+    properties:
+      - type: Documentation
+        url: https://docs.maptiler.com/cloud/api/elevation/
+  - name: MapTiler Geolocation API
+    description: >
+      Returns approximate geographic location based on the incoming request's
+      IP address, including country, city, coordinates, timezone, and optional
+      elevation data. Useful for localizing maps and applications.
+    tags:
+      - Geolocation
+      - IP Geolocation
+      - Location
+    properties:
+      - type: Documentation
+        url: https://docs.maptiler.com/cloud/api/geolocation/
+  - name: MapTiler Coordinates API
+    description: >
+      Enables searching the EPSG coordinate system database and transforming
+      coordinates between different projections and coordinate reference systems.
+      Supports up to 50 coordinate pairs per transformation request.
+    tags:
+      - Coordinates
+      - Coordinate Transformation
+      - CRS
+      - EPSG
+      - Projection
+    properties:
+      - type: Documentation
+        url: https://docs.maptiler.com/cloud/api/coordinates/
+common:
+  - type: Website
+    url: https://www.maptiler.com/
+  - type: Documentation
+    url: https://docs.maptiler.com/
+  - type: GitHub
+    url: https://github.com/maptiler
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/maptiler/
+  - type: Blog
+    url: https://www.maptiler.com/news/
+  - type: Pricing
+    url: https://www.maptiler.com/cloud/pricing/
+  - type: StatusPage
+    url: https://status.maptiler.com
+  - type: X
+    url: https://x.com/MapTiler
+  - type: Plans
+    url: plans/maptiler-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/maptiler-rate-limits.yml
+  - type: FinOps
+    url: finops/maptiler-finops.yml
+maintainers:
+  - name: Kin Lane
+    email: kin@apievangelist.com

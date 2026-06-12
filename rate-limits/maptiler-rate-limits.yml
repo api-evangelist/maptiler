@@ -1,0 +1,92 @@
+specificationVersion: '0.1'
+name: MapTiler Rate Limits
+description: >
+  Rate limiting information for the MapTiler Cloud REST API. MapTiler measures
+  usage via two metrics — map sessions and API requests — with monthly quotas
+  defined by plan tier. Overage behavior differs by plan: Free plan suspends
+  service; paid plans charge extra per-unit overage fees.
+url: https://docs.maptiler.com/cloud/api/
+metrics:
+  - name: Map Sessions
+    description: >
+      A session is counted each time a map is initialized on a page load. Each
+      unique page load with a map widget counts as one session regardless of
+      how many tiles are loaded during that session.
+    unit: sessions/month
+    notes: >
+      Sessions are the primary billing metric for interactive map usage.
+  - name: API Requests
+    description: >
+      Each request to the MapTiler API counts against the monthly request quota.
+      Different operations consume different numbers of requests: a single
+      vector tile costs 1 request, a static map image costs 15 requests, and
+      a rendered 512px raster tile costs 4 requests.
+    unit: requests/month
+    notes: >
+      Geocoding, elevation, geolocation, and coordinate transformation calls
+      each count as API requests. Tile requests count per tile fetched.
+requestCosts:
+  - operation: Vector tile
+    requestCost: 1
+  - operation: Static map image
+    requestCost: 15
+  - operation: Rendered 512px raster tile
+    requestCost: 4
+  - operation: Geocoding query (single)
+    requestCost: 1
+  - operation: Geocoding batch (up to 50 queries)
+    requestCost: 1 per query in batch
+  - operation: Elevation query (single location)
+    requestCost: 1
+  - operation: Elevation batch (up to 50 locations)
+    requestCost: 1 per location
+  - operation: Geolocation IP lookup
+    requestCost: 1
+  - operation: Coordinate search
+    requestCost: 1
+  - operation: Coordinate transformation (up to 50 pairs)
+    requestCost: 1 per coordinate pair
+limits:
+  - plan: Free
+    sessionsPerMonth: 5000
+    requestsPerMonth: 100000
+    overage: Service suspended for remainder of month
+    extraSessionCost: null
+    extraRequestCost: null
+  - plan: Flex
+    sessionsPerMonth: 25000
+    requestsPerMonth: 500000
+    overage: Pay-as-you-go overages charged
+    extraSessionCost: '$2.00 per 1,000 sessions'
+    extraRequestCost: '$0.10 per 1,000 requests'
+  - plan: Unlimited
+    sessionsPerMonth: 300000
+    requestsPerMonth: 5000000
+    overage: Pay-as-you-go overages charged
+    extraSessionCost: '$1.50 per 1,000 sessions'
+    extraRequestCost: '$0.08 per 1,000 requests'
+  - plan: Custom
+    sessionsPerMonth: Custom (negotiated)
+    requestsPerMonth: Custom (negotiated)
+    overage: Soft limits — no automatic overage charges; usage reviewed with account manager
+    extraSessionCost: Negotiated
+    extraRequestCost: Negotiated
+authentication:
+  type: API Key
+  description: >
+    All API requests require a valid MapTiler API key passed as a query
+    parameter named `key`. API keys are obtained through the MapTiler Cloud
+    account dashboard. API access is read-only.
+  parameter: key
+  location: query string
+concurrencyLimits:
+  description: >
+    No published per-second or concurrent request rate limits. Usage is
+    metered against monthly session and request quotas. High-volume or
+    enterprise needs should use a Custom plan with a soft limit configuration.
+notes:
+  - 'Static maps API is not available on the Free plan'
+  - 'Batch geocoding supports up to 50 queries per request'
+  - 'Elevation API supports up to 50 coordinate pairs per request'
+  - 'Coordinate transformation supports up to 50 coordinate pairs per request'
+  - 'All API access is read-only'

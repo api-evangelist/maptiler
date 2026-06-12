@@ -1,0 +1,157 @@
+specificationVersion: '0.1'
+name: MapTiler Plans and Pricing
+description: >
+  Pricing plans for MapTiler Cloud, the geospatial API and map hosting platform.
+  Plans are based on monthly map sessions, API requests, and storage capacity.
+  All prices are in USD and exclude VAT.
+url: https://www.maptiler.com/cloud/pricing/
+plans:
+  - name: Free
+    description: >
+      For individual developers, hobbyists, and non-commercial evaluation.
+      MapTiler branding is required on all maps. No extra usage allowed beyond
+      included quotas.
+    price:
+      amount: 0
+      currency: USD
+      period: monthly
+    commercial: false
+    features:
+      - name: Map Sessions
+        description: Monthly map sessions included
+        value: '5,000'
+        notes: No extras allowed on Free plan
+      - name: API Requests
+        description: Monthly API requests included
+        value: '100,000'
+        notes: No extras allowed on Free plan
+      - name: Storage
+        description: Hosted data storage
+        value: 100 MB
+        notes: 1 file upload limit
+      - name: Custom Map Styles
+        description: Number of custom styles allowed
+        value: '5'
+      - name: MapTiler Logo
+        description: Attribution requirement
+        value: Required
+      - name: Commercial Use
+        description: Whether commercial use is permitted
+        value: 'No'
+  - name: Flex
+    description: >
+      For startups and small businesses needing commercial mapping capability
+      with pay-as-you-go overages. Ideal for growing applications with variable
+      traffic.
+    price:
+      amount: 25
+      currency: USD
+      period: monthly
+    commercial: true
+    features:
+      - name: Map Sessions
+        description: Monthly map sessions included
+        value: '25,000'
+        notes: Extras at $2.00 per 1,000 additional sessions
+      - name: API Requests
+        description: Monthly API requests included
+        value: '500,000'
+        notes: Extras at $0.10 per 1,000 additional requests
+      - name: Storage
+        description: Hosted data storage
+        value: 10 GB
+        notes: Up to 10 file uploads
+      - name: Custom Map Styles
+        description: Number of custom styles allowed
+        value: '20'
+      - name: Commercial Use
+        description: Whether commercial use is permitted
+        value: 'Yes'
+      - name: MapTiler Logo
+        description: Attribution requirement
+        value: Optional
+    overages:
+      - name: Additional Sessions
+        rate: '$2.00 per 1,000 sessions'
+      - name: Additional API Requests
+        rate: '$0.10 per 1,000 requests'
+  - name: Unlimited
+    description: >
+      For medium-sized businesses and production applications requiring higher
+      volume, SLA guarantees, and team account features.
+    price:
+      amount: 295
+      currency: USD
+      period: monthly
+    commercial: true
+    features:
+      - name: Map Sessions
+        description: Monthly map sessions included
+        value: '300,000'
+        notes: Extras at $1.50 per 1,000 additional sessions
+      - name: API Requests
+        description: Monthly API requests included
+        value: '5,000,000'
+        notes: Extras at $0.08 per 1,000 additional requests
+      - name: Storage
+        description: Hosted data storage
+        value: 100 GB
+        notes: Up to 1,000 file uploads
+      - name: Custom Map Styles
+        description: Number of custom styles allowed
+        value: '1,000'
+      - name: SLA
+        description: Service level agreement uptime guarantee
+        value: 99.9%
+      - name: Team Account
+        description: Multiple team members supported
+        value: 'Yes'
+      - name: Commercial Use
+        description: Whether commercial use is permitted
+        value: 'Yes'
+    overages:
+      - name: Additional Sessions
+        rate: '$1.50 per 1,000 sessions'
+      - name: Additional API Requests
+        rate: '$0.08 per 1,000 requests'
+  - name: Custom
+    description: >
+      For large enterprises, high-traffic applications, and resellers needing
+      custom quotas, volume discounts, soft limits (no automatic overages),
+      and dedicated support. Pricing is based on a prepaid contract.
+    price:
+      amount: custom
+      currency: USD
+      period: monthly
+      notes: Quote-based; prepaid contract
+    commercial: true
+    features:
+      - name: Map Sessions
+        description: Monthly map sessions included
+        value: Custom
+        notes: Soft limits, no automatic overages
+      - name: API Requests
+        description: Monthly API requests included
+        value: Custom
+        notes: Soft limits, no automatic overages
+      - name: Storage
+        description: Hosted data storage
+        value: Unlimited
+      - name: Custom Map Styles
+        description: Number of custom styles allowed
+        value: 1,000+
+      - name: Reselling
+        description: Ability to resell MapTiler services
+        value: 'Yes'
+      - name: Volume Discounts
+        description: Discounts based on committed volume
+        value: 'Yes'
+      - name: Commercial Use
+        description: Whether commercial use is permitted
+        value: 'Yes'
+notes:
+  - 'Single vector tile = 1 request'
+  - 'Static map image = 15 requests'
+  - 'Rendered 512px raster tile = 4 requests'
+  - 'Prices are in USD and exclude VAT'
+  - 'Plans can be changed at any time'
