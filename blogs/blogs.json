@@ -2,13 +2,18 @@
   "repo": "maptiler",
   "feeds": [
     {
-      "source": "https://www.linkedin.com/company/maptiler/",
-      "feed_url": "https://www.linkedin.com/company/maptiler/",
-      "title": "",
+      "source": "https://www.maptiler.com/news/",
+      "feed_url": "",
       "saved": 0,
-      "method": "none"
+      "method": "agent-scrape"
+    },
+    {
+      "source": "https://www.linkedin.com/company/maptiler/",
+      "saved": 0,
+      "error": "not a blog feed (LinkedIn company page)"
     }
   ],
-  "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 2,
+  "fetched": "2026-06-27T12:53:03Z",
+  "agent_pulled": "2026-06-27"
 }

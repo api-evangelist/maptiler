@@ -151,13 +151,13 @@ common:
     url: json-schema/maptiler-geocoding-result.json
   - type: JSONSchema
     url: json-schema/maptiler-geolocation-result.json
-  - type: Example
+  - type: Examples
     url: examples/maptiler-geocoding-forward.json
-  - type: Example
+  - type: Examples
     url: examples/maptiler-geolocation-ip.json
-  - type: Example
+  - type: Examples
     url: examples/maptiler-elevation.json
-  - type: Example
+  - type: Examples
     url: examples/maptiler-static-map.json
 maintainers:
   - name: Kin Lane
