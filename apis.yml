@@ -119,6 +119,14 @@ apis:
       - type: Documentation
         url: https://docs.maptiler.com/cloud/api/coordinates/
 common:
+  - type: TrustCenter
+    url: security/maptiler-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/maptiler-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/maptiler-domain-security.yml
+  - type: Authentication
+    url: authentication/maptiler-authentication.yml
   - type: Website
     url: https://www.maptiler.com/
   - type: Documentation

@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/maptiler-maptiler-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: key
+  type: apiKey
+  in: query
+  parameter: key
+  description: Your own API key from https://cloud.maptiler.com/
+  sources:
+  - openapi/maptiler-maptiler-openapi.yml
