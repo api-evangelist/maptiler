@@ -119,6 +119,8 @@ apis:
       - type: Documentation
         url: https://docs.maptiler.com/cloud/api/coordinates/
 common:
+  - type: AgenticAccess
+    url: agentic-access/maptiler-agentic-access.yml
   - type: TrustCenter
     url: security/maptiler-trust-center.yml
   - type: VulnerabilityDisclosure
