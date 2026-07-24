@@ -1,0 +1,53 @@
+openapi: 3.1.0
+info:
+  title: MapTiler Coordinates Data API
+  version: '1.0'
+  description: "MapTiler API allows you to programmatically access all the data, maps, services, and resources available in your MapTiler account. \n\nAccess to your resources via MapTiler API is read-only, and therefore safe and well suited for public end-user applications. You can use it to add a map directly to your website, request map tiles, create an image with a location map for your business, search for addresses, and more. \n\nThe universal public API request format is:\n\n```\nhttps://api.maptiler.com/{METHOD}/{QUERY}.json?{PARAMS}&key=YOUR_MAPTILER_API_KEY_HERE\n```\n\n> [!KEY]\n> You need a **MapTiler API key** to use this service. [Get it here](https://cloud.maptiler.com/account/keys/){:target=\"_blank\" rel=\"noopener noreferrer\"} and [learn how to protect it](/guides/maps-apis/maps-platform/how-to-protect-your-map-key/).\n"
+  termsOfService: https://www.maptiler.com/terms/
+  contact:
+    name: Support
+    email: support@maptiler.com
+    url: https://docs.maptiler.com/support/requests/
+    premium: https://www.maptiler.com/support/
+servers:
+- description: MapTiler API
+  url: https://api.maptiler.com/
+security:
+- key: []
+tags:
+- name: Data
+paths:
+  /data/{dataId}/features.json:
+    parameters:
+    - $ref: '#/components/parameters/dataId'
+    get:
+      summary: GeoJSON
+      description: GeoJSON containing the vector features.
+      tags:
+      - Data
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeoJSON'
+components:
+  schemas:
+    GeoJSON:
+      type: object
+      externalDocs:
+        url: https://tools.ietf.org/html/rfc7946
+  parameters:
+    dataId:
+      name: dataId
+      in: path
+      description: Identifier of the data. See [MapTiler Datasets](https://cloud.maptiler.com/data/).
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    key:
+      description: Your own API key from https://cloud.maptiler.com/
+      type: apiKey
+      name: key
+      in: query

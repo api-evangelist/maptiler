@@ -1,0 +1,304 @@
+openapi: 3.1.0
+info:
+  title: MapTiler Coordinates Static maps API
+  version: '1.0'
+  description: "MapTiler API allows you to programmatically access all the data, maps, services, and resources available in your MapTiler account. \n\nAccess to your resources via MapTiler API is read-only, and therefore safe and well suited for public end-user applications. You can use it to add a map directly to your website, request map tiles, create an image with a location map for your business, search for addresses, and more. \n\nThe universal public API request format is:\n\n```\nhttps://api.maptiler.com/{METHOD}/{QUERY}.json?{PARAMS}&key=YOUR_MAPTILER_API_KEY_HERE\n```\n\n> [!KEY]\n> You need a **MapTiler API key** to use this service. [Get it here](https://cloud.maptiler.com/account/keys/){:target=\"_blank\" rel=\"noopener noreferrer\"} and [learn how to protect it](/guides/maps-apis/maps-platform/how-to-protect-your-map-key/).\n"
+  termsOfService: https://www.maptiler.com/terms/
+  contact:
+    name: Support
+    email: support@maptiler.com
+    url: https://docs.maptiler.com/support/requests/
+    premium: https://www.maptiler.com/support/
+servers:
+- description: MapTiler API
+  url: https://api.maptiler.com/
+security:
+- key: []
+tags:
+- name: Static maps
+paths:
+  /maps/{mapId}/static/{lon},{lat},{zoom}/{width}x{height}{scale}.{format}:
+    parameters:
+    - $ref: '#/components/parameters/mapId'
+    - name: lon
+      in: path
+      description: Longitude of the center of the image.
+      required: true
+      schema:
+        type: number
+    - name: lat
+      in: path
+      description: Latitude of the center of the image.
+      required: true
+      schema:
+        type: number
+    - name: zoom
+      in: path
+      description: Zoom level of the resulting image (can be fractional). (In the tile pyramid based on 512x512 tiles.)
+      required: true
+      schema:
+        type: number
+    - $ref: '#/components/parameters/imageWidth'
+    - $ref: '#/components/parameters/imageHeight'
+    - $ref: '#/components/parameters/rasterizationScale'
+    - $ref: '#/components/parameters/rasterizationFormat'
+    - $ref: '#/components/parameters/path'
+    - $ref: '#/components/parameters/markers'
+    - $ref: '#/components/parameters/latlng'
+    - $ref: '#/components/parameters/attribution'
+    - $ref: '#/components/parameters/fill'
+    - $ref: '#/components/parameters/stroke'
+    - $ref: '#/components/parameters/width'
+    - $ref: '#/components/parameters/encodedpath'
+    - $ref: '#/components/parameters/shortest'
+    get:
+      summary: Center-based image
+      description: Generates a raster image based on the specified center and zoom level.
+      tags:
+      - Static maps
+      responses:
+        '200':
+          $ref: '#/components/responses/RasterizedImage'
+        '400':
+          description: Out of bounds / Invalid format / Invalid image size
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '414':
+          $ref: '#/components/responses/414'
+  /maps/{mapId}/static/{minx},{miny},{maxx},{maxy}/{width}x{height}{scale}.{format}:
+    parameters:
+    - $ref: '#/components/parameters/mapId'
+    - name: minx
+      in: path
+      description: Longitude of the left (west) edge.
+      required: true
+      schema:
+        type: number
+    - name: miny
+      in: path
+      description: Latitude of the bottom (south) edge.
+      required: true
+      schema:
+        type: number
+    - name: maxx
+      in: path
+      description: Longitude of the right (east) edge.
+      required: true
+      schema:
+        type: number
+    - name: maxy
+      in: path
+      description: Latitude of the top (north) edge.
+      required: true
+      schema:
+        type: number
+    - $ref: '#/components/parameters/imageWidth'
+    - $ref: '#/components/parameters/imageHeight'
+    - $ref: '#/components/parameters/rasterizationScale'
+    - $ref: '#/components/parameters/rasterizationFormat'
+    - $ref: '#/components/parameters/padding'
+    - $ref: '#/components/parameters/path'
+    - $ref: '#/components/parameters/markers'
+    - $ref: '#/components/parameters/latlng'
+    - $ref: '#/components/parameters/attribution'
+    - $ref: '#/components/parameters/fill'
+    - $ref: '#/components/parameters/stroke'
+    - $ref: '#/components/parameters/width'
+    - $ref: '#/components/parameters/encodedpath'
+    - $ref: '#/components/parameters/shortest'
+    get:
+      summary: Bounds-based image
+      description: Generates a raster image based on the given bounds.
+      tags:
+      - Static maps
+      responses:
+        '200':
+          $ref: '#/components/responses/RasterizedImage'
+        '400':
+          description: Out of bounds / Invalid format / Invalid image size
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '414':
+          $ref: '#/components/responses/414'
+  /maps/{mapId}/static/auto/{width}x{height}{scale}.{format}:
+    parameters:
+    - $ref: '#/components/parameters/mapId'
+    - $ref: '#/components/parameters/imageWidth'
+    - $ref: '#/components/parameters/imageHeight'
+    - $ref: '#/components/parameters/rasterizationScale'
+    - $ref: '#/components/parameters/rasterizationFormat'
+    - $ref: '#/components/parameters/padding'
+    - $ref: '#/components/parameters/path'
+    - $ref: '#/components/parameters/markers'
+    - $ref: '#/components/parameters/latlng'
+    - $ref: '#/components/parameters/attribution'
+    - $ref: '#/components/parameters/fill'
+    - $ref: '#/components/parameters/stroke'
+    - $ref: '#/components/parameters/width'
+    - $ref: '#/components/parameters/encodedpath'
+    - $ref: '#/components/parameters/shortest'
+    get:
+      summary: Auto-fitted image
+      description: Generates a raster image based on the given features. The area is calculated so that all the paths and markers given in query are visible.
+      tags:
+      - Static maps
+      responses:
+        '200':
+          $ref: '#/components/responses/RasterizedImage'
+        '400':
+          description: Out of bounds / Invalid format / Invalid image size
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '414':
+          $ref: '#/components/responses/414'
+components:
+  parameters:
+    path:
+      name: path
+      in: query
+      description: Define path(s) to be drawn on top of the map. Can be used multiple times. See [Static map with lines or polygons](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-lines/).
+      schema:
+        type: string
+        pattern: ((fill|stroke|width|shortest)\:[^\|]+\|)*((enc:.+)|((-?\d+\.?\d*,-?\d+\.?\d*\|)+(-?\d+\.?\d*,-?\d+\.?\d*)))
+    encodedpath:
+      name: encodedpath
+      in: query
+      description: Path in [Google Encoded Polyline Format](https://developers.google.com/maps/documentation/utilities/polylinealgorithm). Deprecated, use "path" instead.
+      deprecated: true
+      schema:
+        type: string
+    mapId:
+      name: mapId
+      in: path
+      description: Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/).
+      example: streets-v4
+      required: true
+      schema:
+        type: string
+    stroke:
+      name: stroke
+      in: query
+      description: Color to use as a stroke when drawing polygons. Deprecated, use "path" instead.
+      deprecated: true
+      default: rgba(0,64,255,0.7)
+      schema:
+        type: string
+    rasterizationFormat:
+      name: format
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+        - png
+        - jpg
+        - webp
+    shortest:
+      name: shortest
+      in: query
+      description: Draw the shortest paths, allow to cross the dateline.
+      default: false
+      schema:
+        type: boolean
+    padding:
+      name: padding
+      in: query
+      description: Ensures the autofitted bounds or features are comfortably visible in the resulting area. E.g. use 0.1 to add 10% margin (at least) of the size to each side.
+      default: 0.1
+      schema:
+        type: number
+    fill:
+      name: fill
+      in: query
+      description: Color to use as a fill when drawing polygons. Deprecated, use "path" instead.
+      deprecated: true
+      default: rgba(255,255,255,0.4)
+      schema:
+        type: string
+    latlng:
+      name: latlng
+      in: query
+      description: Use [latitude, longitude] order for coordinates instead of [longitude, latitude].
+      default: false
+      schema:
+        type: boolean
+    rasterizationScale:
+      name: scale
+      in: path
+      description: Use "@2x" to get "retina"/HiDPI image.
+      required: false
+      schema:
+        type: string
+        enum:
+        - '@2x'
+    width:
+      name: width
+      in: query
+      description: Width of the stroke line when drawing polygons (in pixels). Deprecated, use "path" instead.
+      deprecated: true
+      default: 1
+      schema:
+        type: number
+    markers:
+      name: markers
+      in: query
+      description: Define marker(s) to be drawn on top of the map. Can be used multiple times. See [Static map with markers](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-markers/).
+      schema:
+        type: string
+        pattern: ((icon|anchor|scale)\:[^\|]+\|)*((-?\d+\.?\d*,-?\d+\.?\d*(,[^\|]+)?\|)*(-?\d+\.?\d*,-?\d+\.?\d*(,[^\|]+)?))
+    imageWidth:
+      name: width
+      in: path
+      description: Width of the image in pixels.
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 2048
+    attribution:
+      name: attribution
+      in: query
+      description: Changes the position of map attribution. If you disable the attribution make sure to display it in your application yourself (visibly).
+      default: bottomright
+      schema:
+        type: string
+        enum:
+        - bottomright
+        - bottomleft
+        - topleft
+        - topright
+        - 'false'
+    imageHeight:
+      name: height
+      in: path
+      description: Height of the image in pixels.
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 2048
+  responses:
+    '414':
+      description: URI Too Long. Maximum allowed length is 8192 bytes.
+    RasterizedImage:
+      content:
+        image/*:
+          schema:
+            type: string
+            format: binary
+    '403':
+      description: Key is missing, invalid or restricted
+    '404':
+      description: The item does not exist
+  securitySchemes:
+    key:
+      description: Your own API key from https://cloud.maptiler.com/
+      type: apiKey
+      name: key
+      in: query

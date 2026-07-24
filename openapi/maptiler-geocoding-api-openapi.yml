@@ -1,0 +1,883 @@
+openapi: 3.1.0
+info:
+  title: MapTiler Coordinates Geocoding API
+  version: '1.0'
+  description: "MapTiler API allows you to programmatically access all the data, maps, services, and resources available in your MapTiler account. \n\nAccess to your resources via MapTiler API is read-only, and therefore safe and well suited for public end-user applications. You can use it to add a map directly to your website, request map tiles, create an image with a location map for your business, search for addresses, and more. \n\nThe universal public API request format is:\n\n```\nhttps://api.maptiler.com/{METHOD}/{QUERY}.json?{PARAMS}&key=YOUR_MAPTILER_API_KEY_HERE\n```\n\n> [!KEY]\n> You need a **MapTiler API key** to use this service. [Get it here](https://cloud.maptiler.com/account/keys/){:target=\"_blank\" rel=\"noopener noreferrer\"} and [learn how to protect it](/guides/maps-apis/maps-platform/how-to-protect-your-map-key/).\n"
+  termsOfService: https://www.maptiler.com/terms/
+  contact:
+    name: Support
+    email: support@maptiler.com
+    url: https://docs.maptiler.com/support/requests/
+    premium: https://www.maptiler.com/support/
+servers:
+- description: MapTiler API
+  url: https://api.maptiler.com/
+security:
+- key: []
+tags:
+- name: Geocoding
+paths:
+  /geocoding/{query}.json:
+    parameters:
+    - name: query
+      in: path
+      description: Place name to search. You can also use bare [POI category](https://docs.maptiler.com/cloud/api/geocoding/#PoiCategory) or mix it with a name to search for POIs of desired category, unless `poi` index is excluded.
+      examples:
+        place:
+          value: Zurich
+          summary: Search place name
+        poi:
+          value: restaurant mediterranean
+          summary: Search POI category
+      required: true
+      schema:
+        type: string
+    - $ref: '#/components/parameters/bbox'
+    - $ref: '#/components/parameters/proximity'
+    - $ref: '#/components/parameters/language'
+    - $ref: '#/components/parameters/country'
+    - $ref: '#/components/parameters/limit'
+    - $ref: '#/components/parameters/types'
+    - $ref: '#/components/parameters/excludeTypes'
+    - $ref: '#/components/parameters/fuzzyMatch'
+    - $ref: '#/components/parameters/autocomplete'
+    - $ref: '#/components/parameters/worldview'
+    get:
+      summary: Search by name (forward)
+      description: Forward <a href="https://www.maptiler.com/cloud/geocoding/">geocoding (search by place name)</a>.
+      tags:
+      - Geocoding
+      responses:
+        '200':
+          $ref: '#/components/responses/ok'
+        '400':
+          description: Query too long / Invalid parameters
+        '403':
+          $ref: '#/components/responses/403'
+  /geocoding/{longitude},{latitude}.json:
+    parameters:
+    - name: longitude
+      in: path
+      example: 8.528509
+      required: true
+      schema:
+        type: number
+        minimum: -180
+        maximum: 180
+    - name: latitude
+      in: path
+      example: 47.3774434
+      required: true
+      schema:
+        type: number
+        minimum: -90
+        maximum: 90
+    - $ref: '#/components/parameters/language'
+    - $ref: '#/components/parameters/limit'
+    - $ref: '#/components/parameters/types'
+    - $ref: '#/components/parameters/excludeTypes'
+    - $ref: '#/components/parameters/worldview'
+    get:
+      summary: Search by coordinates (reverse)
+      description: Reverse geocoding (search by coordinates).
+      tags:
+      - Geocoding
+      responses:
+        '200':
+          $ref: '#/components/responses/ok'
+        '400':
+          description: Query too long / Invalid parameters
+        '403':
+          $ref: '#/components/responses/403'
+  /geocoding/{id}.json:
+    parameters:
+    - name: id
+      in: path
+      example: country.26561650
+      required: true
+      schema:
+        type: string
+        pattern: ^(\S+)\.([0-9]+)$
+      description: Feature ID (found in response of forward or reverse geocoding)
+    - $ref: '#/components/parameters/language'
+    - $ref: '#/components/parameters/worldview'
+    get:
+      summary: Search by feature ID
+      description: Search feature by its ID (`id`) as returned in forward or reverse geocoding response and return its full geometry. Note that the feature ID is not stable and it changes when the database is re-indexed.
+      tags:
+      - Geocoding
+      responses:
+        '200':
+          $ref: '#/components/responses/ok'
+        '400':
+          description: Query too long / Invalid parameters
+        '403':
+          $ref: '#/components/responses/403'
+  /geocoding/{queries}.json:
+    parameters:
+    - in: path
+      name: queries
+      description: Semicolon-separated list of queries. Semicolon `;` must be provided verbatim and not be URL-encoded. Each query may be forward, reverse or by feature ID. Maximum of 50 queries are supported.
+      example: Paris;Berlin
+      required: true
+      schema:
+        type: string
+    - $ref: '#/components/parameters/bbox'
+    - $ref: '#/components/parameters/proximity'
+    - $ref: '#/components/parameters/language'
+    - $ref: '#/components/parameters/country'
+    - $ref: '#/components/parameters/limit'
+    - $ref: '#/components/parameters/types'
+    - $ref: '#/components/parameters/excludeTypes'
+    - $ref: '#/components/parameters/fuzzyMatch'
+    - $ref: '#/components/parameters/autocomplete'
+    - $ref: '#/components/parameters/worldview'
+    get:
+      summary: Batch geocoding API
+      description: Perform geocoding of more than one request in a single API call. Check out the <a href="https://docs.maptiler.com/guides/geocoding/batch-geocoding-api/">Batch Geocoding guide</a> for an example.
+      tags:
+      - Geocoding
+      responses:
+        '200':
+          description: Array of geocoding results where items are matching order of queries in the request. Every result is represented as FeatureCollection where every item is represented as a GeoJSON Feature
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/result'
+        '400':
+          description: Query too long / Invalid parameters
+        '403':
+          $ref: '#/components/responses/403'
+components:
+  schemas:
+    placeType:
+      type: string
+      title: PlaceType
+      description: Check out the [descriptions and default values](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) of each of the PlaceType values
+      enum:
+      - continental_marine
+      - country
+      - major_landform
+      - region
+      - subregion
+      - county
+      - joint_municipality
+      - joint_submunicipality
+      - municipality
+      - municipal_district
+      - locality
+      - neighbourhood
+      - place
+      - postal_code
+      - address
+      - road
+      - poi
+    bbox:
+      example:
+      - 5.9559
+      - 45.818
+      - 10.4921
+      - 47.8084
+      type: array
+      title: BoundingBox
+      prefixItems:
+      - type: number
+        minimum: -180
+        maximum: 180
+        description: minimal longitude
+      - type: number
+        minimum: -90
+        maximum: 90
+        description: minimal latitude
+      - type: number
+        minimum: -180
+        maximum: 180
+        description: maximal longitude
+      - type: number
+        minimum: -90
+        maximum: 90
+        description: maximal latitude
+    featureProperties:
+      title: FeatureProperties
+      type: object
+      additionalProperties: true
+      properties:
+        ref:
+          description: (experimental) External reference of the feature used for debugging purposes. The exact format of this field may change without notice, and should not be relied on at the moment.
+          type: string
+          example: osm:r71525
+        country_code:
+          type: string
+          description: ISO 3166-1 alpha-2 country code of the feature
+          example: fr
+        kind:
+          type: string
+          description: (experimental) Kind of the feature
+          enum:
+          - road
+          - road_relation
+          - admin_area
+          - place
+          - street
+          - virtual_street
+        categories:
+          type: array
+          description: Array of [POI category](https://docs.maptiler.com/cloud/api/geocoding/#PoiCategory). Only available for `poi` type. Category values may change in the near future.
+          minItems: 1
+          items:
+            type: string
+            example: restaurant
+        feature_tags:
+          type: object
+          title: Feature tags
+          description: (experimental) Feature tags, only available for `poi` type. They can include e.g. working hours, type of amenity or wheelchair access.
+          additionalProperties:
+            type: string
+        place_designation:
+          type: string
+          title: Place designation
+          description: (experimental) Additional information about the place. The main use case is to determine if the administrative area represents a town, a city or a village. This field is especially useful in cases, where a large city is a region, land or prefecture from administrative point of view (typical examples are Berlin and Tokyo).
+          example: city
+      required:
+      - ref
+      - country_code
+    ip:
+      type: string
+      title: IP
+      description: Server-side IP based geolocation
+      const: ip
+    commonProperties:
+      title: CommonProperties
+      type: object
+      additionalProperties: true
+      properties:
+        id:
+          description: Unique feature ID
+          type: string
+          example: municipality.46425
+        text:
+          description: Localized feature name
+          type: string
+          example: Paris
+        language:
+          description: Query's primary ISO 639-1 language code
+          type: string
+          example: en
+      patternProperties:
+        ^text_(\w\w):
+          type: string
+          description: A string analogous to the `text` field that matches the query in the requested language. This field is only returned when multiple languages are requested using the `language` parameter, and will be present for each requested language.
+        ^language_(\w\w):
+          type: string
+          description: A ISO 639-1 query's fallback language code. This field is only returned when multiple languages are requested using the `language` parameter, and will be present for each requested language.
+      required:
+      - id
+      - text
+    coordinates:
+      example:
+      - 8.528509
+      - 47.3774434
+      type: array
+      title: Coordinates
+      prefixItems:
+      - type: number
+        minimum: -180
+        maximum: 180
+        description: longitude
+      - type: number
+        minimum: -90
+        maximum: 90
+        description: latitude
+    result:
+      description: Search result represented by FeatureCollection where every item is represented as a GeoJSON Feature
+      type: object
+      title: SearchResults
+      properties:
+        type:
+          type: string
+          const: FeatureCollection
+        features:
+          description: Array of features found
+          type: array
+          title: Feature
+          items:
+            allOf:
+            - $ref: '#/components/schemas/commonProperties'
+            - type: object
+              patternProperties:
+                ^place_name_(\w\w):
+                  type: string
+                  description: A string analogous to the `place_name` field that matches the query in the requested language. This field is only returned when multiple languages are requested using the `language` parameter, and will be present for each requested language.
+              properties:
+                type:
+                  type: string
+                  const: Feature
+                properties:
+                  description: Feature properties
+                  $ref: '#/components/schemas/featureProperties'
+                geometry:
+                  anyOf:
+                  - type: object
+                    title: Point
+                    properties:
+                      type:
+                        type: string
+                        const: Point
+                      coordinates:
+                        $ref: '#/components/schemas/coordinates'
+                    required:
+                    - type
+                    - coordinates
+                  - type: object
+                    title: LineString
+                    properties:
+                      type:
+                        type: string
+                        const: LineString
+                      coordinates:
+                        minItems: 2
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/coordinates'
+                    required:
+                    - type
+                    - coordinates
+                  - type: object
+                    title: Polygon
+                    properties:
+                      type:
+                        type: string
+                        const: Polygon
+                      coordinates:
+                        type: array
+                        items:
+                          minItems: 4
+                          type: array
+                          items:
+                            $ref: '#/components/schemas/coordinates'
+                    required:
+                    - type
+                    - coordinates
+                  - type: object
+                    title: MultiPoint
+                    properties:
+                      type:
+                        type: string
+                        const: MultiPoint
+                      coordinates:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/coordinates'
+                    required:
+                    - type
+                    - coordinates
+                  - type: object
+                    title: MultiLineString
+                    properties:
+                      type:
+                        type: string
+                        const: MultiLineString
+                      coordinates:
+                        type: array
+                        items:
+                          minItems: 2
+                          type: array
+                          items:
+                            $ref: '#/components/schemas/coordinates'
+                    required:
+                    - type
+                    - coordinates
+                  - type: object
+                    title: MultiPolygon
+                    properties:
+                      type:
+                        type: string
+                        const: MultiPolygon
+                      coordinates:
+                        type: array
+                        items:
+                          type: array
+                          items:
+                            minItems: 4
+                            type: array
+                            items:
+                              $ref: '#/components/schemas/coordinates'
+                    required:
+                    - type
+                    - coordinates
+                  - type: object
+                    title: GeometryCollection
+                    properties:
+                      type:
+                        type: string
+                        const: GeometryCollection
+                      geometries:
+                        type: array
+                        items:
+                          anyOf:
+                          - type: object
+                            title: Point
+                            properties:
+                              type:
+                                type: string
+                                const: Point
+                              coordinates:
+                                $ref: '#/components/schemas/coordinates'
+                            required:
+                            - type
+                            - coordinates
+                          - type: object
+                            title: LineString
+                            properties:
+                              type:
+                                type: string
+                                const: LineString
+                              coordinates:
+                                minItems: 2
+                                type: array
+                                items:
+                                  $ref: '#/components/schemas/coordinates'
+                            required:
+                            - type
+                            - coordinates
+                          - type: object
+                            title: Polygon
+                            properties:
+                              type:
+                                type: string
+                                const: Polygon
+                              coordinates:
+                                type: array
+                                items:
+                                  minItems: 4
+                                  type: array
+                                  items:
+                                    $ref: '#/components/schemas/coordinates'
+                            required:
+                            - type
+                            - coordinates
+                          - type: object
+                            title: MultiPoint
+                            properties:
+                              type:
+                                type: string
+                                const: MultiPoint
+                              coordinates:
+                                type: array
+                                items:
+                                  $ref: '#/components/schemas/coordinates'
+                            required:
+                            - type
+                            - coordinates
+                          - type: object
+                            title: MultiLineString
+                            properties:
+                              type:
+                                type: string
+                                const: MultiLineString
+                              coordinates:
+                                type: array
+                                items:
+                                  minItems: 2
+                                  type: array
+                                  items:
+                                    $ref: '#/components/schemas/coordinates'
+                            required:
+                            - type
+                            - coordinates
+                          - type: object
+                            title: MultiPolygon
+                            properties:
+                              type:
+                                type: string
+                                const: MultiPolygon
+                              coordinates:
+                                type: array
+                                items:
+                                  type: array
+                                  items:
+                                    minItems: 4
+                                    type: array
+                                    items:
+                                      $ref: '#/components/schemas/coordinates'
+                            required:
+                            - type
+                            - coordinates
+                    required:
+                    - type
+                    - geometries
+                bbox:
+                  description: Bounding box of the original feature as `[w, s, e, n]` array
+                  $ref: '#/components/schemas/bbox'
+                center:
+                  description: A `[lon, lat]` array of the original feature centeroid
+                  $ref: '#/components/schemas/coordinates'
+                place_name:
+                  description: Formatted (including the hierarchy) and localized feature full name
+                  type: string
+                matching_place_name:
+                  description: A string analogous to the `place_name` field that matches the query. This field is only returned to help you understand how the response aligns with the submitted query.
+                  type: string
+                matching_text:
+                  description: A string analogous to the `text` field that matches the query. This field is only returned to help you understand how the response aligns with the submitted query.
+                  type: string
+                place_type:
+                  description: An array of feature types describing the feature. Currently each feature has only single type but this may change in the future.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/placeType'
+                place_type_name:
+                  type: array
+                  description: Localized type of the place name, matches `place_type` property.
+                  items:
+                    type: string
+                relevance:
+                  description: Indicates how well the returned feature matches the user's query on a scale from 0 to 1. 0 means the result does not match the query text at all, while 1 means the result fully matches the query text. You can use the relevance property to remove results that don't fully match the query.
+                  type: number
+                context:
+                  description: Feature hierarchy
+                  type: array
+                  title: Context
+                  items:
+                    allOf:
+                    - $ref: '#/components/schemas/featureProperties'
+                    - $ref: '#/components/schemas/commonProperties'
+                address:
+                  description: Address number, if applicable
+                  type: string
+              required:
+              - type
+              - properties
+              - geometry
+              - bbox
+              - center
+              - place_name
+              - place_type
+              - place_type_name
+              - relevance
+        query:
+          description: Tokenized search query
+          type: array
+          items:
+            type: string
+        attribution:
+          description: Attribution of the result
+          type: string
+          example: <a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>
+      required:
+      - type
+      - features
+      - query
+      - attribution
+  parameters:
+    fuzzyMatch:
+      schema:
+        type: boolean
+        default: true
+      in: query
+      name: fuzzyMatch
+      required: false
+      description: Set to `false` to disable fuzzy search.
+    excludeTypes:
+      schema:
+        type: boolean
+        default: false
+      in: query
+      name: excludeTypes
+      required: false
+      description: Set to `true` to use all available feature types except those specified in `types`.
+    country:
+      schema:
+        type: array
+        uniqueItems: true
+        items:
+          type: string
+        example: sk,cz
+      example: sk,cz
+      in: query
+      name: country
+      required: false
+      description: Limit search to specific country/countries.
+      explode: false
+    language:
+      schema:
+        type: array
+        maxItems: 20
+        uniqueItems: true
+        items:
+          type: string
+          example: en
+          enum:
+          - aa
+          - ab
+          - ae
+          - af
+          - ak
+          - am
+          - an
+          - ar
+          - as
+          - av
+          - ay
+          - az
+          - ba
+          - be
+          - bg
+          - bh
+          - bi
+          - bm
+          - bn
+          - bo
+          - br
+          - bs
+          - ca
+          - ce
+          - ch
+          - co
+          - cr
+          - cs
+          - cu
+          - cv
+          - cy
+          - da
+          - de
+          - dv
+          - dz
+          - ee
+          - el
+          - en
+          - eo
+          - es
+          - et
+          - eu
+          - fa
+          - ff
+          - fi
+          - fj
+          - fo
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - gn
+          - gu
+          - gv
+          - ha
+          - he
+          - hi
+          - ho
+          - hr
+          - ht
+          - hu
+          - hy
+          - hz
+          - ia
+          - id
+          - ie
+          - ig
+          - ii
+          - ik
+          - io
+          - is
+          - it
+          - iu
+          - ja
+          - jv
+          - ka
+          - kg
+          - ki
+          - kj
+          - kk
+          - kl
+          - km
+          - kn
+          - ko
+          - kr
+          - ks
+          - ku
+          - kv
+          - kw
+          - ky
+          - la
+          - lb
+          - lg
+          - li
+          - ln
+          - lo
+          - lt
+          - lu
+          - lv
+          - mg
+          - mh
+          - mi
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - mt
+          - my
+          - na
+          - nb
+          - nd
+          - ne
+          - ng
+          - nl
+          - nn
+          - 'no'
+          - nr
+          - nv
+          - ny
+          - oc
+          - oj
+          - om
+          - or
+          - os
+          - pa
+          - pi
+          - pl
+          - ps
+          - pt
+          - qu
+          - rm
+          - rn
+          - ro
+          - ru
+          - rw
+          - sa
+          - sc
+          - sd
+          - se
+          - sg
+          - si
+          - sk
+          - sl
+          - sm
+          - sn
+          - so
+          - sq
+          - sr
+          - ss
+          - st
+          - su
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - ti
+          - tk
+          - tl
+          - tn
+          - to
+          - tr
+          - ts
+          - tt
+          - tw
+          - ty
+          - ug
+          - uk
+          - ur
+          - uz
+          - ve
+          - vi
+          - vo
+          - wa
+          - wo
+          - xh
+          - yi
+          - yo
+          - za
+          - zh
+          - zu
+        example: de,en
+      example: de,en
+      in: query
+      name: language
+      required: false
+      description: Prefer results in specific language specified as ISO 639-1 code. Only the first language code is used when prioritizing forward geocode results to be matched. If this query parameter is omited then Accept-Language HTTP header will be analyzed. If the parameter is provided but is empty then no language preference is made.
+      explode: false
+    worldview:
+      schema:
+        type: string
+        example: ch
+        enum:
+        - default
+        - auto
+        - ch
+        - us
+      name: worldview
+      required: false
+      in: query
+      description: 'Some of the geographical boundaries and names are disputed. When `worldview` option is selected, the Geocoding API responses will be aligned with the borders and names recognized by the selected country (US or Switzerland). This affects filtering by country, the context returned with the given feature and also some of the labels (e.g., Gulf of Mexico vs. Gulf of America). Special values include: `auto` - the worldview is determined by the location of the client, `default` - disputed areas are returned without country information, countries with disputed borders are returned without full geometry.
+
+        '
+      example: ch
+      default: default
+    autocomplete:
+      schema:
+        type: boolean
+      in: query
+      name: autocomplete
+      required: false
+      description: Set to `true` to use autocomplete, `false` to disable autocomplete.
+      default: true
+    proximity:
+      schema:
+        anyOf:
+        - $ref: '#/components/schemas/coordinates'
+        - $ref: '#/components/schemas/ip'
+      example: 8.528509,47.3774434
+      in: query
+      name: proximity
+      required: false
+      description: A `[lon, lat]` array to use for biasing search results or the string `ip` to do server-side IP based geolocation. Specify to prefer results close to a specific location - features closer to the proximity value will be given priority over those further from the proximity value.
+      explode: false
+    types:
+      schema:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: '#/components/schemas/placeType'
+      in: query
+      name: types
+      required: false
+      description: Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned.
+    bbox:
+      schema:
+        $ref: '#/components/schemas/bbox'
+      example: 5.9559,45.818,10.4921,47.8084
+      in: query
+      name: bbox
+      required: false
+      description: A `[w, s, e, n]` bounding box array to use for limiting search results. Only features inside the provided bounding box will be included.
+      explode: false
+    limit:
+      schema:
+        type: integer
+        default: 5
+        minimum: 1
+        maximum: 10
+      in: query
+      name: limit
+      required: false
+      description: Maximum number of results to return. For reverse geocoding with multiple types this must not be set or must be set to 1.
+  responses:
+    ok:
+      description: Search result represented as FeatureCollection where every item is represented as a GeoJSON Feature
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/result'
+    '403':
+      description: Key is missing, invalid or restricted
+  securitySchemes:
+    key:
+      description: Your own API key from https://cloud.maptiler.com/
+      type: apiKey
+      name: key
+      in: query

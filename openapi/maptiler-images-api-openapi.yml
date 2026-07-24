@@ -1,0 +1,131 @@
+openapi: 3.1.0
+info:
+  title: MapTiler Coordinates Images API
+  version: '1.0'
+  description: "MapTiler API allows you to programmatically access all the data, maps, services, and resources available in your MapTiler account. \n\nAccess to your resources via MapTiler API is read-only, and therefore safe and well suited for public end-user applications. You can use it to add a map directly to your website, request map tiles, create an image with a location map for your business, search for addresses, and more. \n\nThe universal public API request format is:\n\n```\nhttps://api.maptiler.com/{METHOD}/{QUERY}.json?{PARAMS}&key=YOUR_MAPTILER_API_KEY_HERE\n```\n\n> [!KEY]\n> You need a **MapTiler API key** to use this service. [Get it here](https://cloud.maptiler.com/account/keys/){:target=\"_blank\" rel=\"noopener noreferrer\"} and [learn how to protect it](/guides/maps-apis/maps-platform/how-to-protect-your-map-key/).\n"
+  termsOfService: https://www.maptiler.com/terms/
+  contact:
+    name: Support
+    email: support@maptiler.com
+    url: https://docs.maptiler.com/support/requests/
+    premium: https://www.maptiler.com/support/
+servers:
+- description: MapTiler API
+  url: https://api.maptiler.com/
+security:
+- key: []
+tags:
+- name: Images
+paths:
+  /images/{imageId}/image.json:
+    parameters:
+    - $ref: '#/components/parameters/imageId'
+    get:
+      summary: ImageJSON
+      description: JSON describing the metadata of the image. Can be used with MapTiler SDK to display the image.
+      tags:
+      - Images
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageJSON'
+  /images/{imageId}/{z}/{x}/{y}:
+    parameters:
+    - $ref: '#/components/parameters/imageId'
+    - $ref: '#/components/parameters/z'
+    - $ref: '#/components/parameters/x'
+    - $ref: '#/components/parameters/y'
+    get:
+      summary: XYZ tiles
+      description: The individual tiles. Can be used with various libraries to display the image. It's better to use the ImageJSON with MapTiler SDK rather than using the tile URL directly.
+      tags:
+      - Images
+      responses:
+        '200':
+          content:
+            '*': {}
+        '204':
+          description: Tile not present -- presumed empty (empty response)
+        '400':
+          description: Out of bounds
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+components:
+  parameters:
+    z:
+      name: z
+      description: Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
+    x:
+      name: x
+      description: Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
+    y:
+      name: y
+      description: Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
+    imageId:
+      name: imageId
+      in: path
+      description: Identifier of the image.
+      required: true
+      schema:
+        type: string
+  schemas:
+    ImageJSON:
+      title: ImageJSON Schema
+      type: object
+      properties:
+        id:
+          description: Optional identifier of the image.
+          type: string
+        description:
+          description: Optional description of the image.
+          type: string
+        attribution:
+          description: Optional attribution for the image.
+          type: string
+        width:
+          description: Image width in pixels.
+          type: integer
+          required: true
+        height:
+          description: Image height in pixels.
+          type: integer
+          required: true
+        minzoom:
+          description: Minimum available zoom level.
+          type: integer
+          required: true
+        maxzoom:
+          description: Maximum available zoom level.
+          type: integer
+          required: true
+        tileSize:
+          description: Tile size in pixels.
+          type: integer
+          required: true
+  responses:
+    '403':
+      description: Key is missing, invalid or restricted
+    '404':
+      description: The item does not exist
+  securitySchemes:
+    key:
+      description: Your own API key from https://cloud.maptiler.com/
+      type: apiKey
+      name: key
+      in: query

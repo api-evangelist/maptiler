@@ -1,0 +1,140 @@
+openapi: 3.1.0
+info:
+  title: MapTiler Coordinates Geolocation API
+  version: '1.0'
+  description: "MapTiler API allows you to programmatically access all the data, maps, services, and resources available in your MapTiler account. \n\nAccess to your resources via MapTiler API is read-only, and therefore safe and well suited for public end-user applications. You can use it to add a map directly to your website, request map tiles, create an image with a location map for your business, search for addresses, and more. \n\nThe universal public API request format is:\n\n```\nhttps://api.maptiler.com/{METHOD}/{QUERY}.json?{PARAMS}&key=YOUR_MAPTILER_API_KEY_HERE\n```\n\n> [!KEY]\n> You need a **MapTiler API key** to use this service. [Get it here](https://cloud.maptiler.com/account/keys/){:target=\"_blank\" rel=\"noopener noreferrer\"} and [learn how to protect it](/guides/maps-apis/maps-platform/how-to-protect-your-map-key/).\n"
+  termsOfService: https://www.maptiler.com/terms/
+  contact:
+    name: Support
+    email: support@maptiler.com
+    url: https://docs.maptiler.com/support/requests/
+    premium: https://www.maptiler.com/support/
+servers:
+- description: MapTiler API
+  url: https://api.maptiler.com/
+security:
+- key: []
+tags:
+- name: Geolocation
+paths:
+  /geolocation/ip.json:
+    get:
+      summary: IP Geolocation
+      description: Obtain information about visitor's location based on IP address of the incoming request.
+      tags:
+      - Geolocation
+      parameters:
+      - name: elevation
+        in: query
+        description: Include elevation (in meters) in the results.
+        default: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeolocationResult'
+        '403':
+          $ref: '#/components/responses/403'
+components:
+  responses:
+    '403':
+      description: Key is missing, invalid or restricted
+  schemas:
+    GeolocationResult:
+      type: object
+      title: GeolocationResult
+      properties:
+        country:
+          type: string
+          description: Name of the country
+          example: Switzerland
+        country_code:
+          type: string
+          description: Two-letter code of the country
+          example: CH
+          externalDocs:
+            description: ISO 3166-1 alpha-2 codes
+            url: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+        country_bounds:
+          type: array
+          items:
+            type: number
+          minItems: 4
+          maxItems: 4
+          description: Bounds of the country in WGS84 degrees `[west, south, east, north]`.
+          example:
+          - 5.95538
+          - 45.818852
+          - 10.490936
+          - 47.809357
+        country_languages:
+          type: array
+          items:
+            type: string
+          description: Official country languages in ISO 639-1 format.
+          example:
+          - de
+          - fr
+          - it
+          externalDocs:
+            description: ISO 639-1 codes
+            url: https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+        continent:
+          type: string
+          description: Name of the continent
+          example: Europe
+        continent_code:
+          type: string
+          description: Two-letter code of the continent
+          example: EU
+        eu:
+          type: boolean
+          description: Indicated whether the country is part of the European Union.
+          example: false
+        city:
+          type: string
+          description: Name of the city
+          example: Zurich
+        latitude:
+          type: number
+          description: Latitude of the location
+          example: 47.36667
+        longitude:
+          type: number
+          description: Longitude of the location
+          example: 8.55
+        postal:
+          type: string
+          description: Postal code
+          example: '8000'
+        region:
+          type: string
+          description: If known, the ISO 3166-2 name for the first level region.
+          example: Zurich
+          externalDocs:
+            description: ISO 3166-2 codes
+            url: https://en.wikipedia.org/wiki/ISO_3166-2
+        region_code:
+          type: string
+          description: If known, the ISO 3166-2 code for the first level region.
+          example: ZH
+          externalDocs:
+            description: ISO 3166-2 codes
+            url: https://en.wikipedia.org/wiki/ISO_3166-2
+        timezone:
+          type: string
+          description: Name of the timezone
+          example: Europe/Zurich
+        elevation:
+          type: number
+          description: Elevation of the location in meters
+          example: 433
+  securitySchemes:
+    key:
+      description: Your own API key from https://cloud.maptiler.com/
+      type: apiKey
+      name: key
+      in: query

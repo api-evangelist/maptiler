@@ -1,0 +1,292 @@
+openapi: 3.1.0
+info:
+  title: MapTiler Coordinates API
+  version: '1.0'
+  description: "MapTiler API allows you to programmatically access all the data, maps, services, and resources available in your MapTiler account. \n\nAccess to your resources via MapTiler API is read-only, and therefore safe and well suited for public end-user applications. You can use it to add a map directly to your website, request map tiles, create an image with a location map for your business, search for addresses, and more. \n\nThe universal public API request format is:\n\n```\nhttps://api.maptiler.com/{METHOD}/{QUERY}.json?{PARAMS}&key=YOUR_MAPTILER_API_KEY_HERE\n```\n\n> [!KEY]\n> You need a **MapTiler API key** to use this service. [Get it here](https://cloud.maptiler.com/account/keys/){:target=\"_blank\" rel=\"noopener noreferrer\"} and [learn how to protect it](/guides/maps-apis/maps-platform/how-to-protect-your-map-key/).\n"
+  termsOfService: https://www.maptiler.com/terms/
+  contact:
+    name: Support
+    email: support@maptiler.com
+    url: https://docs.maptiler.com/support/requests/
+    premium: https://www.maptiler.com/support/
+servers:
+- description: MapTiler API
+  url: https://api.maptiler.com/
+security:
+- key: []
+tags:
+- name: Coordinates
+paths:
+  /coordinates/search/{query}.json:
+    get:
+      summary: Search coordinate systems
+      tags:
+      - Coordinates
+      parameters:
+      - name: query
+        in: path
+        description: "Query string used to search the catalog. It accepts plain terms such as names of locations and key:value pairs for filtering.\n\nFollowing parameter values can be used:\n- kind\n    - \\* (All kinds)\n    - CRS (All coordinate reference systems - default)\n        - CRS-PROJCRS (Projected coordinate systems)\n        - CRS-GEOGCRS (Geodetic coordinate systems)\n        - CRS-GEOG3DCRS (Geodetic 3D coordinate systems)\n        - CRS-GCENCRS (Geocentric coordinate systems)\n        - CRS-VERTCRS (Vertical coordinate systems)\n        - CRS-ENGCRS (Engineering coordinate systems)\n        - CRS-COMPOUNDCRS (Compound coordinate systems)\n        - CRS-DRVDCRS (Derived coordinate systems)\n    - COORDOP (All operations)\n        - COORDOP-COPTRAN (Transformations)\n        - COORDOP-COPCONO (Compound operations)\n        - COORDOP-POIMOTO (Point motion operations)\n        - COORDOP-COPCON (Conversions)\n    - DATUM (All datums)\n        - DATUM-VERTDAT (Vertical datums)\n        - DATUM-ENGDAT (Engineering datums)\n        - DATUM-GEODDAT (Geodetic datums)\n        - DATUM-DYNGEODDA (Dynamic geodetic datums)\n        - DATUM-ENSEMDAT (Ensemble datum)\n    - ELLIPSOID (Ellipsoid)\n    - PRIMEM (Prime meridian)\n    - METHOD (Method / Projection)\n    - CS (Coordinate systems)\n        - CS-VERTCS (Vertical coordinate system)\n        - CS-SPHERCS (Spherical coordinate system)\n        - CS-CARTESCS (Cartesian coordinate system)\n        - CS-ELLIPCS (Ellipsoidal coordinate system)\n        - CS-AFFINE (Affine coordinate system)\n        - CS-ORDINAL (Ordinal coordinate system)\n    - AXIS (Axis)\n    - AREA (Area)\n    - UNIT (Unit)\n        - UNIT-ANGUNIT (Angle unit)\n        - UNIT-SCALEUNIT (Scale unit)\n        - UNIT-LENUNIT (Length unit)\n        - UNIT-TIMEUNIT (Time unit)\n- code\n    - Full code of the resource\n- trans\n    - Code of the transformation\n- deprecated\n    - \\* (Both active and deprecated)\n    - 0 (active only - default)\n    - 1 (deprecated only)"
+        examples:
+          all:
+            summary: Finding all resources of Finland
+            value: finland deprecated:* kind:*
+          basic:
+            summary: Basic example
+            value: United Kingdom
+          deprecated:
+            summary: Finding deprecated mercator CRS
+            value: mercator deprecated:1
+          parameterized:
+            summary: Filtering resources using parameter(s)
+            value: Finland kind:DATUM
+          specific:
+            summary: Finding specific resource (WGS84) by code
+            value: code:4326
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of results returned
+        required: false
+        schema:
+          default: 10
+          maximum: 50
+          minimum: 1
+          type: integer
+      - name: offset
+        in: query
+        required: false
+        description: The starting position of returned list of results
+        schema:
+          default: 0
+          minimum: 0
+          type: integer
+      - name: transformations
+        in: query
+        required: false
+        description: Show detailed transformations for each CRS
+        schema:
+          default: false
+          type: boolean
+      - name: exports
+        in: query
+        required: false
+        description: Show exports in WKT and Proj4 notations
+        schema:
+          default: false
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  results:
+                    items:
+                      properties:
+                        accuracy:
+                          title: Accuracy
+                          type: number
+                        area:
+                          title: Area
+                          type: string
+                        bbox:
+                          description: Bounding box of the resource in [min_lon, min_lat, max_lon, max_lat] order.
+                          items:
+                            type: number
+                          title: Bbox
+                          type: array
+                        default_transformation:
+                          allOf:
+                          - $ref: '#/components/schemas/Id'
+                          description: Most suitable transformation for this CRS.
+                          title: Default Transformation
+                        deprecated:
+                          title: Deprecated
+                          type: boolean
+                        exports:
+                          $ref: '#/components/schemas/ExportItem'
+                        id:
+                          $ref: '#/components/schemas/Id'
+                        kind:
+                          title: Kind
+                          type: string
+                        name:
+                          title: Name
+                          type: string
+                        transformations:
+                          items:
+                            anyOf:
+                            - type: object
+                              properties:
+                                accuracy:
+                                  title: Accuracy
+                                  type: number
+                                area:
+                                  title: Area
+                                  type: string
+                                bbox:
+                                  description: Bounding box of the resource in [min_lon, min_lat, max_lon, max_lat] order.
+                                  items:
+                                    type: number
+                                  title: Bbox
+                                  type: array
+                                deprecated:
+                                  title: Deprecated
+                                  type: boolean
+                                exports:
+                                  $ref: '#/components/schemas/ExportItem'
+                                grids:
+                                  description: List of grids used in this operation.
+                                  items:
+                                    properties:
+                                      path:
+                                        title: Path
+                                        type: string
+                                    required:
+                                    - path
+                                    title: GridFile
+                                    type: object
+                                  title: Grids
+                                  type: array
+                                id:
+                                  $ref: '#/components/schemas/Id'
+                                name:
+                                  title: Name
+                                  type: string
+                                reversible:
+                                  description: Whether this operation can be used in reverse or not.
+                                  title: Reversible
+                                  type: boolean
+                                target_crs:
+                                  $ref: '#/components/schemas/Id'
+                                unit:
+                                  title: Unit
+                                  type: string
+                                usable:
+                                  description: Whether this operation can be used in online API or not.
+                                  title: Usable
+                                  type: boolean
+                              required:
+                              - id
+                              - name
+                              - reversible
+                              - grids
+                              - usable
+                              - deprecated
+                              title: TransformationItem
+                            - type: integer
+                          title: Transformations
+                          type: array
+                        unit:
+                          title: Unit
+                          type: string
+                      required:
+                      - id
+                      - kind
+                      - name
+                      - deprecated
+                      title: SearchItem
+                      type: object
+                    title: Results
+                    type: array
+                  total:
+                    title: Total
+                    type: integer
+                required:
+                - results
+                - total
+                title: SearchResult
+                type: object
+  /coordinates/transform/{coordinates}.json:
+    get:
+      summary: Transform coordinates
+      tags:
+      - Coordinates
+      parameters:
+      - name: coordinates
+        in: path
+        required: true
+        description: List of coordinate pairs seperated by `;` delimeter (Max 50 pairs).
+        example: 17,50;17,50,300
+        schema:
+          type: string
+      - name: s_srs
+        description: Source CRS
+        in: query
+        required: false
+        schema:
+          default: 4326
+          type: integer
+      - name: t_srs
+        description: Target CRS
+        in: query
+        required: false
+        schema:
+          default: 4326
+          type: integer
+      - name: ops
+        description: List of codes of operations seperated by a | (pipe) operator
+        example: '1623'
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  results:
+                    items:
+                      properties:
+                        x:
+                          type: number
+                        y:
+                          type: number
+                        z:
+                          type: number
+                      type: object
+                      title: XYZ
+                    type: array
+                  transformer_selection_strategy:
+                    description: Transformations are selected using given `ops` parameter. If no parameter is given, `auto` strategy is used. If given, it may try to use a `listed` transformation, then fallback to `towgs84` patching, and finally `boundcrs`.
+                    type: string
+                required:
+                - transformer_selection_strategy
+                - results
+                title: TransformResult
+                type: object
+components:
+  schemas:
+    ExportItem:
+      properties:
+        proj4:
+          title: Proj4
+          type: string
+        wkt:
+          title: Wkt
+          type: string
+      title: ExportItem
+      type: object
+    Id:
+      properties:
+        authority:
+          title: Authority
+          type: string
+        code:
+          title: Code
+          type: integer
+      required:
+      - authority
+      - code
+      title: Id
+      type: object
+  securitySchemes:
+    key:
+      description: Your own API key from https://cloud.maptiler.com/
+      type: apiKey
+      name: key
+      in: query

@@ -1,0 +1,72 @@
+openapi: 3.1.0
+info:
+  title: MapTiler Coordinates Elevation API
+  version: '1.0'
+  description: "MapTiler API allows you to programmatically access all the data, maps, services, and resources available in your MapTiler account. \n\nAccess to your resources via MapTiler API is read-only, and therefore safe and well suited for public end-user applications. You can use it to add a map directly to your website, request map tiles, create an image with a location map for your business, search for addresses, and more. \n\nThe universal public API request format is:\n\n```\nhttps://api.maptiler.com/{METHOD}/{QUERY}.json?{PARAMS}&key=YOUR_MAPTILER_API_KEY_HERE\n```\n\n> [!KEY]\n> You need a **MapTiler API key** to use this service. [Get it here](https://cloud.maptiler.com/account/keys/){:target=\"_blank\" rel=\"noopener noreferrer\"} and [learn how to protect it](/guides/maps-apis/maps-platform/how-to-protect-your-map-key/).\n"
+  termsOfService: https://www.maptiler.com/terms/
+  contact:
+    name: Support
+    email: support@maptiler.com
+    url: https://docs.maptiler.com/support/requests/
+    premium: https://www.maptiler.com/support/
+servers:
+- description: MapTiler API
+  url: https://api.maptiler.com/
+security:
+- key: []
+tags:
+- name: Elevation
+paths:
+  /elevation/{locations}.json:
+    get:
+      summary: Get elevation
+      description: Get the elevation at given locations. If <i>unit</i> is omitted, elevation values are in meters.
+      tags:
+      - Elevation
+      parameters:
+      - name: locations
+        in: path
+        required: true
+        description: List of `lng,lat` WGS 84 positions seperated by `;` delimeter (Max 50 positions). Longitude values must be `> -180 < 180`. Latitudes must be `>= -85 <= 85`.
+        example: 17,50;-133.5,58.39
+        schema:
+          type: string
+      - name: unit
+        in: query
+        description: Unit of the elevation.
+        schema:
+          type: string
+          default: meters
+          enum:
+          - meters
+          - feet
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: ElevationResults
+                description: Array of locations with elevation `[lng, lat, ele]`
+                type: array
+                example:
+                - - 17
+                  - 50
+                  - 364.20001220703125
+                - - -133.5
+                  - 58.39
+                  - 1323.800048828125
+                items:
+                  type: array
+                  minItems: 3
+                  maxItems: 3
+                  items:
+                    type: number
+        '400':
+          description: Out of bounds
+components:
+  securitySchemes:
+    key:
+      description: Your own API key from https://cloud.maptiler.com/
+      type: apiKey
+      name: key
+      in: query

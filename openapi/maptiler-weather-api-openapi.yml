@@ -1,0 +1,209 @@
+openapi: 3.1.0
+info:
+  title: MapTiler Coordinates Weather API
+  version: '1.0'
+  description: "MapTiler API allows you to programmatically access all the data, maps, services, and resources available in your MapTiler account. \n\nAccess to your resources via MapTiler API is read-only, and therefore safe and well suited for public end-user applications. You can use it to add a map directly to your website, request map tiles, create an image with a location map for your business, search for addresses, and more. \n\nThe universal public API request format is:\n\n```\nhttps://api.maptiler.com/{METHOD}/{QUERY}.json?{PARAMS}&key=YOUR_MAPTILER_API_KEY_HERE\n```\n\n> [!KEY]\n> You need a **MapTiler API key** to use this service. [Get it here](https://cloud.maptiler.com/account/keys/){:target=\"_blank\" rel=\"noopener noreferrer\"} and [learn how to protect it](/guides/maps-apis/maps-platform/how-to-protect-your-map-key/).\n"
+  termsOfService: https://www.maptiler.com/terms/
+  contact:
+    name: Support
+    email: support@maptiler.com
+    url: https://docs.maptiler.com/support/requests/
+    premium: https://www.maptiler.com/support/
+servers:
+- description: MapTiler API
+  url: https://api.maptiler.com/
+security:
+- key: []
+tags:
+- name: Weather
+paths:
+  /weather/latest.json:
+    get:
+      summary: Weather catalog
+      description: List current weather-related variables, their metadata and individual keyframes
+      tags:
+      - Weather
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherCatalogResult'
+        '403':
+          $ref: '#/components/responses/403'
+components:
+  schemas:
+    TilesetDefinition:
+      type: object
+      title: TilesetDefinition
+      properties:
+        spatial_ref_sys:
+          type: object
+          title: Spatial reference system
+          description: Projection
+          properties:
+            auth_name:
+              type: string
+              description: Name of the defining authority
+              example: EPSG
+            auth_srid:
+              type: string
+              description: ID given by the defining authority
+              example: '3857'
+            wkt:
+              type: string
+              description: Well known text of the definition
+              example: PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Web mapping and visualisation."],AREA["World between 85.06°S and 85.06°N."],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]
+          required:
+          - auth_name
+          - auth_srid
+        bounds:
+          title: Bounds
+          type: array
+          item: number
+          description: Bounds of the area represented by the tileset. Coordinates are in the given projection.
+          minItems: 4
+          maxItems: 4
+          example:
+          - -20037481.18083349
+          - -20037508.342789244
+          - 20008180.55502281
+          - 20037508.342789244
+        tile_format:
+          type: string
+          description: Format of individual tiles
+          example: png
+        tile_matrix_set:
+          type: object
+          title: Tile matrix set
+          properties:
+            bounds:
+              type: array
+              title: Bounds
+              item: number
+              minItems: 4
+              maxItems: 4
+              example:
+              - -20037481.18083349
+              - -20037508.342789244
+              - 20008180.55502281
+              - 20037508.342789244
+            items:
+              type: array
+              items:
+                type: object
+                title: Tile matrix
+                properties:
+                  zoom_level:
+                    type: integer
+                  matrix_width:
+                    type: integer
+                  matrix_height:
+                    type: integer
+                  tile_width:
+                    type: integer
+                  tile_height:
+                    type: integer
+                  pixel_x_size:
+                    type: number
+                  pixel_y_size:
+                    type: number
+        metadata:
+          type: object
+          title: Metadata
+          properties:
+            weather_variable:
+              type: object
+              title: Weather variable
+              properties:
+                name:
+                  type: string
+                  description: Human-friendly name of the variable
+                  example: Wind
+                description:
+                  type: string
+                  description: Human-friendly description of the variable
+                  example: Wind at 10 m above ground [m/s]
+                attribution:
+                  type: string
+                  example: GFS
+                variable_id:
+                  type: string
+                  description: unique ID of the forecast for grouping
+                  example: wind-10m:gfs
+                decoding:
+                  type: object
+                  title: Decoding
+                  properties:
+                    channels:
+                      type: string
+                      enum:
+                      - r
+                      - g
+                      - b
+                      - rg
+                      - rb
+                      - gb
+                      - rgb
+                      description: Channel to decode the info from
+                      example: rg
+                    min:
+                      type: number
+                      description: Min boundary of the data for decoding
+                      example: -75
+                    max:
+                      type: number
+                      description: Max boundary of the data for decoding
+                      example: 75
+                unit:
+                  type: string
+                  description: Human-friendly unit of the values
+                  example: ms
+                release_timestamp:
+                  type: string
+                  description: Date of release for the whole batch, ISO timestamp
+                  example: '2023-03-01T06:00:00+00:00'
+                timestamp:
+                  type: string
+                  description: ISO timestamp of the forecast frame – the moment in time it depicts
+                  example: '2023-03-01T11:00:00+00:00'
+      required:
+      - bounds
+      - tile_matrix_set
+      - keyframes
+    WeatherCatalogResult:
+      type: object
+      title: WeatherCatalogResult
+      properties:
+        variables:
+          type: array
+          description: List of all the available weather variables
+          title: CatalogResult
+          items:
+            allOf:
+            - $ref: '#/components/schemas/TilesetDefinition'
+            - type: object
+              properties:
+                keyframes:
+                  type: array
+                  title: Keyframes
+                  description: List of the available keyframes for this variable
+                  items:
+                    type: object
+                    title: Keyframe
+                    properties:
+                      id:
+                        type: string
+                        description: UUID of the tileset
+                      timestamp:
+                        type: string
+                        description: ISO timestamp of the tileset
+  responses:
+    '403':
+      description: Key is missing, invalid or restricted
+  securitySchemes:
+    key:
+      description: Your own API key from https://cloud.maptiler.com/
+      type: apiKey
+      name: key
+      in: query

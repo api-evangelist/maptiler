@@ -1,0 +1,236 @@
+openapi: 3.1.0
+info:
+  title: MapTiler Coordinates Maps API
+  version: '1.0'
+  description: "MapTiler API allows you to programmatically access all the data, maps, services, and resources available in your MapTiler account. \n\nAccess to your resources via MapTiler API is read-only, and therefore safe and well suited for public end-user applications. You can use it to add a map directly to your website, request map tiles, create an image with a location map for your business, search for addresses, and more. \n\nThe universal public API request format is:\n\n```\nhttps://api.maptiler.com/{METHOD}/{QUERY}.json?{PARAMS}&key=YOUR_MAPTILER_API_KEY_HERE\n```\n\n> [!KEY]\n> You need a **MapTiler API key** to use this service. [Get it here](https://cloud.maptiler.com/account/keys/){:target=\"_blank\" rel=\"noopener noreferrer\"} and [learn how to protect it](/guides/maps-apis/maps-platform/how-to-protect-your-map-key/).\n"
+  termsOfService: https://www.maptiler.com/terms/
+  contact:
+    name: Support
+    email: support@maptiler.com
+    url: https://docs.maptiler.com/support/requests/
+    premium: https://www.maptiler.com/support/
+servers:
+- description: MapTiler API
+  url: https://api.maptiler.com/
+security:
+- key: []
+tags:
+- name: Maps
+paths:
+  /maps/{mapId}/:
+    parameters:
+    - $ref: '#/components/parameters/mapId'
+    get:
+      summary: Embeddable HTML viewer
+      tags:
+      - Maps
+      responses:
+        '200':
+          description: ''
+          content:
+            text/html: {}
+  /maps/{mapId}/style.json:
+    parameters:
+    - $ref: '#/components/parameters/mapId'
+    get:
+      summary: Style JSON of the map
+      description: Style JSON describing the map cartography. Can be used with various libraries to display a vector map (e.g. Mapbox GL JS, OpenLayers, ...).
+      tags:
+      - Maps
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StyleJSON'
+  /maps/{mapId}/sprite{scale}.{format}:
+    parameters:
+    - $ref: '#/components/parameters/mapId'
+    - name: scale
+      in: path
+      required: false
+      schema:
+        type: string
+        enum:
+        - '@2x'
+    - name: format
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+        - png
+        - json
+    get:
+      summary: Map symbols (sprites)
+      description: Map symbols (sprites) required to display the vector map. <br><b>Deprecated:</b> use <a href="https://docs.maptiler.com/cloud/api/other/#sprites-icon-sets">Sprites API</a>.
+      deprecated: true
+      tags:
+      - Maps
+      security: []
+      responses:
+        '200':
+          content:
+            application/json: {}
+            image/png: {}
+  /maps/{mapId}/{tileSize/}/{z}/{x}/{y}{scale}.{format}:
+    parameters:
+    - $ref: '#/components/parameters/mapId'
+    - name: tileSize/
+      in: path
+      required: false
+      schema:
+        type: integer
+        enum:
+        - '256'
+    - $ref: '#/components/parameters/z'
+    - $ref: '#/components/parameters/x'
+    - $ref: '#/components/parameters/y'
+    - $ref: '#/components/parameters/rasterizationScale'
+    - $ref: '#/components/parameters/rasterizationFormat'
+    get:
+      summary: Raster XYZ tiles
+      description: Rasterized tiles (XYZ) of the map. Can be used with various libraries to display a raster map (e.g. Leaflet, OpenLayers, ...). It's usually better (if possible) to use the TileJSON rather than using the tile URL directly.
+      tags:
+      - Maps
+      responses:
+        '200':
+          $ref: '#/components/responses/RasterizedImage'
+        '400':
+          description: Out of bounds / Invalid format
+  /maps/{mapId}/{tileSize/}/tiles.json:
+    parameters:
+    - $ref: '#/components/parameters/mapId'
+    - name: tileSize/
+      in: path
+      required: false
+      schema:
+        type: integer
+        enum:
+        - '256'
+    get:
+      summary: TileJSON
+      description: TileJSON describing the metadata of the map as well as link to the XYZ tiles. Can be used with various libraries to display a raster map (e.g. Leaflet, OpenLayers, ...).
+      tags:
+      - Maps
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TileJSON'
+  /maps/{mapId}/tiles:
+    parameters:
+    - $ref: '#/components/parameters/mapId'
+    get:
+      summary: OGC API - Tiles
+      description: Tileset landing page of the rasterized tiles. Can be used in software supporting the OGC API - Tiles v1.0 specification.
+      tags:
+      - Maps
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: string
+  /maps/{mapId}/tileMatrixSet:
+    parameters:
+    - $ref: '#/components/parameters/mapId'
+    get:
+      summary: OGC API TileMatrixSets
+      description: Description of the tileset tile matrix sets according to the OGC Web API. This resource is linked from the OGC API - Tiles endpoint.
+      tags:
+      - Maps
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: string
+  /maps/{mapId}/WMTSCapabilities.xml:
+    parameters:
+    - $ref: '#/components/parameters/mapId'
+    get:
+      summary: WMTS Capabilities
+      description: WMTS Capabilities XML document describing the metadata of the map as well as link to the XYZ tiles. Can be used with various GIS software (e.g. QGIS) to display the map.
+      tags:
+      - Maps
+      responses:
+        '200':
+          content:
+            text/xml:
+              schema:
+                type: string
+components:
+  parameters:
+    z:
+      name: z
+      description: Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
+    x:
+      name: x
+      description: Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
+    rasterizationScale:
+      name: scale
+      in: path
+      description: Use "@2x" to get "retina"/HiDPI image.
+      required: false
+      schema:
+        type: string
+        enum:
+        - '@2x'
+    mapId:
+      name: mapId
+      in: path
+      description: Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/).
+      example: streets-v4
+      required: true
+      schema:
+        type: string
+    rasterizationFormat:
+      name: format
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+        - png
+        - jpg
+        - webp
+    y:
+      name: y
+      description: Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
+  schemas:
+    StyleJSON:
+      type: object
+      description: Style JSON object
+      externalDocs:
+        url: https://docs.maptiler.com/gl-style-specification/
+    TileJSON:
+      type: object
+      externalDocs:
+        url: https://raw.githubusercontent.com/maptiler/tilejson-spec/master/2.2.0/schema.json
+  responses:
+    RasterizedImage:
+      content:
+        image/*:
+          schema:
+            type: string
+            format: binary
+  securitySchemes:
+    key:
+      description: Your own API key from https://cloud.maptiler.com/
+      type: apiKey
+      name: key
+      in: query
