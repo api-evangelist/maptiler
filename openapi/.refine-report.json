@@ -1,0 +1,34 @@
+{
+  "provider": "maptiler",
+  "sources": [
+    "maptiler-coordinates-api-openapi.yml",
+    "maptiler-data-api-openapi.yml",
+    "maptiler-elevation-api-openapi.yml",
+    "maptiler-geocoding-api-openapi.yml",
+    "maptiler-geolocation-api-openapi.yml",
+    "maptiler-images-api-openapi.yml",
+    "maptiler-maps-api-openapi.yml",
+    "maptiler-other-api-openapi.yml",
+    "maptiler-static-maps-api-openapi.yml",
+    "maptiler-tiles-api-openapi.yml",
+    "maptiler-weather-api-openapi.yml"
+  ],
+  "outputs": [
+    "maptiler-coordinates-api-openapi.yml",
+    "maptiler-data-api-openapi.yml",
+    "maptiler-elevation-api-openapi.yml",
+    "maptiler-geocoding-api-openapi.yml",
+    "maptiler-geolocation-api-openapi.yml",
+    "maptiler-images-api-openapi.yml",
+    "maptiler-maps-api-openapi.yml",
+    "maptiler-other-api-openapi.yml",
+    "maptiler-static-maps-api-openapi.yml",
+    "maptiler-tiles-api-openapi.yml",
+    "maptiler-weather-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
