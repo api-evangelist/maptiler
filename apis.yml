@@ -247,7 +247,7 @@ common:
   - type: FinOps
     url: finops/maptiler-finops.yml
   - type: OpenAPI
-    url: openapi/maptiler-maptiler-openapi.yml
+    url: openapi/_original/maptiler-maptiler-openapi.yml
   - type: Vocabulary
     url: vocabulary/maptiler-vocabulary.yml
   - type: JSONLDContext
