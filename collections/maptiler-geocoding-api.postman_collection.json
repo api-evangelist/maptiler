@@ -1,0 +1,1231 @@
+{
+  "item": [
+    {
+      "id": "4c4ae9ad-fdd5-40fa-925c-0b02ba69d746",
+      "name": "Geocoding",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eec3e244-1646-464d-8d7b-0b324d13cf52",
+          "name": "Search by name (forward)",
+          "request": {
+            "name": "Search by name (forward)",
+            "description": {
+              "content": "Forward <a href=\"https://www.maptiler.com/cloud/geocoding/\">geocoding (search by place name)</a>.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "geocoding",
+                "{{query}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "bbox",
+                  "value": "<array>",
+                  "description": "A `[w, s, e, n]` bounding box array to use for limiting search results. Only features inside the provided bounding box will be included."
+                },
+                {
+                  "disabled": false,
+                  "key": "proximity",
+                  "value": "<array>",
+                  "description": "A `[lon, lat]` array to use for biasing search results or the string `ip` to do server-side IP based geolocation. Specify to prefer results close to a specific location - features closer to the proximity value will be given priority over those further from the proximity value."
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>,<string>",
+                  "description": "Prefer results in specific language specified as ISO 639-1 code. Only the first language code is used when prioritizing forward geocode results to be matched. If this query parameter is omited then Accept-Language HTTP header will be analyzed. If the parameter is provided but is empty then no language preference is made."
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>,<string>",
+                  "description": "Limit search to specific country/countries."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "5",
+                  "description": "Maximum number of results to return. For reverse geocoding with multiple types this must not be set or must be set to 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "types",
+                  "value": "<string>",
+                  "description": "Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "types",
+                  "value": "<string>",
+                  "description": "Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludeTypes",
+                  "value": "false",
+                  "description": "Set to `true` to use all available feature types except those specified in `types`."
+                },
+                {
+                  "disabled": false,
+                  "key": "fuzzyMatch",
+                  "value": "true",
+                  "description": "Set to `false` to disable fuzzy search."
+                },
+                {
+                  "disabled": false,
+                  "key": "autocomplete",
+                  "value": "<boolean>",
+                  "description": "Set to `true` to use autocomplete, `false` to disable autocomplete."
+                },
+                {
+                  "disabled": false,
+                  "key": "worldview",
+                  "value": "<string>",
+                  "description": "Some of the geographical boundaries and names are disputed. When `worldview` option is selected, the Geocoding API responses will be aligned with the borders and names recognized by the selected country (US or Switzerland). This affects filtering by country, the context returned with the given feature and also some of the labels (e.g., Gulf of Mexico vs. Gulf of America). Special values include: `auto` - the worldview is determined by the location of the client, `default` - disputed areas are returned without country information, countries with disputed borders are returned without full geometry.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52e4e093-2aa8-48a5-9bfe-6083b6febe4a",
+              "name": "Search result represented as FeatureCollection where every item is represented as a GeoJSON Feature",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geocoding",
+                    "{{query}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bbox",
+                      "value": ""
+                    },
+                    {
+                      "key": "proximity",
+                      "value": "8.528509,47.3774434"
+                    },
+                    {
+                      "key": "language",
+                      "value": "en"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    },
+                    {
+                      "key": "types",
+                      "value": "locality"
+                    },
+                    {
+                      "key": "types",
+                      "value": "region"
+                    },
+                    {
+                      "key": "excludeTypes",
+                      "value": "false"
+                    },
+                    {
+                      "key": "fuzzyMatch",
+                      "value": "true"
+                    },
+                    {
+                      "key": "autocomplete",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "worldview",
+                      "value": "ch"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"features\": [\n    {\n      \"bbox\": [\n        5.9559,\n        45.818,\n        10.4921,\n        47.8084\n      ],\n      \"center\": [\n        8.528509,\n        47.3774434\n      ],\n      \"geometry\": {\n        \"type\": \"string\",\n        \"coordinates\": [\n          8.528509,\n          47.3774434\n        ]\n      },\n      \"id\": \"municipality.46425\",\n      \"place_name\": \"string\",\n      \"place_type\": [\n        \"road\",\n        \"region\"\n      ],\n      \"place_type_name\": [\n        \"string\",\n        \"string\"\n      ],\n      \"properties\": {\n        \"ref\": \"osm:r71525\",\n        \"country_code\": \"fr\",\n        \"kind\": \"street\",\n        \"categories\": [\n          \"restaurant\"\n        ],\n        \"feature_tags\": {\n          \"key_0\": \"string\"\n        },\n        \"place_designation\": \"city\"\n      },\n      \"relevance\": 8171.042551354219,\n      \"text\": \"Paris\",\n      \"type\": \"string\",\n      \"language\": \"en\",\n      \"matching_place_name\": \"string\",\n      \"matching_text\": \"string\",\n      \"context\": [\n        {\n          \"country_code\": \"fr\",\n          \"id\": \"municipality.46425\",\n          \"ref\": \"osm:r71525\",\n          \"text\": \"Paris\",\n          \"kind\": \"virtual_street\",\n          \"categories\": [\n            \"restaurant\"\n          ],\n          \"feature_tags\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"place_designation\": \"city\",\n          \"language\": \"en\",\n          \"text_73\": \"string\",\n          \"language_Nh\": \"string\"\n        },\n        {\n          \"country_code\": \"fr\",\n          \"id\": \"municipality.46425\",\n          \"ref\": \"osm:r71525\",\n          \"text\": \"Paris\",\n          \"kind\": \"place\",\n          \"categories\": [\n            \"restaurant\"\n          ],\n          \"feature_tags\": {\n            \"key_0\": \"string\"\n          },\n          \"place_designation\": \"city\",\n          \"language\": \"en\",\n          \"text_EK\": \"string\",\n          \"language_f0\": \"string\"\n        }\n      ],\n      \"address\": \"string\",\n      \"text_kh\": \"string\",\n      \"language_5H\": \"string\",\n      \"place_name_3_\": \"string\"\n    },\n    {\n      \"bbox\": [\n        5.9559,\n        45.818,\n        10.4921,\n        47.8084\n      ],\n      \"center\": [\n        8.528509,\n        47.3774434\n      ],\n      \"geometry\": {\n        \"type\": \"string\",\n        \"coordinates\": [\n          8.528509,\n          47.3774434\n        ]\n      },\n      \"id\": \"municipality.46425\",\n      \"place_name\": \"string\",\n      \"place_type\": [\n        \"county\",\n        \"country\"\n      ],\n      \"place_type_name\": [\n        \"string\",\n        \"string\"\n      ],\n      \"properties\": {\n        \"ref\": \"osm:r71525\",\n        \"country_code\": \"fr\",\n        \"kind\": \"virtual_street\",\n        \"categories\": [\n          \"restaurant\"\n        ],\n        \"feature_tags\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"place_designation\": \"city\"\n      },\n      \"relevance\": 8009.973483851936,\n      \"text\": \"Paris\",\n      \"type\": \"string\",\n      \"language\": \"en\",\n      \"matching_place_name\": \"string\",\n      \"matching_text\": \"string\",\n      \"context\": [\n        {\n          \"country_code\": \"fr\",\n          \"id\": \"municipality.46425\",\n          \"ref\": \"osm:r71525\",\n          \"text\": \"Paris\",\n          \"kind\": \"road_relation\",\n          \"categories\": [\n            \"restaurant\"\n          ],\n          \"feature_tags\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"place_designation\": \"city\",\n          \"language\": \"en\",\n          \"text_ui\": \"string\",\n          \"language_Tw\": \"string\"\n        },\n        {\n          \"country_code\": \"fr\",\n          \"id\": \"municipality.46425\",\n          \"ref\": \"osm:r71525\",\n          \"text\": \"Paris\",\n          \"kind\": \"admin_area\",\n          \"categories\": [\n            \"restaurant\"\n          ],\n          \"feature_tags\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\",\n            \"key_3\": \"string\",\n            \"key_4\": \"string\"\n          },\n          \"place_designation\": \"city\",\n          \"language\": \"en\",\n          \"text_qe\": \"string\",\n          \"language_NI\": \"string\"\n        }\n      ],\n      \"address\": \"string\",\n      \"text_1u\": \"string\",\n      \"language_oY\": \"string\",\n      \"place_name_Ts\": \"string\"\n    }\n  ],\n  \"query\": [\n    \"string\",\n    \"string\"\n  ],\n  \"attribution\": \"<a href=\\\"https://www.maptiler.com/copyright/\\\" target=\\\"_blank\\\">&copy; MapTiler</a> <a href=\\\"https://www.openstreetmap.org/copyright\\\" target=\\\"_blank\\\">&copy; OpenStreetMap contributors</a>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05e695cf-7083-42c7-9fc0-d0359065e0ca",
+              "name": "Query too long / Invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geocoding",
+                    "{{query}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bbox",
+                      "value": ""
+                    },
+                    {
+                      "key": "proximity",
+                      "value": "8.528509,47.3774434"
+                    },
+                    {
+                      "key": "language",
+                      "value": "en"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    },
+                    {
+                      "key": "types",
+                      "value": "locality"
+                    },
+                    {
+                      "key": "types",
+                      "value": "region"
+                    },
+                    {
+                      "key": "excludeTypes",
+                      "value": "false"
+                    },
+                    {
+                      "key": "fuzzyMatch",
+                      "value": "true"
+                    },
+                    {
+                      "key": "autocomplete",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "worldview",
+                      "value": "ch"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b561f8a1-49c6-4f85-a94f-e2a49224d831",
+              "name": "Key is missing, invalid or restricted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geocoding",
+                    "{{query}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bbox",
+                      "value": ""
+                    },
+                    {
+                      "key": "proximity",
+                      "value": "8.528509,47.3774434"
+                    },
+                    {
+                      "key": "language",
+                      "value": "en"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    },
+                    {
+                      "key": "types",
+                      "value": "locality"
+                    },
+                    {
+                      "key": "types",
+                      "value": "region"
+                    },
+                    {
+                      "key": "excludeTypes",
+                      "value": "false"
+                    },
+                    {
+                      "key": "fuzzyMatch",
+                      "value": "true"
+                    },
+                    {
+                      "key": "autocomplete",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "worldview",
+                      "value": "ch"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2a8a6e8-27d6-439a-8fae-8e90a6af2d92",
+          "name": "Search by coordinates (reverse)",
+          "request": {
+            "name": "Search by coordinates (reverse)",
+            "description": {
+              "content": "Reverse geocoding (search by coordinates).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "geocoding",
+                "{{longitude}},{{latitude}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>,<string>",
+                  "description": "Prefer results in specific language specified as ISO 639-1 code. Only the first language code is used when prioritizing forward geocode results to be matched. If this query parameter is omited then Accept-Language HTTP header will be analyzed. If the parameter is provided but is empty then no language preference is made."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "5",
+                  "description": "Maximum number of results to return. For reverse geocoding with multiple types this must not be set or must be set to 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "types",
+                  "value": "<string>",
+                  "description": "Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "types",
+                  "value": "<string>",
+                  "description": "Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludeTypes",
+                  "value": "false",
+                  "description": "Set to `true` to use all available feature types except those specified in `types`."
+                },
+                {
+                  "disabled": false,
+                  "key": "worldview",
+                  "value": "<string>",
+                  "description": "Some of the geographical boundaries and names are disputed. When `worldview` option is selected, the Geocoding API responses will be aligned with the borders and names recognized by the selected country (US or Switzerland). This affects filtering by country, the context returned with the given feature and also some of the labels (e.g., Gulf of Mexico vs. Gulf of America). Special values include: `auto` - the worldview is determined by the location of the client, `default` - disputed areas are returned without country information, countries with disputed borders are returned without full geometry.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b45430a5-70dd-4fe1-9dc8-d71dfc1cc778",
+              "name": "Search result represented as FeatureCollection where every item is represented as a GeoJSON Feature",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geocoding",
+                    "{{longitude}},{{latitude}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "language",
+                      "value": "en"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    },
+                    {
+                      "key": "types",
+                      "value": "locality"
+                    },
+                    {
+                      "key": "types",
+                      "value": "region"
+                    },
+                    {
+                      "key": "excludeTypes",
+                      "value": "false"
+                    },
+                    {
+                      "key": "worldview",
+                      "value": "ch"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"features\": [\n    {\n      \"bbox\": [\n        5.9559,\n        45.818,\n        10.4921,\n        47.8084\n      ],\n      \"center\": [\n        8.528509,\n        47.3774434\n      ],\n      \"geometry\": {\n        \"type\": \"string\",\n        \"coordinates\": [\n          8.528509,\n          47.3774434\n        ]\n      },\n      \"id\": \"municipality.46425\",\n      \"place_name\": \"string\",\n      \"place_type\": [\n        \"region\",\n        \"locality\"\n      ],\n      \"place_type_name\": [\n        \"string\",\n        \"string\"\n      ],\n      \"properties\": {\n        \"ref\": \"osm:r71525\",\n        \"country_code\": \"fr\",\n        \"kind\": \"street\",\n        \"categories\": [\n          \"restaurant\"\n        ],\n        \"feature_tags\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\"\n        },\n        \"place_designation\": \"city\"\n      },\n      \"relevance\": 9591.146159506456,\n      \"text\": \"Paris\",\n      \"type\": \"string\",\n      \"language\": \"en\",\n      \"matching_place_name\": \"string\",\n      \"matching_text\": \"string\",\n      \"context\": [\n        {\n          \"country_code\": \"fr\",\n          \"id\": \"municipality.46425\",\n          \"ref\": \"osm:r71525\",\n          \"text\": \"Paris\",\n          \"kind\": \"admin_area\",\n          \"categories\": [\n            \"restaurant\"\n          ],\n          \"feature_tags\": {\n            \"key_0\": \"string\"\n          },\n          \"place_designation\": \"city\",\n          \"language\": \"en\",\n          \"text_95\": \"string\",\n          \"language_wy\": \"string\"\n        },\n        {\n          \"country_code\": \"fr\",\n          \"id\": \"municipality.46425\",\n          \"ref\": \"osm:r71525\",\n          \"text\": \"Paris\",\n          \"kind\": \"road_relation\",\n          \"categories\": [\n            \"restaurant\"\n          ],\n          \"feature_tags\": {\n            \"key_0\": \"string\"\n          },\n          \"place_designation\": \"city\",\n          \"language\": \"en\",\n          \"text_Z9\": \"string\",\n          \"language_OF\": \"string\"\n        }\n      ],\n      \"address\": \"string\",\n      \"text_pJ\": \"string\",\n      \"language_s5\": \"string\",\n      \"place_name_lD\": \"string\"\n    },\n    {\n      \"bbox\": [\n        5.9559,\n        45.818,\n        10.4921,\n        47.8084\n      ],\n      \"center\": [\n        8.528509,\n        47.3774434\n      ],\n      \"geometry\": {\n        \"type\": \"string\",\n        \"coordinates\": [\n          8.528509,\n          47.3774434\n        ]\n      },\n      \"id\": \"municipality.46425\",\n      \"place_name\": \"string\",\n      \"place_type\": [\n        \"joint_submunicipality\",\n        \"neighbourhood\"\n      ],\n      \"place_type_name\": [\n        \"string\",\n        \"string\"\n      ],\n      \"properties\": {\n        \"ref\": \"osm:r71525\",\n        \"country_code\": \"fr\",\n        \"kind\": \"road\",\n        \"categories\": [\n          \"restaurant\"\n        ],\n        \"feature_tags\": {\n          \"key_0\": \"string\"\n        },\n        \"place_designation\": \"city\"\n      },\n      \"relevance\": 5569.819816362829,\n      \"text\": \"Paris\",\n      \"type\": \"string\",\n      \"language\": \"en\",\n      \"matching_place_name\": \"string\",\n      \"matching_text\": \"string\",\n      \"context\": [\n        {\n          \"country_code\": \"fr\",\n          \"id\": \"municipality.46425\",\n          \"ref\": \"osm:r71525\",\n          \"text\": \"Paris\",\n          \"kind\": \"road\",\n          \"categories\": [\n            \"restaurant\"\n          ],\n          \"feature_tags\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          },\n          \"place_designation\": \"city\",\n          \"language\": \"en\",\n          \"text_Dj\": \"string\",\n          \"language_He\": \"string\"\n        },\n        {\n          \"country_code\": \"fr\",\n          \"id\": \"municipality.46425\",\n          \"ref\": \"osm:r71525\",\n          \"text\": \"Paris\",\n          \"kind\": \"road_relation\",\n          \"categories\": [\n            \"restaurant\"\n          ],\n          \"feature_tags\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"place_designation\": \"city\",\n          \"language\": \"en\",\n          \"text_Gh\": \"string\",\n          \"language_LJ\": \"string\"\n        }\n      ],\n      \"address\": \"string\",\n      \"text_6J\": \"string\",\n      \"language_TU\": \"string\",\n      \"place_name_Vl\": \"string\"\n    }\n  ],\n  \"query\": [\n    \"string\",\n    \"string\"\n  ],\n  \"attribution\": \"<a href=\\\"https://www.maptiler.com/copyright/\\\" target=\\\"_blank\\\">&copy; MapTiler</a> <a href=\\\"https://www.openstreetmap.org/copyright\\\" target=\\\"_blank\\\">&copy; OpenStreetMap contributors</a>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a756db80-4345-45b2-b4bb-733d8b6429ff",
+              "name": "Query too long / Invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geocoding",
+                    "{{longitude}},{{latitude}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "language",
+                      "value": "en"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    },
+                    {
+                      "key": "types",
+                      "value": "locality"
+                    },
+                    {
+                      "key": "types",
+                      "value": "region"
+                    },
+                    {
+                      "key": "excludeTypes",
+                      "value": "false"
+                    },
+                    {
+                      "key": "worldview",
+                      "value": "ch"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b3e59f65-9236-4054-b5e4-67e1527bc187",
+              "name": "Key is missing, invalid or restricted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geocoding",
+                    "{{longitude}},{{latitude}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "language",
+                      "value": "en"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    },
+                    {
+                      "key": "types",
+                      "value": "locality"
+                    },
+                    {
+                      "key": "types",
+                      "value": "region"
+                    },
+                    {
+                      "key": "excludeTypes",
+                      "value": "false"
+                    },
+                    {
+                      "key": "worldview",
+                      "value": "ch"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d4f0e94-caaf-4194-aa2d-fded13052dae",
+          "name": "Search by feature ID",
+          "request": {
+            "name": "Search by feature ID",
+            "description": {
+              "content": "Search feature by its ID (`id`) as returned in forward or reverse geocoding response and return its full geometry. Note that the feature ID is not stable and it changes when the database is re-indexed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "geocoding",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>,<string>",
+                  "description": "Prefer results in specific language specified as ISO 639-1 code. Only the first language code is used when prioritizing forward geocode results to be matched. If this query parameter is omited then Accept-Language HTTP header will be analyzed. If the parameter is provided but is empty then no language preference is made."
+                },
+                {
+                  "disabled": false,
+                  "key": "worldview",
+                  "value": "<string>",
+                  "description": "Some of the geographical boundaries and names are disputed. When `worldview` option is selected, the Geocoding API responses will be aligned with the borders and names recognized by the selected country (US or Switzerland). This affects filtering by country, the context returned with the given feature and also some of the labels (e.g., Gulf of Mexico vs. Gulf of America). Special values include: `auto` - the worldview is determined by the location of the client, `default` - disputed areas are returned without country information, countries with disputed borders are returned without full geometry.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "07f2ad90-c6d4-40d1-88a8-e504cba181dd",
+              "name": "Search result represented as FeatureCollection where every item is represented as a GeoJSON Feature",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geocoding",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "language",
+                      "value": "en"
+                    },
+                    {
+                      "key": "worldview",
+                      "value": "ch"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"features\": [\n    {\n      \"bbox\": [\n        5.9559,\n        45.818,\n        10.4921,\n        47.8084\n      ],\n      \"center\": [\n        8.528509,\n        47.3774434\n      ],\n      \"geometry\": {\n        \"type\": \"string\",\n        \"coordinates\": [\n          8.528509,\n          47.3774434\n        ]\n      },\n      \"id\": \"municipality.46425\",\n      \"place_name\": \"string\",\n      \"place_type\": [\n        \"region\",\n        \"locality\"\n      ],\n      \"place_type_name\": [\n        \"string\",\n        \"string\"\n      ],\n      \"properties\": {\n        \"ref\": \"osm:r71525\",\n        \"country_code\": \"fr\",\n        \"kind\": \"street\",\n        \"categories\": [\n          \"restaurant\"\n        ],\n        \"feature_tags\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\"\n        },\n        \"place_designation\": \"city\"\n      },\n      \"relevance\": 9591.146159506456,\n      \"text\": \"Paris\",\n      \"type\": \"string\",\n      \"language\": \"en\",\n      \"matching_place_name\": \"string\",\n      \"matching_text\": \"string\",\n      \"context\": [\n        {\n          \"country_code\": \"fr\",\n          \"id\": \"municipality.46425\",\n          \"ref\": \"osm:r71525\",\n          \"text\": \"Paris\",\n          \"kind\": \"admin_area\",\n          \"categories\": [\n            \"restaurant\"\n          ],\n          \"feature_tags\": {\n            \"key_0\": \"string\"\n          },\n          \"place_designation\": \"city\",\n          \"language\": \"en\",\n          \"text_95\": \"string\",\n          \"language_wy\": \"string\"\n        },\n        {\n          \"country_code\": \"fr\",\n          \"id\": \"municipality.46425\",\n          \"ref\": \"osm:r71525\",\n          \"text\": \"Paris\",\n          \"kind\": \"road_relation\",\n          \"categories\": [\n            \"restaurant\"\n          ],\n          \"feature_tags\": {\n            \"key_0\": \"string\"\n          },\n          \"place_designation\": \"city\",\n          \"language\": \"en\",\n          \"text_Z9\": \"string\",\n          \"language_OF\": \"string\"\n        }\n      ],\n      \"address\": \"string\",\n      \"text_pJ\": \"string\",\n      \"language_s5\": \"string\",\n      \"place_name_lD\": \"string\"\n    },\n    {\n      \"bbox\": [\n        5.9559,\n        45.818,\n        10.4921,\n        47.8084\n      ],\n      \"center\": [\n        8.528509,\n        47.3774434\n      ],\n      \"geometry\": {\n        \"type\": \"string\",\n        \"coordinates\": [\n          8.528509,\n          47.3774434\n        ]\n      },\n      \"id\": \"municipality.46425\",\n      \"place_name\": \"string\",\n      \"place_type\": [\n        \"joint_submunicipality\",\n        \"neighbourhood\"\n      ],\n      \"place_type_name\": [\n        \"string\",\n        \"string\"\n      ],\n      \"properties\": {\n        \"ref\": \"osm:r71525\",\n        \"country_code\": \"fr\",\n        \"kind\": \"road\",\n        \"categories\": [\n          \"restaurant\"\n        ],\n        \"feature_tags\": {\n          \"key_0\": \"string\"\n        },\n        \"place_designation\": \"city\"\n      },\n      \"relevance\": 5569.819816362829,\n      \"text\": \"Paris\",\n      \"type\": \"string\",\n      \"language\": \"en\",\n      \"matching_place_name\": \"string\",\n      \"matching_text\": \"string\",\n      \"context\": [\n        {\n          \"country_code\": \"fr\",\n          \"id\": \"municipality.46425\",\n          \"ref\": \"osm:r71525\",\n          \"text\": \"Paris\",\n          \"kind\": \"road\",\n          \"categories\": [\n            \"restaurant\"\n          ],\n          \"feature_tags\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          },\n          \"place_designation\": \"city\",\n          \"language\": \"en\",\n          \"text_Dj\": \"string\",\n          \"language_He\": \"string\"\n        },\n        {\n          \"country_code\": \"fr\",\n          \"id\": \"municipality.46425\",\n          \"ref\": \"osm:r71525\",\n          \"text\": \"Paris\",\n          \"kind\": \"road_relation\",\n          \"categories\": [\n            \"restaurant\"\n          ],\n          \"feature_tags\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"place_designation\": \"city\",\n          \"language\": \"en\",\n          \"text_Gh\": \"string\",\n          \"language_LJ\": \"string\"\n        }\n      ],\n      \"address\": \"string\",\n      \"text_6J\": \"string\",\n      \"language_TU\": \"string\",\n      \"place_name_Vl\": \"string\"\n    }\n  ],\n  \"query\": [\n    \"string\",\n    \"string\"\n  ],\n  \"attribution\": \"<a href=\\\"https://www.maptiler.com/copyright/\\\" target=\\\"_blank\\\">&copy; MapTiler</a> <a href=\\\"https://www.openstreetmap.org/copyright\\\" target=\\\"_blank\\\">&copy; OpenStreetMap contributors</a>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84c93bca-5a3b-4836-be14-989a0a862600",
+              "name": "Query too long / Invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geocoding",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "language",
+                      "value": "en"
+                    },
+                    {
+                      "key": "worldview",
+                      "value": "ch"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "67ec91e2-8055-461c-885a-8728ccf589f9",
+              "name": "Key is missing, invalid or restricted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geocoding",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "language",
+                      "value": "en"
+                    },
+                    {
+                      "key": "worldview",
+                      "value": "ch"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7668ec08-3cfa-4d6f-92b6-51f371b1cbd1",
+          "name": "Batch geocoding API",
+          "request": {
+            "name": "Batch geocoding API",
+            "description": {
+              "content": "Perform geocoding of more than one request in a single API call. Check out the <a href=\"https://docs.maptiler.com/guides/geocoding/batch-geocoding-api/\">Batch Geocoding guide</a> for an example.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "geocoding",
+                "{{queries}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "bbox",
+                  "value": "<array>",
+                  "description": "A `[w, s, e, n]` bounding box array to use for limiting search results. Only features inside the provided bounding box will be included."
+                },
+                {
+                  "disabled": false,
+                  "key": "proximity",
+                  "value": "<array>",
+                  "description": "A `[lon, lat]` array to use for biasing search results or the string `ip` to do server-side IP based geolocation. Specify to prefer results close to a specific location - features closer to the proximity value will be given priority over those further from the proximity value."
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>,<string>",
+                  "description": "Prefer results in specific language specified as ISO 639-1 code. Only the first language code is used when prioritizing forward geocode results to be matched. If this query parameter is omited then Accept-Language HTTP header will be analyzed. If the parameter is provided but is empty then no language preference is made."
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>,<string>",
+                  "description": "Limit search to specific country/countries."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "5",
+                  "description": "Maximum number of results to return. For reverse geocoding with multiple types this must not be set or must be set to 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "types",
+                  "value": "<string>",
+                  "description": "Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "types",
+                  "value": "<string>",
+                  "description": "Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludeTypes",
+                  "value": "false",
+                  "description": "Set to `true` to use all available feature types except those specified in `types`."
+                },
+                {
+                  "disabled": false,
+                  "key": "fuzzyMatch",
+                  "value": "true",
+                  "description": "Set to `false` to disable fuzzy search."
+                },
+                {
+                  "disabled": false,
+                  "key": "autocomplete",
+                  "value": "<boolean>",
+                  "description": "Set to `true` to use autocomplete, `false` to disable autocomplete."
+                },
+                {
+                  "disabled": false,
+                  "key": "worldview",
+                  "value": "<string>",
+                  "description": "Some of the geographical boundaries and names are disputed. When `worldview` option is selected, the Geocoding API responses will be aligned with the borders and names recognized by the selected country (US or Switzerland). This affects filtering by country, the context returned with the given feature and also some of the labels (e.g., Gulf of Mexico vs. Gulf of America). Special values include: `auto` - the worldview is determined by the location of the client, `default` - disputed areas are returned without country information, countries with disputed borders are returned without full geometry.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "902e5daa-6a5d-4e3e-8fa2-ad10b3bb2d46",
+              "name": "Array of geocoding results where items are matching order of queries in the request. Every result is represented as FeatureCollection where every item is represented as a GeoJSON Feature",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geocoding",
+                    "{{queries}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bbox",
+                      "value": ""
+                    },
+                    {
+                      "key": "proximity",
+                      "value": "8.528509,47.3774434"
+                    },
+                    {
+                      "key": "language",
+                      "value": "en"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    },
+                    {
+                      "key": "types",
+                      "value": "locality"
+                    },
+                    {
+                      "key": "types",
+                      "value": "region"
+                    },
+                    {
+                      "key": "excludeTypes",
+                      "value": "false"
+                    },
+                    {
+                      "key": "fuzzyMatch",
+                      "value": "true"
+                    },
+                    {
+                      "key": "autocomplete",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "worldview",
+                      "value": "ch"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"type\": \"string\",\n    \"features\": [\n      {\n        \"bbox\": [\n          5.9559,\n          45.818,\n          10.4921,\n          47.8084\n        ],\n        \"center\": [\n          8.528509,\n          47.3774434\n        ],\n        \"geometry\": {\n          \"type\": \"string\",\n          \"coordinates\": [\n            8.528509,\n            47.3774434\n          ]\n        },\n        \"id\": \"municipality.46425\",\n        \"place_name\": \"string\",\n        \"place_type\": [\n          \"address\",\n          \"joint_municipality\"\n        ],\n        \"place_type_name\": [\n          \"string\",\n          \"string\"\n        ],\n        \"properties\": {\n          \"ref\": \"osm:r71525\",\n          \"country_code\": \"fr\",\n          \"kind\": \"admin_area\",\n          \"categories\": [\n            \"restaurant\"\n          ],\n          \"feature_tags\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"place_designation\": \"city\"\n        },\n        \"relevance\": 7348.132298569342,\n        \"text\": \"Paris\",\n        \"type\": \"string\",\n        \"language\": \"en\",\n        \"matching_place_name\": \"string\",\n        \"matching_text\": \"string\",\n        \"context\": [\n          {\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"text\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"kind\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"categories\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"feature_tags\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"place_designation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"language\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"text_HF\": \"string\",\n            \"language_WR\": \"string\"\n          },\n          {\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"text\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"kind\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"categories\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"feature_tags\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"place_designation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"language\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"text_lo\": \"string\",\n            \"language_tg\": \"string\"\n          }\n        ],\n        \"address\": \"string\",\n        \"text_I1\": \"string\",\n        \"language_vI\": \"string\",\n        \"place_name_bY\": \"string\"\n      },\n      {\n        \"bbox\": [\n          5.9559,\n          45.818,\n          10.4921,\n          47.8084\n        ],\n        \"center\": [\n          8.528509,\n          47.3774434\n        ],\n        \"geometry\": {\n          \"type\": \"string\",\n          \"coordinates\": [\n            8.528509,\n            47.3774434\n          ]\n        },\n        \"id\": \"municipality.46425\",\n        \"place_name\": \"string\",\n        \"place_type\": [\n          \"county\",\n          \"neighbourhood\"\n        ],\n        \"place_type_name\": [\n          \"string\",\n          \"string\"\n        ],\n        \"properties\": {\n          \"ref\": \"osm:r71525\",\n          \"country_code\": \"fr\",\n          \"kind\": \"virtual_street\",\n          \"categories\": [\n            \"restaurant\"\n          ],\n          \"feature_tags\": {\n            \"key_0\": \"string\"\n          },\n          \"place_designation\": \"city\"\n        },\n        \"relevance\": 7529.884451444541,\n        \"text\": \"Paris\",\n        \"type\": \"string\",\n        \"language\": \"en\",\n        \"matching_place_name\": \"string\",\n        \"matching_text\": \"string\",\n        \"context\": [\n          {\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"text\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"kind\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"categories\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"feature_tags\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"place_designation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"language\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"text_iy\": \"string\",\n            \"language_iU\": \"string\"\n          },\n          {\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"text\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"kind\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"categories\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"feature_tags\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"place_designation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"language\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"text_MJ\": \"string\",\n            \"language_S4\": \"string\"\n          }\n        ],\n        \"address\": \"string\",\n        \"text_GH\": \"string\",\n        \"language_qp\": \"string\",\n        \"place_name_dk\": \"string\"\n      }\n    ],\n    \"query\": [\n      \"string\",\n      \"string\"\n    ],\n    \"attribution\": \"<a href=\\\"https://www.maptiler.com/copyright/\\\" target=\\\"_blank\\\">&copy; MapTiler</a> <a href=\\\"https://www.openstreetmap.org/copyright\\\" target=\\\"_blank\\\">&copy; OpenStreetMap contributors</a>\"\n  },\n  {\n    \"type\": \"string\",\n    \"features\": [\n      {\n        \"bbox\": [\n          5.9559,\n          45.818,\n          10.4921,\n          47.8084\n        ],\n        \"center\": [\n          8.528509,\n          47.3774434\n        ],\n        \"geometry\": {\n          \"type\": \"string\",\n          \"coordinates\": [\n            8.528509,\n            47.3774434\n          ]\n        },\n        \"id\": \"municipality.46425\",\n        \"place_name\": \"string\",\n        \"place_type\": [\n          \"major_landform\",\n          \"joint_municipality\"\n        ],\n        \"place_type_name\": [\n          \"string\",\n          \"string\"\n        ],\n        \"properties\": {\n          \"ref\": \"osm:r71525\",\n          \"country_code\": \"fr\",\n          \"kind\": \"virtual_street\",\n          \"categories\": [\n            \"restaurant\"\n          ],\n          \"feature_tags\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"place_designation\": \"city\"\n        },\n        \"relevance\": 3122.901337389943,\n        \"text\": \"Paris\",\n        \"type\": \"string\",\n        \"language\": \"en\",\n        \"matching_place_name\": \"string\",\n        \"matching_text\": \"string\",\n        \"context\": [\n          {\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"text\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"kind\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"categories\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"feature_tags\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"place_designation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"language\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"text_nG\": \"string\",\n            \"language_jN\": \"string\"\n          },\n          {\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"text\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"kind\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"categories\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"feature_tags\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"place_designation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"language\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"text_5r\": \"string\",\n            \"language_7J\": \"string\"\n          }\n        ],\n        \"address\": \"string\",\n        \"text_C3\": \"string\",\n        \"language_jJ\": \"string\",\n        \"place_name_zf\": \"string\"\n      },\n      {\n        \"bbox\": [\n          5.9559,\n          45.818,\n          10.4921,\n          47.8084\n        ],\n        \"center\": [\n          8.528509,\n          47.3774434\n        ],\n        \"geometry\": {\n          \"type\": \"string\",\n          \"coordinates\": [\n            8.528509,\n            47.3774434\n          ]\n        },\n        \"id\": \"municipality.46425\",\n        \"place_name\": \"string\",\n        \"place_type\": [\n          \"country\",\n          \"joint_submunicipality\"\n        ],\n        \"place_type_name\": [\n          \"string\",\n          \"string\"\n        ],\n        \"properties\": {\n          \"ref\": \"osm:r71525\",\n          \"country_code\": \"fr\",\n          \"kind\": \"road\",\n          \"categories\": [\n            \"restaurant\"\n          ],\n          \"feature_tags\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"place_designation\": \"city\"\n        },\n        \"relevance\": 8548.227214374581,\n        \"text\": \"Paris\",\n        \"type\": \"string\",\n        \"language\": \"en\",\n        \"matching_place_name\": \"string\",\n        \"matching_text\": \"string\",\n        \"context\": [\n          {\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"text\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"kind\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"categories\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"feature_tags\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"place_designation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"language\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"text_k6\": \"string\",\n            \"language_Yw\": \"string\"\n          },\n          {\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"text\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"kind\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"categories\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"feature_tags\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"place_designation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"language\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"text_ZC\": \"string\",\n            \"language_fh\": \"string\"\n          }\n        ],\n        \"address\": \"string\",\n        \"text_du\": \"string\",\n        \"language_GP\": \"string\",\n        \"place_name_Qv\": \"string\"\n      }\n    ],\n    \"query\": [\n      \"string\",\n      \"string\"\n    ],\n    \"attribution\": \"<a href=\\\"https://www.maptiler.com/copyright/\\\" target=\\\"_blank\\\">&copy; MapTiler</a> <a href=\\\"https://www.openstreetmap.org/copyright\\\" target=\\\"_blank\\\">&copy; OpenStreetMap contributors</a>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "126c5b72-8831-4432-b11e-53dbe01af499",
+              "name": "Query too long / Invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geocoding",
+                    "{{queries}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bbox",
+                      "value": ""
+                    },
+                    {
+                      "key": "proximity",
+                      "value": "8.528509,47.3774434"
+                    },
+                    {
+                      "key": "language",
+                      "value": "en"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    },
+                    {
+                      "key": "types",
+                      "value": "locality"
+                    },
+                    {
+                      "key": "types",
+                      "value": "region"
+                    },
+                    {
+                      "key": "excludeTypes",
+                      "value": "false"
+                    },
+                    {
+                      "key": "fuzzyMatch",
+                      "value": "true"
+                    },
+                    {
+                      "key": "autocomplete",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "worldview",
+                      "value": "ch"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5c5e15e6-1263-4f63-9a6b-90ada107374c",
+              "name": "Key is missing, invalid or restricted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geocoding",
+                    "{{queries}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bbox",
+                      "value": ""
+                    },
+                    {
+                      "key": "proximity",
+                      "value": "8.528509,47.3774434"
+                    },
+                    {
+                      "key": "language",
+                      "value": "en"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    },
+                    {
+                      "key": "types",
+                      "value": "locality"
+                    },
+                    {
+                      "key": "types",
+                      "value": "region"
+                    },
+                    {
+                      "key": "excludeTypes",
+                      "value": "false"
+                    },
+                    {
+                      "key": "fuzzyMatch",
+                      "value": "true"
+                    },
+                    {
+                      "key": "autocomplete",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "worldview",
+                      "value": "ch"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.maptiler.com/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Place name to search. You can also use bare [POI category](https://docs.maptiler.com/cloud/api/geocoding/#PoiCategory) or mix it with a name to search for POIs of desired category, unless `poi` index is excluded.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "query"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) ",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<number>",
+      "key": "longitude"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) ",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<number>",
+      "key": "latitude"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Feature ID (found in response of forward or reverse geocoding)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "id"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Semicolon-separated list of queries. Semicolon `;` must be provided verbatim and not be URL-encoded. Each query may be forward, reverse or by feature ID. Maximum of 50 queries are supported.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "queries"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ae844c79-7586-45aa-b287-e3575854b226",
+    "name": "MapTiler Coordinates Geocoding API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "MapTiler API allows you to programmatically access all the data, maps, services, and resources available in your MapTiler account. \n\nAccess to your resources via MapTiler API is read-only, and therefore safe and well suited for public end-user applications. You can use it to add a map directly to your website, request map tiles, create an image with a location map for your business, search for addresses, and more. \n\nThe universal public API request format is:\n\n```\nhttps://api.maptiler.com/{METHOD}/{QUERY}.json?{PARAMS}&key=YOUR_MAPTILER_API_KEY_HERE\n```\n\n> [!KEY]\n> You need a **MapTiler API key** to use this service. [Get it here](https://cloud.maptiler.com/account/keys/){:target=\"_blank\" rel=\"noopener noreferrer\"} and [learn how to protect it](/guides/maps-apis/maps-platform/how-to-protect-your-map-key/).\n\n\nContact Support:\n Name: Support\n Email: support@maptiler.com",
+      "type": "text/plain"
+    }
+  }
+}

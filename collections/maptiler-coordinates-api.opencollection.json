@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MapTiler Coordinates API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Coordinates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search coordinate systems",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/coordinates/search/:query.json",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "path",
+                "description": "Query string used to search the catalog. It accepts plain terms such as names of locations and key:value pairs for filtering.\n\nFollowing parameter values can be used:\n- kind\n    - \\* (All kinds)\n    - CRS (All coordinate reference systems - default)\n        - CRS-PROJCRS (Projected coordinate systems)\n        - CRS-GEOGCRS (Geodetic coordinate systems)\n        - CRS-GEOG3DCRS (Geodetic 3D coordinate systems)\n        - CRS-GCENCRS (Geocentric coordinate systems)\n        - CRS-VERTCRS (Vertical coordinate systems)\n        - CRS-ENGCRS (Engineering coordinate systems)\n        - CRS-COMPOUNDCRS (Compound coordinate systems)\n        - CRS-DRVDCRS (Derived coordinate systems)\n    - COORDOP (All operations)\n        - COORDOP-COPTRAN (Transformations)\n        - COORDOP-COPCONO (Compound operations)\n        - COORDOP-POIMOTO (Point motion operations)\n        - COORDOP-COPCON (Conversions)\n    - DATUM (All datums)\n        - DATUM-VERTDAT (Vertical datums)\n        - DATUM-ENGDAT (Engineering datums)\n        - DATUM-GEODDAT (Geodetic datums)\n        - DATUM-DYNGEODDA (Dynamic geodetic datums)\n        - DATUM-ENSEMDAT (Ensemble datum)\n    - ELLIPSOID (Ellipsoid)\n    - PRIMEM (Prime meridian)\n    - METHOD (Method / Projection)\n    - CS (Coordinate systems)\n        - CS-VERTCS (Vertical coordinate system)\n        - CS-SPHERCS (Spherical coordinate system)\n        - CS-CARTESCS (Cartesian coordinate system)\n        - CS-ELLIPCS (Ellipsoidal coordinate system)\n        - CS-AFFINE (Affine coordinate system)\n        - CS-ORDINAL (Ordinal coordinate system)\n    - AXIS (Axis)\n    - AREA (Area)\n    - UNIT (Unit)\n        - UNIT-ANGUNIT (Angle unit)\n        - UNIT-SCALEUNIT (Scale unit)\n        - UNIT-LENUNIT (Length unit)\n        - UNIT-TIMEUNIT (Time unit)\n- code\n    - Full code of the resource\n- trans\n    - Code of the transformation\n- deprecated\n    - \\* (Both active and deprecated)\n    - 0 (active only - default)\n    - 1 (deprecated only)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results returned"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The starting position of returned list of results"
+              },
+              {
+                "name": "transformations",
+                "value": "",
+                "type": "query",
+                "description": "Show detailed transformations for each CRS"
+              },
+              {
+                "name": "exports",
+                "value": "",
+                "type": "query",
+                "description": "Show exports in WKT and Proj4 notations"
+              }
+            ]
+          },
+          "docs": "Search coordinate systems"
+        },
+        {
+          "info": {
+            "name": "Transform coordinates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/coordinates/transform/:coordinates.json",
+            "params": [
+              {
+                "name": "coordinates",
+                "value": "17,50;17,50,300",
+                "type": "path",
+                "description": "List of coordinate pairs seperated by `;` delimeter (Max 50 pairs)."
+              },
+              {
+                "name": "s_srs",
+                "value": "",
+                "type": "query",
+                "description": "Source CRS"
+              },
+              {
+                "name": "t_srs",
+                "value": "",
+                "type": "query",
+                "description": "Target CRS"
+              },
+              {
+                "name": "ops",
+                "value": "1623",
+                "type": "query",
+                "description": "List of codes of operations seperated by a | (pipe) operator"
+              }
+            ]
+          },
+          "docs": "Transform coordinates"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

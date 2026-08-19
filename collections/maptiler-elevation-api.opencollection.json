@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MapTiler Coordinates Elevation API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Elevation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get elevation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/elevation/:locations.json",
+            "params": [
+              {
+                "name": "locations",
+                "value": "17,50;-133.5,58.39",
+                "type": "path",
+                "description": "List of `lng,lat` WGS 84 positions seperated by `;` delimeter (Max 50 positions). Longitude values must be `> -180 < 180`. Latitudes must be `>= -85 <= 85`."
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query",
+                "description": "Unit of the elevation."
+              }
+            ]
+          },
+          "docs": "Get the elevation at given locations. If <i>unit</i> is omitted, elevation values are in meters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

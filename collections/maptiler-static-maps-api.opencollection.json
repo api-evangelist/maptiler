@@ -1,0 +1,368 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MapTiler Coordinates Static maps API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Static maps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Center-based image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/maps/:mapId/static/:lon,:lat,:zoom/:widthx:height:scale.:format",
+            "params": [
+              {
+                "name": "mapId",
+                "value": "streets-v4",
+                "type": "path",
+                "description": "Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+              },
+              {
+                "name": "lon",
+                "value": "",
+                "type": "path",
+                "description": "Longitude of the center of the image."
+              },
+              {
+                "name": "lat",
+                "value": "",
+                "type": "path",
+                "description": "Latitude of the center of the image."
+              },
+              {
+                "name": "zoom",
+                "value": "",
+                "type": "path",
+                "description": "Zoom level of the resulting image (can be fractional). (In the tile pyramid based on 512x512 tiles.)"
+              },
+              {
+                "name": "width",
+                "value": "",
+                "type": "path",
+                "description": "Width of the image in pixels."
+              },
+              {
+                "name": "height",
+                "value": "",
+                "type": "path",
+                "description": "Height of the image in pixels."
+              },
+              {
+                "name": "scale",
+                "value": "",
+                "type": "path",
+                "description": "Use \"@2x\" to get \"retina\"/HiDPI image."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Define path(s) to be drawn on top of the map. Can be used multiple times. See [Static map with lines or polygons](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-lines/)."
+              },
+              {
+                "name": "markers",
+                "value": "",
+                "type": "query",
+                "description": "Define marker(s) to be drawn on top of the map. Can be used multiple times. See [Static map with markers](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-markers/)."
+              },
+              {
+                "name": "latlng",
+                "value": "",
+                "type": "query",
+                "description": "Use [latitude, longitude] order for coordinates instead of [longitude, latitude]."
+              },
+              {
+                "name": "attribution",
+                "value": "",
+                "type": "query",
+                "description": "Changes the position of map attribution. If you disable the attribution make sure to display it in your application yourself (visibly)."
+              },
+              {
+                "name": "fill",
+                "value": "",
+                "type": "query",
+                "description": "Color to use as a fill when drawing polygons. Deprecated, use \"path\" instead."
+              },
+              {
+                "name": "stroke",
+                "value": "",
+                "type": "query",
+                "description": "Color to use as a stroke when drawing polygons. Deprecated, use \"path\" instead."
+              },
+              {
+                "name": "width",
+                "value": "",
+                "type": "query",
+                "description": "Width of the stroke line when drawing polygons (in pixels). Deprecated, use \"path\" instead."
+              },
+              {
+                "name": "encodedpath",
+                "value": "",
+                "type": "query",
+                "description": "Path in [Google Encoded Polyline Format](https://developers.google.com/maps/documentation/utilities/polylinealgorithm). Deprecated, use \"path\" instead."
+              },
+              {
+                "name": "shortest",
+                "value": "",
+                "type": "query",
+                "description": "Draw the shortest paths, allow to cross the dateline."
+              }
+            ]
+          },
+          "docs": "Generates a raster image based on the specified center and zoom level."
+        },
+        {
+          "info": {
+            "name": "Bounds-based image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/maps/:mapId/static/:minx,:miny,:maxx,:maxy/:widthx:height:scale.:format",
+            "params": [
+              {
+                "name": "mapId",
+                "value": "streets-v4",
+                "type": "path",
+                "description": "Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+              },
+              {
+                "name": "minx",
+                "value": "",
+                "type": "path",
+                "description": "Longitude of the left (west) edge."
+              },
+              {
+                "name": "miny",
+                "value": "",
+                "type": "path",
+                "description": "Latitude of the bottom (south) edge."
+              },
+              {
+                "name": "maxx",
+                "value": "",
+                "type": "path",
+                "description": "Longitude of the right (east) edge."
+              },
+              {
+                "name": "maxy",
+                "value": "",
+                "type": "path",
+                "description": "Latitude of the top (north) edge."
+              },
+              {
+                "name": "width",
+                "value": "",
+                "type": "path",
+                "description": "Width of the image in pixels."
+              },
+              {
+                "name": "height",
+                "value": "",
+                "type": "path",
+                "description": "Height of the image in pixels."
+              },
+              {
+                "name": "scale",
+                "value": "",
+                "type": "path",
+                "description": "Use \"@2x\" to get \"retina\"/HiDPI image."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "padding",
+                "value": "",
+                "type": "query",
+                "description": "Ensures the autofitted bounds or features are comfortably visible in the resulting area. E.g. use 0.1 to add 10% margin (at least) of the size to each side."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Define path(s) to be drawn on top of the map. Can be used multiple times. See [Static map with lines or polygons](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-lines/)."
+              },
+              {
+                "name": "markers",
+                "value": "",
+                "type": "query",
+                "description": "Define marker(s) to be drawn on top of the map. Can be used multiple times. See [Static map with markers](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-markers/)."
+              },
+              {
+                "name": "latlng",
+                "value": "",
+                "type": "query",
+                "description": "Use [latitude, longitude] order for coordinates instead of [longitude, latitude]."
+              },
+              {
+                "name": "attribution",
+                "value": "",
+                "type": "query",
+                "description": "Changes the position of map attribution. If you disable the attribution make sure to display it in your application yourself (visibly)."
+              },
+              {
+                "name": "fill",
+                "value": "",
+                "type": "query",
+                "description": "Color to use as a fill when drawing polygons. Deprecated, use \"path\" instead."
+              },
+              {
+                "name": "stroke",
+                "value": "",
+                "type": "query",
+                "description": "Color to use as a stroke when drawing polygons. Deprecated, use \"path\" instead."
+              },
+              {
+                "name": "width",
+                "value": "",
+                "type": "query",
+                "description": "Width of the stroke line when drawing polygons (in pixels). Deprecated, use \"path\" instead."
+              },
+              {
+                "name": "encodedpath",
+                "value": "",
+                "type": "query",
+                "description": "Path in [Google Encoded Polyline Format](https://developers.google.com/maps/documentation/utilities/polylinealgorithm). Deprecated, use \"path\" instead."
+              },
+              {
+                "name": "shortest",
+                "value": "",
+                "type": "query",
+                "description": "Draw the shortest paths, allow to cross the dateline."
+              }
+            ]
+          },
+          "docs": "Generates a raster image based on the given bounds."
+        },
+        {
+          "info": {
+            "name": "Auto-fitted image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/maps/:mapId/static/auto/:widthx:height:scale.:format",
+            "params": [
+              {
+                "name": "mapId",
+                "value": "streets-v4",
+                "type": "path",
+                "description": "Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+              },
+              {
+                "name": "width",
+                "value": "",
+                "type": "path",
+                "description": "Width of the image in pixels."
+              },
+              {
+                "name": "height",
+                "value": "",
+                "type": "path",
+                "description": "Height of the image in pixels."
+              },
+              {
+                "name": "scale",
+                "value": "",
+                "type": "path",
+                "description": "Use \"@2x\" to get \"retina\"/HiDPI image."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "padding",
+                "value": "",
+                "type": "query",
+                "description": "Ensures the autofitted bounds or features are comfortably visible in the resulting area. E.g. use 0.1 to add 10% margin (at least) of the size to each side."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Define path(s) to be drawn on top of the map. Can be used multiple times. See [Static map with lines or polygons](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-lines/)."
+              },
+              {
+                "name": "markers",
+                "value": "",
+                "type": "query",
+                "description": "Define marker(s) to be drawn on top of the map. Can be used multiple times. See [Static map with markers](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-markers/)."
+              },
+              {
+                "name": "latlng",
+                "value": "",
+                "type": "query",
+                "description": "Use [latitude, longitude] order for coordinates instead of [longitude, latitude]."
+              },
+              {
+                "name": "attribution",
+                "value": "",
+                "type": "query",
+                "description": "Changes the position of map attribution. If you disable the attribution make sure to display it in your application yourself (visibly)."
+              },
+              {
+                "name": "fill",
+                "value": "",
+                "type": "query",
+                "description": "Color to use as a fill when drawing polygons. Deprecated, use \"path\" instead."
+              },
+              {
+                "name": "stroke",
+                "value": "",
+                "type": "query",
+                "description": "Color to use as a stroke when drawing polygons. Deprecated, use \"path\" instead."
+              },
+              {
+                "name": "width",
+                "value": "",
+                "type": "query",
+                "description": "Width of the stroke line when drawing polygons (in pixels). Deprecated, use \"path\" instead."
+              },
+              {
+                "name": "encodedpath",
+                "value": "",
+                "type": "query",
+                "description": "Path in [Google Encoded Polyline Format](https://developers.google.com/maps/documentation/utilities/polylinealgorithm). Deprecated, use \"path\" instead."
+              },
+              {
+                "name": "shortest",
+                "value": "",
+                "type": "query",
+                "description": "Draw the shortest paths, allow to cross the dateline."
+              }
+            ]
+          },
+          "docs": "Generates a raster image based on the given features. The area is calculated so that all the paths and markers given in query are visible."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

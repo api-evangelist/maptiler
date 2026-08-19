@@ -1,0 +1,291 @@
+{
+  "item": [
+    {
+      "id": "836ad699-5425-4ec4-9656-fd0c0d192fce",
+      "name": "Coordinates",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2cbf3ab3-308e-4a1a-95e7-d1e24b430070",
+          "name": "Search coordinate systems",
+          "request": {
+            "name": "Search coordinate systems",
+            "description": {},
+            "url": {
+              "path": [
+                "coordinates",
+                "search",
+                "{{query}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Maximum number of results returned"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "The starting position of returned list of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "transformations",
+                  "value": "false",
+                  "description": "Show detailed transformations for each CRS"
+                },
+                {
+                  "disabled": false,
+                  "key": "exports",
+                  "value": "false",
+                  "description": "Show exports in WKT and Proj4 notations"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d2d2d4a0-2e42-4114-99c3-6947ff2a559e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coordinates",
+                    "search",
+                    "{{query}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "transformations",
+                      "value": "false"
+                    },
+                    {
+                      "key": "exports",
+                      "value": "false"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": {\n        \"authority\": \"string\",\n        \"code\": 6907\n      },\n      \"kind\": \"string\",\n      \"name\": \"string\",\n      \"deprecated\": false,\n      \"accuracy\": 7699.928250047875,\n      \"area\": \"string\",\n      \"bbox\": [\n        1961.1015012688204,\n        2452.8335694371563\n      ],\n      \"default_transformation\": {\n        \"authority\": \"string\",\n        \"code\": 3268\n      },\n      \"exports\": {\n        \"proj4\": \"string\",\n        \"wkt\": \"string\"\n      },\n      \"transformations\": [\n        {\n          \"id\": {\n            \"authority\": \"string\",\n            \"code\": 9884\n          },\n          \"name\": \"string\",\n          \"reversible\": false,\n          \"grids\": [\n            {\n              \"path\": \"string\"\n            },\n            {\n              \"path\": \"string\"\n            }\n          ],\n          \"usable\": true,\n          \"deprecated\": false,\n          \"accuracy\": 7570.031488746546,\n          \"area\": \"string\",\n          \"bbox\": [\n            5905.873875360079,\n            5021.620577508163\n          ],\n          \"exports\": {\n            \"proj4\": \"string\",\n            \"wkt\": \"string\"\n          },\n          \"target_crs\": {\n            \"authority\": \"string\",\n            \"code\": 6619\n          },\n          \"unit\": \"string\"\n        },\n        {\n          \"id\": {\n            \"authority\": \"string\",\n            \"code\": 7981\n          },\n          \"name\": \"string\",\n          \"reversible\": true,\n          \"grids\": [\n            {\n              \"path\": \"string\"\n            },\n            {\n              \"path\": \"string\"\n            }\n          ],\n          \"usable\": false,\n          \"deprecated\": true,\n          \"accuracy\": 7405.643631020573,\n          \"area\": \"string\",\n          \"bbox\": [\n            768.6479871836183,\n            493.2067316477795\n          ],\n          \"exports\": {\n            \"proj4\": \"string\",\n            \"wkt\": \"string\"\n          },\n          \"target_crs\": {\n            \"authority\": \"string\",\n            \"code\": 1965\n          },\n          \"unit\": \"string\"\n        }\n      ],\n      \"unit\": \"string\"\n    },\n    {\n      \"id\": {\n        \"authority\": \"string\",\n        \"code\": 1177\n      },\n      \"kind\": \"string\",\n      \"name\": \"string\",\n      \"deprecated\": true,\n      \"accuracy\": 9592.982931730243,\n      \"area\": \"string\",\n      \"bbox\": [\n        2490.0398441290818,\n        2761.290114353574\n      ],\n      \"default_transformation\": {\n        \"authority\": \"string\",\n        \"code\": 594\n      },\n      \"exports\": {\n        \"proj4\": \"string\",\n        \"wkt\": \"string\"\n      },\n      \"transformations\": [\n        {\n          \"id\": {\n            \"authority\": \"string\",\n            \"code\": 9181\n          },\n          \"name\": \"string\",\n          \"reversible\": true,\n          \"grids\": [\n            {\n              \"path\": \"string\"\n            },\n            {\n              \"path\": \"string\"\n            }\n          ],\n          \"usable\": true,\n          \"deprecated\": true,\n          \"accuracy\": 5222.560637128538,\n          \"area\": \"string\",\n          \"bbox\": [\n            758.5384135206797,\n            3039.204392834534\n          ],\n          \"exports\": {\n            \"proj4\": \"string\",\n            \"wkt\": \"string\"\n          },\n          \"target_crs\": {\n            \"authority\": \"string\",\n            \"code\": 6770\n          },\n          \"unit\": \"string\"\n        },\n        {\n          \"id\": {\n            \"authority\": \"string\",\n            \"code\": 8407\n          },\n          \"name\": \"string\",\n          \"reversible\": false,\n          \"grids\": [\n            {\n              \"path\": \"string\"\n            },\n            {\n              \"path\": \"string\"\n            }\n          ],\n          \"usable\": false,\n          \"deprecated\": true,\n          \"accuracy\": 8418.458270532778,\n          \"area\": \"string\",\n          \"bbox\": [\n            7628.39154744158,\n            8683.498405841206\n          ],\n          \"exports\": {\n            \"proj4\": \"string\",\n            \"wkt\": \"string\"\n          },\n          \"target_crs\": {\n            \"authority\": \"string\",\n            \"code\": 1606\n          },\n          \"unit\": \"string\"\n        }\n      ],\n      \"unit\": \"string\"\n    }\n  ],\n  \"total\": 6505\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea9384a9-1319-413f-893b-a114233a2fb6",
+          "name": "Transform coordinates",
+          "request": {
+            "name": "Transform coordinates",
+            "description": {},
+            "url": {
+              "path": [
+                "coordinates",
+                "transform",
+                "{{coordinates}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "s_srs",
+                  "value": "4326",
+                  "description": "Source CRS"
+                },
+                {
+                  "disabled": false,
+                  "key": "t_srs",
+                  "value": "4326",
+                  "description": "Target CRS"
+                },
+                {
+                  "disabled": false,
+                  "key": "ops",
+                  "value": "<string>",
+                  "description": "List of codes of operations seperated by a | (pipe) operator"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b1a6dc7a-a5e6-43c3-af4a-e25be9ddd8f4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coordinates",
+                    "transform",
+                    "{{coordinates}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "s_srs",
+                      "value": "4326"
+                    },
+                    {
+                      "key": "t_srs",
+                      "value": "4326"
+                    },
+                    {
+                      "key": "ops",
+                      "value": "1623"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transformer_selection_strategy\": \"string\",\n  \"results\": [\n    {\n      \"x\": 2571.0891336686304,\n      \"y\": 315.67883790243224,\n      \"z\": 6494.043512426964\n    },\n    {\n      \"x\": 6332.353067488958,\n      \"y\": 841.0464493875025,\n      \"z\": 7488.232408176552\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.maptiler.com/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Query string used to search the catalog. It accepts plain terms such as names of locations and key:value pairs for filtering.\n\nFollowing parameter values can be used:\n- kind\n    - \\* (All kinds)\n    - CRS (All coordinate reference systems - default)\n        - CRS-PROJCRS (Projected coordinate systems)\n        - CRS-GEOGCRS (Geodetic coordinate systems)\n        - CRS-GEOG3DCRS (Geodetic 3D coordinate systems)\n        - CRS-GCENCRS (Geocentric coordinate systems)\n        - CRS-VERTCRS (Vertical coordinate systems)\n        - CRS-ENGCRS (Engineering coordinate systems)\n        - CRS-COMPOUNDCRS (Compound coordinate systems)\n        - CRS-DRVDCRS (Derived coordinate systems)\n    - COORDOP (All operations)\n        - COORDOP-COPTRAN (Transformations)\n        - COORDOP-COPCONO (Compound operations)\n        - COORDOP-POIMOTO (Point motion operations)\n        - COORDOP-COPCON (Conversions)\n    - DATUM (All datums)\n        - DATUM-VERTDAT (Vertical datums)\n        - DATUM-ENGDAT (Engineering datums)\n        - DATUM-GEODDAT (Geodetic datums)\n        - DATUM-DYNGEODDA (Dynamic geodetic datums)\n        - DATUM-ENSEMDAT (Ensemble datum)\n    - ELLIPSOID (Ellipsoid)\n    - PRIMEM (Prime meridian)\n    - METHOD (Method / Projection)\n    - CS (Coordinate systems)\n        - CS-VERTCS (Vertical coordinate system)\n        - CS-SPHERCS (Spherical coordinate system)\n        - CS-CARTESCS (Cartesian coordinate system)\n        - CS-ELLIPCS (Ellipsoidal coordinate system)\n        - CS-AFFINE (Affine coordinate system)\n        - CS-ORDINAL (Ordinal coordinate system)\n    - AXIS (Axis)\n    - AREA (Area)\n    - UNIT (Unit)\n        - UNIT-ANGUNIT (Angle unit)\n        - UNIT-SCALEUNIT (Scale unit)\n        - UNIT-LENUNIT (Length unit)\n        - UNIT-TIMEUNIT (Time unit)\n- code\n    - Full code of the resource\n- trans\n    - Code of the transformation\n- deprecated\n    - \\* (Both active and deprecated)\n    - 0 (active only - default)\n    - 1 (deprecated only)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "query"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) List of coordinate pairs seperated by `;` delimeter (Max 50 pairs).",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "coordinates"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6aad6689-b849-4728-a229-6665723a2517",
+    "name": "MapTiler Coordinates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "MapTiler API allows you to programmatically access all the data, maps, services, and resources available in your MapTiler account. \n\nAccess to your resources via MapTiler API is read-only, and therefore safe and well suited for public end-user applications. You can use it to add a map directly to your website, request map tiles, create an image with a location map for your business, search for addresses, and more. \n\nThe universal public API request format is:\n\n```\nhttps://api.maptiler.com/{METHOD}/{QUERY}.json?{PARAMS}&key=YOUR_MAPTILER_API_KEY_HERE\n```\n\n> [!KEY]\n> You need a **MapTiler API key** to use this service. [Get it here](https://cloud.maptiler.com/account/keys/){:target=\"_blank\" rel=\"noopener noreferrer\"} and [learn how to protect it](/guides/maps-apis/maps-platform/how-to-protect-your-map-key/).\n\n\nContact Support:\n Name: Support\n Email: support@maptiler.com",
+      "type": "text/plain"
+    }
+  }
+}

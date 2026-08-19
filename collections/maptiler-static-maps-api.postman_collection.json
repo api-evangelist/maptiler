@@ -1,0 +1,1762 @@
+{
+  "item": [
+    {
+      "id": "8dbdb2fa-b239-4aeb-b9c1-384f8e94cba3",
+      "name": "Static maps",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "47c797ca-e983-4220-bbfb-10103fe44be7",
+          "name": "Center-based image",
+          "request": {
+            "name": "Center-based image",
+            "description": {
+              "content": "Generates a raster image based on the specified center and zoom level.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "maps",
+                ":mapId",
+                "static",
+                "{{lon}},{{lat}},{{zoom}}",
+                "{{width}}x{{height}}{{scale}}.{{format}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "Define path(s) to be drawn on top of the map. Can be used multiple times. See [Static map with lines or polygons](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-lines/)."
+                },
+                {
+                  "disabled": false,
+                  "key": "markers",
+                  "value": "<string>",
+                  "description": "Define marker(s) to be drawn on top of the map. Can be used multiple times. See [Static map with markers](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-markers/)."
+                },
+                {
+                  "disabled": false,
+                  "key": "latlng",
+                  "value": "<boolean>",
+                  "description": "Use [latitude, longitude] order for coordinates instead of [longitude, latitude]."
+                },
+                {
+                  "disabled": false,
+                  "key": "attribution",
+                  "value": "<string>",
+                  "description": "Changes the position of map attribution. If you disable the attribution make sure to display it in your application yourself (visibly)."
+                },
+                {
+                  "disabled": false,
+                  "key": "fill",
+                  "value": "<string>",
+                  "description": "Color to use as a fill when drawing polygons. Deprecated, use \"path\" instead."
+                },
+                {
+                  "disabled": false,
+                  "key": "stroke",
+                  "value": "<string>",
+                  "description": "Color to use as a stroke when drawing polygons. Deprecated, use \"path\" instead."
+                },
+                {
+                  "disabled": false,
+                  "key": "width",
+                  "value": "<number>",
+                  "description": "Width of the stroke line when drawing polygons (in pixels). Deprecated, use \"path\" instead."
+                },
+                {
+                  "disabled": false,
+                  "key": "encodedpath",
+                  "value": "<string>",
+                  "description": "Path in [Google Encoded Polyline Format](https://developers.google.com/maps/documentation/utilities/polylinealgorithm). Deprecated, use \"path\" instead."
+                },
+                {
+                  "disabled": false,
+                  "key": "shortest",
+                  "value": "<boolean>",
+                  "description": "Draw the shortest paths, allow to cross the dateline."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mapId",
+                  "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "image/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b34e0ca2-6da2-4300-b41b-bbca6333aaa7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "static",
+                    "{{lon}},{{lat}},{{zoom}}",
+                    "{{width}}x{{height}}{{scale}}.{{format}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latlng",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "attribution",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fill",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stroke",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "width",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "encodedpath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shortest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "image/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "image/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b9cf5fb5-f0ac-4f5e-afe3-75753d823ee1",
+              "name": "Out of bounds / Invalid format / Invalid image size",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "static",
+                    "{{lon}},{{lat}},{{zoom}}",
+                    "{{width}}x{{height}}{{scale}}.{{format}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latlng",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "attribution",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fill",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stroke",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "width",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "encodedpath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shortest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2ce2f680-ee3a-4bf5-9712-a50dceb9b4b4",
+              "name": "Key is missing, invalid or restricted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "static",
+                    "{{lon}},{{lat}},{{zoom}}",
+                    "{{width}}x{{height}}{{scale}}.{{format}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latlng",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "attribution",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fill",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stroke",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "width",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "encodedpath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shortest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9a14195e-f36f-43bc-b85c-e6c166ed1397",
+              "name": "The item does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "static",
+                    "{{lon}},{{lat}},{{zoom}}",
+                    "{{width}}x{{height}}{{scale}}.{{format}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latlng",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "attribution",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fill",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stroke",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "width",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "encodedpath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shortest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "096acc50-eab1-4ef8-a36a-5574a3e959c5",
+              "name": "URI Too Long. Maximum allowed length is 8192 bytes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "static",
+                    "{{lon}},{{lat}},{{zoom}}",
+                    "{{width}}x{{height}}{{scale}}.{{format}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latlng",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "attribution",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fill",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stroke",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "width",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "encodedpath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shortest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request-URI Too Long",
+              "code": 414,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb56245d-9611-469a-aa37-8840aa7b5da3",
+          "name": "Bounds-based image",
+          "request": {
+            "name": "Bounds-based image",
+            "description": {
+              "content": "Generates a raster image based on the given bounds.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "maps",
+                ":mapId",
+                "static",
+                "{{minx}},{{miny}},{{maxx}},{{maxy}}",
+                "{{width}}x{{height}}{{scale}}.{{format}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "padding",
+                  "value": "<number>",
+                  "description": "Ensures the autofitted bounds or features are comfortably visible in the resulting area. E.g. use 0.1 to add 10% margin (at least) of the size to each side."
+                },
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "Define path(s) to be drawn on top of the map. Can be used multiple times. See [Static map with lines or polygons](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-lines/)."
+                },
+                {
+                  "disabled": false,
+                  "key": "markers",
+                  "value": "<string>",
+                  "description": "Define marker(s) to be drawn on top of the map. Can be used multiple times. See [Static map with markers](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-markers/)."
+                },
+                {
+                  "disabled": false,
+                  "key": "latlng",
+                  "value": "<boolean>",
+                  "description": "Use [latitude, longitude] order for coordinates instead of [longitude, latitude]."
+                },
+                {
+                  "disabled": false,
+                  "key": "attribution",
+                  "value": "<string>",
+                  "description": "Changes the position of map attribution. If you disable the attribution make sure to display it in your application yourself (visibly)."
+                },
+                {
+                  "disabled": false,
+                  "key": "fill",
+                  "value": "<string>",
+                  "description": "Color to use as a fill when drawing polygons. Deprecated, use \"path\" instead."
+                },
+                {
+                  "disabled": false,
+                  "key": "stroke",
+                  "value": "<string>",
+                  "description": "Color to use as a stroke when drawing polygons. Deprecated, use \"path\" instead."
+                },
+                {
+                  "disabled": false,
+                  "key": "width",
+                  "value": "<number>",
+                  "description": "Width of the stroke line when drawing polygons (in pixels). Deprecated, use \"path\" instead."
+                },
+                {
+                  "disabled": false,
+                  "key": "encodedpath",
+                  "value": "<string>",
+                  "description": "Path in [Google Encoded Polyline Format](https://developers.google.com/maps/documentation/utilities/polylinealgorithm). Deprecated, use \"path\" instead."
+                },
+                {
+                  "disabled": false,
+                  "key": "shortest",
+                  "value": "<boolean>",
+                  "description": "Draw the shortest paths, allow to cross the dateline."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mapId",
+                  "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "image/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "703bd38e-2762-41f4-9f66-6342f427dfb0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "static",
+                    "{{minx}},{{miny}},{{maxx}},{{maxy}}",
+                    "{{width}}x{{height}}{{scale}}.{{format}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "padding",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latlng",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "attribution",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fill",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stroke",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "width",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "encodedpath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shortest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "image/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "image/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6e1813ed-6ec4-4b4e-9cea-1e8f23a0432c",
+              "name": "Out of bounds / Invalid format / Invalid image size",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "static",
+                    "{{minx}},{{miny}},{{maxx}},{{maxy}}",
+                    "{{width}}x{{height}}{{scale}}.{{format}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "padding",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latlng",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "attribution",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fill",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stroke",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "width",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "encodedpath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shortest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "97aedec0-1c1a-4ec5-9201-6d61036cac30",
+              "name": "Key is missing, invalid or restricted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "static",
+                    "{{minx}},{{miny}},{{maxx}},{{maxy}}",
+                    "{{width}}x{{height}}{{scale}}.{{format}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "padding",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latlng",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "attribution",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fill",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stroke",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "width",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "encodedpath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shortest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f1974510-63ce-4076-be23-7149a7706094",
+              "name": "The item does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "static",
+                    "{{minx}},{{miny}},{{maxx}},{{maxy}}",
+                    "{{width}}x{{height}}{{scale}}.{{format}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "padding",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latlng",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "attribution",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fill",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stroke",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "width",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "encodedpath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shortest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8afc7e88-d039-4def-8c05-ac3dc518024b",
+              "name": "URI Too Long. Maximum allowed length is 8192 bytes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "static",
+                    "{{minx}},{{miny}},{{maxx}},{{maxy}}",
+                    "{{width}}x{{height}}{{scale}}.{{format}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "padding",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latlng",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "attribution",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fill",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stroke",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "width",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "encodedpath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shortest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request-URI Too Long",
+              "code": 414,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8cb24b2-978e-47c4-8e63-a0a38c818886",
+          "name": "Auto-fitted image",
+          "request": {
+            "name": "Auto-fitted image",
+            "description": {
+              "content": "Generates a raster image based on the given features. The area is calculated so that all the paths and markers given in query are visible.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "maps",
+                ":mapId",
+                "static",
+                "auto",
+                "{{width}}x{{height}}{{scale}}.{{format}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "padding",
+                  "value": "<number>",
+                  "description": "Ensures the autofitted bounds or features are comfortably visible in the resulting area. E.g. use 0.1 to add 10% margin (at least) of the size to each side."
+                },
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "Define path(s) to be drawn on top of the map. Can be used multiple times. See [Static map with lines or polygons](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-lines/)."
+                },
+                {
+                  "disabled": false,
+                  "key": "markers",
+                  "value": "<string>",
+                  "description": "Define marker(s) to be drawn on top of the map. Can be used multiple times. See [Static map with markers](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-markers/)."
+                },
+                {
+                  "disabled": false,
+                  "key": "latlng",
+                  "value": "<boolean>",
+                  "description": "Use [latitude, longitude] order for coordinates instead of [longitude, latitude]."
+                },
+                {
+                  "disabled": false,
+                  "key": "attribution",
+                  "value": "<string>",
+                  "description": "Changes the position of map attribution. If you disable the attribution make sure to display it in your application yourself (visibly)."
+                },
+                {
+                  "disabled": false,
+                  "key": "fill",
+                  "value": "<string>",
+                  "description": "Color to use as a fill when drawing polygons. Deprecated, use \"path\" instead."
+                },
+                {
+                  "disabled": false,
+                  "key": "stroke",
+                  "value": "<string>",
+                  "description": "Color to use as a stroke when drawing polygons. Deprecated, use \"path\" instead."
+                },
+                {
+                  "disabled": false,
+                  "key": "width",
+                  "value": "<number>",
+                  "description": "Width of the stroke line when drawing polygons (in pixels). Deprecated, use \"path\" instead."
+                },
+                {
+                  "disabled": false,
+                  "key": "encodedpath",
+                  "value": "<string>",
+                  "description": "Path in [Google Encoded Polyline Format](https://developers.google.com/maps/documentation/utilities/polylinealgorithm). Deprecated, use \"path\" instead."
+                },
+                {
+                  "disabled": false,
+                  "key": "shortest",
+                  "value": "<boolean>",
+                  "description": "Draw the shortest paths, allow to cross the dateline."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mapId",
+                  "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "image/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cfb48245-94be-40d1-8c84-0cf5d26d08f0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "static",
+                    "auto",
+                    "{{width}}x{{height}}{{scale}}.{{format}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "padding",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latlng",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "attribution",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fill",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stroke",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "width",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "encodedpath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shortest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "image/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "image/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "38556fb7-0a9a-42ca-bbb9-5b094c4d10a9",
+              "name": "Out of bounds / Invalid format / Invalid image size",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "static",
+                    "auto",
+                    "{{width}}x{{height}}{{scale}}.{{format}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "padding",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latlng",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "attribution",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fill",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stroke",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "width",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "encodedpath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shortest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8bc05987-8b22-425d-b392-dda3663d0b2b",
+              "name": "Key is missing, invalid or restricted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "static",
+                    "auto",
+                    "{{width}}x{{height}}{{scale}}.{{format}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "padding",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latlng",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "attribution",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fill",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stroke",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "width",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "encodedpath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shortest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1af87b75-5fe1-489a-af08-e26f5d31d747",
+              "name": "The item does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "static",
+                    "auto",
+                    "{{width}}x{{height}}{{scale}}.{{format}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "padding",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latlng",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "attribution",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fill",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stroke",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "width",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "encodedpath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shortest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a2fc900d-dd61-4adb-829f-1144ff2e9ca3",
+              "name": "URI Too Long. Maximum allowed length is 8192 bytes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "static",
+                    "auto",
+                    "{{width}}x{{height}}{{scale}}.{{format}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "padding",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latlng",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "attribution",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fill",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stroke",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "width",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "encodedpath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shortest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request-URI Too Long",
+              "code": 414,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.maptiler.com/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Longitude of the center of the image.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<number>",
+      "key": "lon"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Latitude of the center of the image.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<number>",
+      "key": "lat"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Zoom level of the resulting image (can be fractional). (In the tile pyramid based on 512x512 tiles.)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<number>",
+      "key": "zoom"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Width of the image in pixels.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "width"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Height of the image in pixels.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "height"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "Use \"@2x\" to get \"retina\"/HiDPI image.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "scale"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) ",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "format"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Longitude of the left (west) edge.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<number>",
+      "key": "minx"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Latitude of the bottom (south) edge.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<number>",
+      "key": "miny"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Longitude of the right (east) edge.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<number>",
+      "key": "maxx"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Latitude of the top (north) edge.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<number>",
+      "key": "maxy"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7f452920-2079-4cd6-b2c5-140c745f4c37",
+    "name": "MapTiler Coordinates Static maps API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "MapTiler API allows you to programmatically access all the data, maps, services, and resources available in your MapTiler account. \n\nAccess to your resources via MapTiler API is read-only, and therefore safe and well suited for public end-user applications. You can use it to add a map directly to your website, request map tiles, create an image with a location map for your business, search for addresses, and more. \n\nThe universal public API request format is:\n\n```\nhttps://api.maptiler.com/{METHOD}/{QUERY}.json?{PARAMS}&key=YOUR_MAPTILER_API_KEY_HERE\n```\n\n> [!KEY]\n> You need a **MapTiler API key** to use this service. [Get it here](https://cloud.maptiler.com/account/keys/){:target=\"_blank\" rel=\"noopener noreferrer\"} and [learn how to protect it](/guides/maps-apis/maps-platform/how-to-protect-your-map-key/).\n\n\nContact Support:\n Name: Support\n Email: support@maptiler.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,956 @@
+{
+  "item": [
+    {
+      "id": "2cff3eec-09e9-4efa-9b6c-a2c0e5353877",
+      "name": "Maps",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "935bfdf7-fff3-479b-9fa9-8eea970ff160",
+          "name": "Embeddable HTML viewer",
+          "request": {
+            "name": "Embeddable HTML viewer",
+            "description": {},
+            "url": {
+              "path": [
+                "maps",
+                ":mapId",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mapId",
+                  "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/html"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f27ba792-30b4-43c2-9f89-160f257f336a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4645c64-b801-4af6-9139-d784bf929206",
+          "name": "Style JSON of the map",
+          "request": {
+            "name": "Style JSON of the map",
+            "description": {
+              "content": "Style JSON describing the map cartography. Can be used with various libraries to display a vector map (e.g. Mapbox GL JS, OpenLayers, ...).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "maps",
+                ":mapId",
+                "style.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mapId",
+                  "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cbebfbaa-c58d-4ff1-a77a-f67512ea1d4b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "style.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08c4e218-d864-468d-be06-61a15a8badaf",
+          "name": "Map symbols (sprites)",
+          "request": {
+            "name": "Map symbols (sprites)",
+            "description": {
+              "content": "Map symbols (sprites) required to display the vector map. <br><b>Deprecated:</b> use <a href=\"https://docs.maptiler.com/cloud/api/other/#sprites-icon-sets\">Sprites API</a>.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "maps",
+                ":mapId",
+                "sprite{{scale}}.{{format}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mapId",
+                  "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bc0a56de-4a7d-4db5-90c6-70f197d327e6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "sprite{{scale}}.{{format}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "55e97836-fd3e-4218-bdde-01b984ac4ae8",
+          "name": "Raster XYZ tiles",
+          "request": {
+            "name": "Raster XYZ tiles",
+            "description": {
+              "content": "Rasterized tiles (XYZ) of the map. Can be used with various libraries to display a raster map (e.g. Leaflet, OpenLayers, ...). It's usually better (if possible) to use the TileJSON rather than using the tile URL directly.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "maps",
+                ":mapId",
+                "{tileSize",
+                "}",
+                ":z",
+                ":x",
+                "{{y}}{{scale}}.{{format}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mapId",
+                  "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "tileSize/"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "z",
+                  "description": "(Required) Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "x",
+                  "description": "(Required) Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "image/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6099eba0-d2b3-4ad1-8ae8-d7a073c19dfd",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "{tileSize",
+                    "}",
+                    ":z",
+                    ":x",
+                    "{{y}}{{scale}}.{{format}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "tileSize/"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "z",
+                      "description": "(Required) Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "x",
+                      "description": "(Required) Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "image/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "image/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b63c885a-91fb-403e-b361-ae4e02322598",
+              "name": "Out of bounds / Invalid format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "{tileSize",
+                    "}",
+                    ":z",
+                    ":x",
+                    "{{y}}{{scale}}.{{format}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "tileSize/"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "z",
+                      "description": "(Required) Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "x",
+                      "description": "(Required) Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "701dba31-9426-42bb-8efb-7d47b56f11ec",
+          "name": "TileJSON",
+          "request": {
+            "name": "TileJSON",
+            "description": {
+              "content": "TileJSON describing the metadata of the map as well as link to the XYZ tiles. Can be used with various libraries to display a raster map (e.g. Leaflet, OpenLayers, ...).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "maps",
+                ":mapId",
+                "{tileSize",
+                "}",
+                "tiles.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mapId",
+                  "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "tileSize/"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9591775d-3f4e-4c6d-8f18-306f79c8c52e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "{tileSize",
+                    "}",
+                    "tiles.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "tileSize/"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e03051bb-68ad-4b52-9b3f-808f868410fd",
+          "name": "OGC API - Tiles",
+          "request": {
+            "name": "OGC API - Tiles",
+            "description": {
+              "content": "Tileset landing page of the rasterized tiles. Can be used in software supporting the OGC API - Tiles v1.0 specification.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "maps",
+                ":mapId",
+                "tiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mapId",
+                  "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "90bc7d87-8a8b-48ae-ab12-afde6776fb9a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "tiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "271a0579-6d4f-4328-a600-2a259eb9dc81",
+          "name": "OGC API TileMatrixSets",
+          "request": {
+            "name": "OGC API TileMatrixSets",
+            "description": {
+              "content": "Description of the tileset tile matrix sets according to the OGC Web API. This resource is linked from the OGC API - Tiles endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "maps",
+                ":mapId",
+                "tileMatrixSet"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mapId",
+                  "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f2926db5-b513-4ac8-8d48-dbb46618da9e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "tileMatrixSet"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28c186bc-416a-4a53-b991-02bab6d120da",
+          "name": "WMTS Capabilities",
+          "request": {
+            "name": "WMTS Capabilities",
+            "description": {
+              "content": "WMTS Capabilities XML document describing the metadata of the map as well as link to the XYZ tiles. Can be used with various GIS software (e.g. QGIS) to display the map.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "maps",
+                ":mapId",
+                "WMTSCapabilities.xml"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mapId",
+                  "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e2d70c41-dc38-4b7a-acba-de66d72b5ba8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maps",
+                    ":mapId",
+                    "WMTSCapabilities.xml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mapId",
+                      "description": "(Required) Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.maptiler.com/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "type": "any",
+      "value": "<string>",
+      "key": "scale"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) ",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "format"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "y"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e9a869a6-a168-49e7-bc31-0ffcab252d1e",
+    "name": "MapTiler Coordinates Maps API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "MapTiler API allows you to programmatically access all the data, maps, services, and resources available in your MapTiler account. \n\nAccess to your resources via MapTiler API is read-only, and therefore safe and well suited for public end-user applications. You can use it to add a map directly to your website, request map tiles, create an image with a location map for your business, search for addresses, and more. \n\nThe universal public API request format is:\n\n```\nhttps://api.maptiler.com/{METHOD}/{QUERY}.json?{PARAMS}&key=YOUR_MAPTILER_API_KEY_HERE\n```\n\n> [!KEY]\n> You need a **MapTiler API key** to use this service. [Get it here](https://cloud.maptiler.com/account/keys/){:target=\"_blank\" rel=\"noopener noreferrer\"} and [learn how to protect it](/guides/maps-apis/maps-platform/how-to-protect-your-map-key/).\n\n\nContact Support:\n Name: Support\n Email: support@maptiler.com",
+      "type": "text/plain"
+    }
+  }
+}

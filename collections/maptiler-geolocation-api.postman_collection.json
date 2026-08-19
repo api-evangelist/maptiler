@@ -1,0 +1,175 @@
+{
+  "item": [
+    {
+      "id": "e52f2a2f-4d25-4e42-8828-e78e2b2d7b4c",
+      "name": "Geolocation",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "438660c8-efc0-443a-ad3f-737542dd7bdd",
+          "name": "IP Geolocation",
+          "request": {
+            "name": "IP Geolocation",
+            "description": {
+              "content": "Obtain information about visitor's location based on IP address of the incoming request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "geolocation",
+                "ip.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "elevation",
+                  "value": "<boolean>",
+                  "description": "Include elevation (in meters) in the results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "90e7c42f-d00f-48b5-97ac-092d905eba3b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geolocation",
+                    "ip.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "elevation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"country\": \"Switzerland\",\n  \"country_code\": \"CH\",\n  \"country_bounds\": [\n    5.95538,\n    45.818852,\n    10.490936,\n    47.809357\n  ],\n  \"country_languages\": [\n    \"de\",\n    \"fr\",\n    \"it\"\n  ],\n  \"continent\": \"Europe\",\n  \"continent_code\": \"EU\",\n  \"eu\": false,\n  \"city\": \"Zurich\",\n  \"latitude\": 47.36667,\n  \"longitude\": 8.55,\n  \"postal\": \"8000\",\n  \"region\": \"Zurich\",\n  \"region_code\": \"ZH\",\n  \"timezone\": \"Europe/Zurich\",\n  \"elevation\": 433\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4d9930c-4ebe-49d8-95d1-985907ccc613",
+              "name": "Key is missing, invalid or restricted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geolocation",
+                    "ip.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "elevation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.maptiler.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f58bfa0e-6ecd-4a87-836a-8a8e290b6a79",
+    "name": "MapTiler Coordinates Geolocation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "MapTiler API allows you to programmatically access all the data, maps, services, and resources available in your MapTiler account. \n\nAccess to your resources via MapTiler API is read-only, and therefore safe and well suited for public end-user applications. You can use it to add a map directly to your website, request map tiles, create an image with a location map for your business, search for addresses, and more. \n\nThe universal public API request format is:\n\n```\nhttps://api.maptiler.com/{METHOD}/{QUERY}.json?{PARAMS}&key=YOUR_MAPTILER_API_KEY_HERE\n```\n\n> [!KEY]\n> You need a **MapTiler API key** to use this service. [Get it here](https://cloud.maptiler.com/account/keys/){:target=\"_blank\" rel=\"noopener noreferrer\"} and [learn how to protect it](/guides/maps-apis/maps-platform/how-to-protect-your-map-key/).\n\n\nContact Support:\n Name: Support\n Email: support@maptiler.com",
+      "type": "text/plain"
+    }
+  }
+}

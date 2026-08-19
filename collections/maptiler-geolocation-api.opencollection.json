@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MapTiler Coordinates Geolocation API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Geolocation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "IP Geolocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/geolocation/ip.json",
+            "params": [
+              {
+                "name": "elevation",
+                "value": "",
+                "type": "query",
+                "description": "Include elevation (in meters) in the results."
+              }
+            ]
+          },
+          "docs": "Obtain information about visitor's location based on IP address of the incoming request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

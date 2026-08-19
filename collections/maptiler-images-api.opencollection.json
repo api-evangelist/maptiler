@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MapTiler Coordinates Images API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Images",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ImageJSON",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/images/:imageId/image.json",
+            "params": [
+              {
+                "name": "imageId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the image."
+              }
+            ]
+          },
+          "docs": "JSON describing the metadata of the image. Can be used with MapTiler SDK to display the image."
+        },
+        {
+          "info": {
+            "name": "XYZ tiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/images/:imageId/:z/:x/:y",
+            "params": [
+              {
+                "name": "imageId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the image."
+              },
+              {
+                "name": "z",
+                "value": "",
+                "type": "path",
+                "description": "Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)"
+              },
+              {
+                "name": "x",
+                "value": "",
+                "type": "path",
+                "description": "Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)"
+              },
+              {
+                "name": "y",
+                "value": "",
+                "type": "path",
+                "description": "Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)"
+              }
+            ]
+          },
+          "docs": "The individual tiles. Can be used with various libraries to display the image. It's better to use the ImageJSON with MapTiler SDK rather than using the tile URL directly."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

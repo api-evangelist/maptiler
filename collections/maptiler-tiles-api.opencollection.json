@@ -1,0 +1,158 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MapTiler Coordinates Tiles API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Embeddable HTML viewer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/tiles/:tilesId/",
+            "params": [
+              {
+                "name": "tilesId",
+                "value": "satellite-v4",
+                "type": "path",
+                "description": "Identifier of the tiles. See [MapTiler Tiles](https://cloud.maptiler.com/tiles/)."
+              }
+            ]
+          },
+          "docs": "Embeddable HTML viewer"
+        },
+        {
+          "info": {
+            "name": "XYZ tiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/tiles/:tilesId/:z/:x/:y",
+            "params": [
+              {
+                "name": "tilesId",
+                "value": "satellite-v4",
+                "type": "path",
+                "description": "Identifier of the tiles. See [MapTiler Tiles](https://cloud.maptiler.com/tiles/)."
+              },
+              {
+                "name": "z",
+                "value": "",
+                "type": "path",
+                "description": "Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)"
+              },
+              {
+                "name": "x",
+                "value": "",
+                "type": "path",
+                "description": "Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)"
+              },
+              {
+                "name": "y",
+                "value": "",
+                "type": "path",
+                "description": "Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)"
+              }
+            ]
+          },
+          "docs": "The individual tiles. Can be used with various libraries to display the tiles (e.g. Leaflet, OpenLayers, ...). It's usually better (if possible) to use the TileJSON rather than using the tile URL directly."
+        },
+        {
+          "info": {
+            "name": "TileJSON",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/tiles/:tilesId/tiles.json",
+            "params": [
+              {
+                "name": "tilesId",
+                "value": "satellite-v4",
+                "type": "path",
+                "description": "Identifier of the tiles. See [MapTiler Tiles](https://cloud.maptiler.com/tiles/)."
+              }
+            ]
+          },
+          "docs": "TileJSON describing the metadata of the tiles as well as link to the XYZ tiles. Can be used with various libraries to display the tiles (e.g. Leaflet, OpenLayers, ...)."
+        },
+        {
+          "info": {
+            "name": "OGC API - Tiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/tiles/:tilesId/tiles",
+            "params": [
+              {
+                "name": "tilesId",
+                "value": "satellite-v4",
+                "type": "path",
+                "description": "Identifier of the tiles. See [MapTiler Tiles](https://cloud.maptiler.com/tiles/)."
+              }
+            ]
+          },
+          "docs": "Tileset landing page of the tiles. Can be used in software supporting the OGC API - Tiles v1.0 specification."
+        },
+        {
+          "info": {
+            "name": "OGC API TileMatrixSets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/tiles/:tilesId/tileMatrixSet",
+            "params": [
+              {
+                "name": "tilesId",
+                "value": "satellite-v4",
+                "type": "path",
+                "description": "Identifier of the tiles. See [MapTiler Tiles](https://cloud.maptiler.com/tiles/)."
+              }
+            ]
+          },
+          "docs": "Description of the tileset tile matrix sets according to the OGC Web API. This resource is linked from the OGC API - Tiles endpoint."
+        },
+        {
+          "info": {
+            "name": "WMTS Capabilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/tiles/:tilesId/WMTSCapabilities.xml",
+            "params": [
+              {
+                "name": "tilesId",
+                "value": "satellite-v4",
+                "type": "path",
+                "description": "Identifier of the tiles. See [MapTiler Tiles](https://cloud.maptiler.com/tiles/)."
+              }
+            ]
+          },
+          "docs": "WMTS Capabilities XML document describing the metadata of the tiles as well as link to the XYZ tiles. Can be used with various GIS software (e.g. QGIS) to display the tiles."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MapTiler Coordinates Other API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Other",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sprites (icon sets)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/sprites/:spriteId/sprite:scale.:format",
+            "params": [
+              {
+                "name": "spriteId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the sprite."
+              },
+              {
+                "name": "scale",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Map icons (sprites) used to display the vector map."
+        },
+        {
+          "info": {
+            "name": "Fonts (glyphs)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/fonts/:fontstack/:start-:end.pbf",
+            "params": [
+              {
+                "name": "fontstack",
+                "value": "Roboto Medium,Noto Sans Regular",
+                "type": "path",
+                "description": "Font name, or more comma-separated names."
+              },
+              {
+                "name": "start",
+                "value": "0",
+                "type": "path",
+                "description": "Start of the glyph range."
+              },
+              {
+                "name": "end",
+                "value": "255",
+                "type": "path",
+                "description": "End of the glyph range (last glyph index)."
+              }
+            ]
+          },
+          "docs": "Generates the glyphs for the requested fonts. Used when displaying vector maps."
+        },
+        {
+          "info": {
+            "name": "OGC API conformance classes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/ogc/conformance"
+          },
+          "docs": "Declaration of the implemented conformance classes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

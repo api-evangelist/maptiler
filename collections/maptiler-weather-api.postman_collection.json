@@ -1,0 +1,160 @@
+{
+  "item": [
+    {
+      "id": "bc6e26bb-9920-4fd4-8b96-fd110f6448fa",
+      "name": "Weather",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b20f3f88-8d3b-4467-8a47-1f60266e654d",
+          "name": "Weather catalog",
+          "request": {
+            "name": "Weather catalog",
+            "description": {
+              "content": "List current weather-related variables, their metadata and individual keyframes",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "weather",
+                "latest.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b726dfa0-24a4-4e1c-a929-ba438b33c724",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weather",
+                    "latest.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"variables\": [\n    {\n      \"bounds\": [\n        -20037481.18083349,\n        -20037508.342789244,\n        20008180.55502281,\n        20037508.342789244\n      ],\n      \"tile_matrix_set\": {\n        \"bounds\": [\n          -20037481.18083349,\n          -20037508.342789244,\n          20008180.55502281,\n          20037508.342789244\n        ],\n        \"items\": [\n          {\n            \"zoom_level\": 4540,\n            \"matrix_width\": 2755,\n            \"matrix_height\": 2469,\n            \"tile_width\": 5100,\n            \"tile_height\": 8669,\n            \"pixel_x_size\": 7630.4817009660555,\n            \"pixel_y_size\": 9352.273501020725\n          },\n          {\n            \"zoom_level\": 2477,\n            \"matrix_width\": 4870,\n            \"matrix_height\": 4477,\n            \"tile_width\": 723,\n            \"tile_height\": 576,\n            \"pixel_x_size\": 410.9157519813456,\n            \"pixel_y_size\": 4522.547643356398\n          }\n        ]\n      },\n      \"keyframes\": [\n        {\n          \"id\": \"string\",\n          \"timestamp\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"timestamp\": \"string\"\n        }\n      ],\n      \"spatial_ref_sys\": {\n        \"auth_name\": \"EPSG\",\n        \"auth_srid\": \"3857\",\n        \"wkt\": \"PROJCRS[\\\"WGS 84 / Pseudo-Mercator\\\",BASEGEOGCRS[\\\"WGS 84\\\",ENSEMBLE[\\\"World Geodetic System 1984 ensemble\\\",MEMBER[\\\"World Geodetic System 1984 (Transit)\\\"],MEMBER[\\\"World Geodetic System 1984 (G730)\\\"],MEMBER[\\\"World Geodetic System 1984 (G873)\\\"],MEMBER[\\\"World Geodetic System 1984 (G1150)\\\"],MEMBER[\\\"World Geodetic System 1984 (G1674)\\\"],MEMBER[\\\"World Geodetic System 1984 (G1762)\\\"],MEMBER[\\\"World Geodetic System 1984 (G2139)\\\"],ELLIPSOID[\\\"WGS 84\\\",6378137,298.257223563,LENGTHUNIT[\\\"metre\\\",1]],ENSEMBLEACCURACY[2.0]],PRIMEM[\\\"Greenwich\\\",0,ANGLEUNIT[\\\"degree\\\",0.0174532925199433]],ID[\\\"EPSG\\\",4326]],CONVERSION[\\\"Popular Visualisation Pseudo-Mercator\\\",METHOD[\\\"Popular Visualisation Pseudo Mercator\\\",ID[\\\"EPSG\\\",1024]],PARAMETER[\\\"Latitude of natural origin\\\",0,ANGLEUNIT[\\\"degree\\\",0.0174532925199433],ID[\\\"EPSG\\\",8801]],PARAMETER[\\\"Longitude of natural origin\\\",0,ANGLEUNIT[\\\"degree\\\",0.0174532925199433],ID[\\\"EPSG\\\",8802]],PARAMETER[\\\"False easting\\\",0,LENGTHUNIT[\\\"metre\\\",1],ID[\\\"EPSG\\\",8806]],PARAMETER[\\\"False northing\\\",0,LENGTHUNIT[\\\"metre\\\",1],ID[\\\"EPSG\\\",8807]]],CS[Cartesian,2],AXIS[\\\"easting (X)\\\",east,ORDER[1],LENGTHUNIT[\\\"metre\\\",1]],AXIS[\\\"northing (Y)\\\",north,ORDER[2],LENGTHUNIT[\\\"metre\\\",1]],USAGE[SCOPE[\\\"Web mapping and visualisation.\\\"],AREA[\\\"World between 85.06°S and 85.06°N.\\\"],BBOX[-85.06,-180,85.06,180]],ID[\\\"EPSG\\\",3857]]\"\n      },\n      \"tile_format\": \"png\",\n      \"metadata\": {\n        \"weather_variable\": {\n          \"name\": \"Wind\",\n          \"description\": \"Wind at 10 m above ground [m/s]\",\n          \"attribution\": \"GFS\",\n          \"variable_id\": \"wind-10m:gfs\",\n          \"decoding\": {\n            \"channels\": \"rg\",\n            \"min\": -75,\n            \"max\": 75\n          },\n          \"unit\": \"ms\",\n          \"release_timestamp\": \"2023-03-01T06:00:00+00:00\",\n          \"timestamp\": \"2023-03-01T11:00:00+00:00\"\n        }\n      }\n    },\n    {\n      \"bounds\": [\n        -20037481.18083349,\n        -20037508.342789244,\n        20008180.55502281,\n        20037508.342789244\n      ],\n      \"tile_matrix_set\": {\n        \"bounds\": [\n          -20037481.18083349,\n          -20037508.342789244,\n          20008180.55502281,\n          20037508.342789244\n        ],\n        \"items\": [\n          {\n            \"zoom_level\": 8186,\n            \"matrix_width\": 7858,\n            \"matrix_height\": 6971,\n            \"tile_width\": 5834,\n            \"tile_height\": 9878,\n            \"pixel_x_size\": 8163.332127795679,\n            \"pixel_y_size\": 700.2005873595684\n          },\n          {\n            \"zoom_level\": 2434,\n            \"matrix_width\": 7622,\n            \"matrix_height\": 5924,\n            \"tile_width\": 3811,\n            \"tile_height\": 9861,\n            \"pixel_x_size\": 5018.701499239887,\n            \"pixel_y_size\": 9431.396784257455\n          }\n        ]\n      },\n      \"keyframes\": [\n        {\n          \"id\": \"string\",\n          \"timestamp\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"timestamp\": \"string\"\n        }\n      ],\n      \"spatial_ref_sys\": {\n        \"auth_name\": \"EPSG\",\n        \"auth_srid\": \"3857\",\n        \"wkt\": \"PROJCRS[\\\"WGS 84 / Pseudo-Mercator\\\",BASEGEOGCRS[\\\"WGS 84\\\",ENSEMBLE[\\\"World Geodetic System 1984 ensemble\\\",MEMBER[\\\"World Geodetic System 1984 (Transit)\\\"],MEMBER[\\\"World Geodetic System 1984 (G730)\\\"],MEMBER[\\\"World Geodetic System 1984 (G873)\\\"],MEMBER[\\\"World Geodetic System 1984 (G1150)\\\"],MEMBER[\\\"World Geodetic System 1984 (G1674)\\\"],MEMBER[\\\"World Geodetic System 1984 (G1762)\\\"],MEMBER[\\\"World Geodetic System 1984 (G2139)\\\"],ELLIPSOID[\\\"WGS 84\\\",6378137,298.257223563,LENGTHUNIT[\\\"metre\\\",1]],ENSEMBLEACCURACY[2.0]],PRIMEM[\\\"Greenwich\\\",0,ANGLEUNIT[\\\"degree\\\",0.0174532925199433]],ID[\\\"EPSG\\\",4326]],CONVERSION[\\\"Popular Visualisation Pseudo-Mercator\\\",METHOD[\\\"Popular Visualisation Pseudo Mercator\\\",ID[\\\"EPSG\\\",1024]],PARAMETER[\\\"Latitude of natural origin\\\",0,ANGLEUNIT[\\\"degree\\\",0.0174532925199433],ID[\\\"EPSG\\\",8801]],PARAMETER[\\\"Longitude of natural origin\\\",0,ANGLEUNIT[\\\"degree\\\",0.0174532925199433],ID[\\\"EPSG\\\",8802]],PARAMETER[\\\"False easting\\\",0,LENGTHUNIT[\\\"metre\\\",1],ID[\\\"EPSG\\\",8806]],PARAMETER[\\\"False northing\\\",0,LENGTHUNIT[\\\"metre\\\",1],ID[\\\"EPSG\\\",8807]]],CS[Cartesian,2],AXIS[\\\"easting (X)\\\",east,ORDER[1],LENGTHUNIT[\\\"metre\\\",1]],AXIS[\\\"northing (Y)\\\",north,ORDER[2],LENGTHUNIT[\\\"metre\\\",1]],USAGE[SCOPE[\\\"Web mapping and visualisation.\\\"],AREA[\\\"World between 85.06°S and 85.06°N.\\\"],BBOX[-85.06,-180,85.06,180]],ID[\\\"EPSG\\\",3857]]\"\n      },\n      \"tile_format\": \"png\",\n      \"metadata\": {\n        \"weather_variable\": {\n          \"name\": \"Wind\",\n          \"description\": \"Wind at 10 m above ground [m/s]\",\n          \"attribution\": \"GFS\",\n          \"variable_id\": \"wind-10m:gfs\",\n          \"decoding\": {\n            \"channels\": \"rg\",\n            \"min\": -75,\n            \"max\": 75\n          },\n          \"unit\": \"ms\",\n          \"release_timestamp\": \"2023-03-01T06:00:00+00:00\",\n          \"timestamp\": \"2023-03-01T11:00:00+00:00\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ee57ef6-4a15-45e8-ae45-72c0967b12bb",
+              "name": "Key is missing, invalid or restricted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weather",
+                    "latest.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.maptiler.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "faa525df-dcb8-4055-a7b6-3d165daeb302",
+    "name": "MapTiler Coordinates Weather API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "MapTiler API allows you to programmatically access all the data, maps, services, and resources available in your MapTiler account. \n\nAccess to your resources via MapTiler API is read-only, and therefore safe and well suited for public end-user applications. You can use it to add a map directly to your website, request map tiles, create an image with a location map for your business, search for addresses, and more. \n\nThe universal public API request format is:\n\n```\nhttps://api.maptiler.com/{METHOD}/{QUERY}.json?{PARAMS}&key=YOUR_MAPTILER_API_KEY_HERE\n```\n\n> [!KEY]\n> You need a **MapTiler API key** to use this service. [Get it here](https://cloud.maptiler.com/account/keys/){:target=\"_blank\" rel=\"noopener noreferrer\"} and [learn how to protect it](/guides/maps-apis/maps-platform/how-to-protect-your-map-key/).\n\n\nContact Support:\n Name: Support\n Email: support@maptiler.com",
+      "type": "text/plain"
+    }
+  }
+}

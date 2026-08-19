@@ -1,0 +1,268 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MapTiler Coordinates Geocoding API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Geocoding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search by name (forward)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/geocoding/:query.json",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "path",
+                "description": "Place name to search. You can also use bare [POI category](https://docs.maptiler.com/cloud/api/geocoding/#PoiCategory) or mix it with a name to search for POIs of desired category, unless `poi` index is excluded."
+              },
+              {
+                "name": "bbox",
+                "value": "5.9559,45.818,10.4921,47.8084",
+                "type": "query",
+                "description": "A `[w, s, e, n]` bounding box array to use for limiting search results. Only features inside the provided bounding box will be included."
+              },
+              {
+                "name": "proximity",
+                "value": "8.528509,47.3774434",
+                "type": "query",
+                "description": "A `[lon, lat]` array to use for biasing search results or the string `ip` to do server-side IP based geolocation. Specify to prefer results close to a specific location - features closer to the proximity value will be given priority over those further from the proximity value."
+              },
+              {
+                "name": "language",
+                "value": "de,en",
+                "type": "query",
+                "description": "Prefer results in specific language specified as ISO 639-1 code. Only the first language code is used when prioritizing forward geocode results to be matched. If this query parameter is omited then Accept-Language HTTP header will be analyzed. If the parameter is provided but is empty then no language preference is made."
+              },
+              {
+                "name": "country",
+                "value": "sk,cz",
+                "type": "query",
+                "description": "Limit search to specific country/countries."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. For reverse geocoding with multiple types this must not be set or must be set to 1."
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned."
+              },
+              {
+                "name": "excludeTypes",
+                "value": "",
+                "type": "query",
+                "description": "Set to `true` to use all available feature types except those specified in `types`."
+              },
+              {
+                "name": "fuzzyMatch",
+                "value": "",
+                "type": "query",
+                "description": "Set to `false` to disable fuzzy search."
+              },
+              {
+                "name": "autocomplete",
+                "value": "",
+                "type": "query",
+                "description": "Set to `true` to use autocomplete, `false` to disable autocomplete."
+              },
+              {
+                "name": "worldview",
+                "value": "ch",
+                "type": "query",
+                "description": "Some of the geographical boundaries and names are disputed. When `worldview` option is selected, the Geocoding API responses will be aligned with the borders and names recognized by the selected country (US or Switzerland). This affects filtering by country, the context returned with the given feature and also some of the labels (e.g., Gulf of Mexico vs. Gulf of America). Special values include: `auto` - the worldview is determined by the location of the client, `default` - disputed areas are returned without country information, countries with disputed borders are returned without full geometry.\n"
+              }
+            ]
+          },
+          "docs": "Forward <a href=\"https://www.maptiler.com/cloud/geocoding/\">geocoding (search by place name)</a>."
+        },
+        {
+          "info": {
+            "name": "Search by coordinates (reverse)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/geocoding/:longitude,:latitude.json",
+            "params": [
+              {
+                "name": "longitude",
+                "value": "8.528509",
+                "type": "path"
+              },
+              {
+                "name": "latitude",
+                "value": "47.3774434",
+                "type": "path"
+              },
+              {
+                "name": "language",
+                "value": "de,en",
+                "type": "query",
+                "description": "Prefer results in specific language specified as ISO 639-1 code. Only the first language code is used when prioritizing forward geocode results to be matched. If this query parameter is omited then Accept-Language HTTP header will be analyzed. If the parameter is provided but is empty then no language preference is made."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. For reverse geocoding with multiple types this must not be set or must be set to 1."
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned."
+              },
+              {
+                "name": "excludeTypes",
+                "value": "",
+                "type": "query",
+                "description": "Set to `true` to use all available feature types except those specified in `types`."
+              },
+              {
+                "name": "worldview",
+                "value": "ch",
+                "type": "query",
+                "description": "Some of the geographical boundaries and names are disputed. When `worldview` option is selected, the Geocoding API responses will be aligned with the borders and names recognized by the selected country (US or Switzerland). This affects filtering by country, the context returned with the given feature and also some of the labels (e.g., Gulf of Mexico vs. Gulf of America). Special values include: `auto` - the worldview is determined by the location of the client, `default` - disputed areas are returned without country information, countries with disputed borders are returned without full geometry.\n"
+              }
+            ]
+          },
+          "docs": "Reverse geocoding (search by coordinates)."
+        },
+        {
+          "info": {
+            "name": "Search by feature ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/geocoding/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "country.26561650",
+                "type": "path",
+                "description": "Feature ID (found in response of forward or reverse geocoding)"
+              },
+              {
+                "name": "language",
+                "value": "de,en",
+                "type": "query",
+                "description": "Prefer results in specific language specified as ISO 639-1 code. Only the first language code is used when prioritizing forward geocode results to be matched. If this query parameter is omited then Accept-Language HTTP header will be analyzed. If the parameter is provided but is empty then no language preference is made."
+              },
+              {
+                "name": "worldview",
+                "value": "ch",
+                "type": "query",
+                "description": "Some of the geographical boundaries and names are disputed. When `worldview` option is selected, the Geocoding API responses will be aligned with the borders and names recognized by the selected country (US or Switzerland). This affects filtering by country, the context returned with the given feature and also some of the labels (e.g., Gulf of Mexico vs. Gulf of America). Special values include: `auto` - the worldview is determined by the location of the client, `default` - disputed areas are returned without country information, countries with disputed borders are returned without full geometry.\n"
+              }
+            ]
+          },
+          "docs": "Search feature by its ID (`id`) as returned in forward or reverse geocoding response and return its full geometry. Note that the feature ID is not stable and it changes when the database is re-indexed."
+        },
+        {
+          "info": {
+            "name": "Batch geocoding API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/geocoding/:queries.json",
+            "params": [
+              {
+                "name": "queries",
+                "value": "Paris;Berlin",
+                "type": "path",
+                "description": "Semicolon-separated list of queries. Semicolon `;` must be provided verbatim and not be URL-encoded. Each query may be forward, reverse or by feature ID. Maximum of 50 queries are supported."
+              },
+              {
+                "name": "bbox",
+                "value": "5.9559,45.818,10.4921,47.8084",
+                "type": "query",
+                "description": "A `[w, s, e, n]` bounding box array to use for limiting search results. Only features inside the provided bounding box will be included."
+              },
+              {
+                "name": "proximity",
+                "value": "8.528509,47.3774434",
+                "type": "query",
+                "description": "A `[lon, lat]` array to use for biasing search results or the string `ip` to do server-side IP based geolocation. Specify to prefer results close to a specific location - features closer to the proximity value will be given priority over those further from the proximity value."
+              },
+              {
+                "name": "language",
+                "value": "de,en",
+                "type": "query",
+                "description": "Prefer results in specific language specified as ISO 639-1 code. Only the first language code is used when prioritizing forward geocode results to be matched. If this query parameter is omited then Accept-Language HTTP header will be analyzed. If the parameter is provided but is empty then no language preference is made."
+              },
+              {
+                "name": "country",
+                "value": "sk,cz",
+                "type": "query",
+                "description": "Limit search to specific country/countries."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. For reverse geocoding with multiple types this must not be set or must be set to 1."
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned."
+              },
+              {
+                "name": "excludeTypes",
+                "value": "",
+                "type": "query",
+                "description": "Set to `true` to use all available feature types except those specified in `types`."
+              },
+              {
+                "name": "fuzzyMatch",
+                "value": "",
+                "type": "query",
+                "description": "Set to `false` to disable fuzzy search."
+              },
+              {
+                "name": "autocomplete",
+                "value": "",
+                "type": "query",
+                "description": "Set to `true` to use autocomplete, `false` to disable autocomplete."
+              },
+              {
+                "name": "worldview",
+                "value": "ch",
+                "type": "query",
+                "description": "Some of the geographical boundaries and names are disputed. When `worldview` option is selected, the Geocoding API responses will be aligned with the borders and names recognized by the selected country (US or Switzerland). This affects filtering by country, the context returned with the given feature and also some of the labels (e.g., Gulf of Mexico vs. Gulf of America). Special values include: `auto` - the worldview is determined by the location of the client, `default` - disputed areas are returned without country information, countries with disputed borders are returned without full geometry.\n"
+              }
+            ]
+          },
+          "docs": "Perform geocoding of more than one request in a single API call. Check out the <a href=\"https://docs.maptiler.com/guides/geocoding/batch-geocoding-api/\">Batch Geocoding guide</a> for an example."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

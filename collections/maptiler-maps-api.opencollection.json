@@ -1,0 +1,227 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MapTiler Coordinates Maps API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Maps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Embeddable HTML viewer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/maps/:mapId/",
+            "params": [
+              {
+                "name": "mapId",
+                "value": "streets-v4",
+                "type": "path",
+                "description": "Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+              }
+            ]
+          },
+          "docs": "Embeddable HTML viewer"
+        },
+        {
+          "info": {
+            "name": "Style JSON of the map",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/maps/:mapId/style.json",
+            "params": [
+              {
+                "name": "mapId",
+                "value": "streets-v4",
+                "type": "path",
+                "description": "Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+              }
+            ]
+          },
+          "docs": "Style JSON describing the map cartography. Can be used with various libraries to display a vector map (e.g. Mapbox GL JS, OpenLayers, ...)."
+        },
+        {
+          "info": {
+            "name": "Map symbols (sprites)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/maps/:mapId/sprite:scale.:format",
+            "params": [
+              {
+                "name": "mapId",
+                "value": "streets-v4",
+                "type": "path",
+                "description": "Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+              },
+              {
+                "name": "scale",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Map symbols (sprites) required to display the vector map. <br><b>Deprecated:</b> use <a href=\"https://docs.maptiler.com/cloud/api/other/#sprites-icon-sets\">Sprites API</a>."
+        },
+        {
+          "info": {
+            "name": "Raster XYZ tiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/maps/:mapId/:tileSize//:z/:x/:y:scale.:format",
+            "params": [
+              {
+                "name": "mapId",
+                "value": "streets-v4",
+                "type": "path",
+                "description": "Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+              },
+              {
+                "name": "tileSize/",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "z",
+                "value": "",
+                "type": "path",
+                "description": "Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)"
+              },
+              {
+                "name": "x",
+                "value": "",
+                "type": "path",
+                "description": "Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)"
+              },
+              {
+                "name": "y",
+                "value": "",
+                "type": "path",
+                "description": "Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)"
+              },
+              {
+                "name": "scale",
+                "value": "",
+                "type": "path",
+                "description": "Use \"@2x\" to get \"retina\"/HiDPI image."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Rasterized tiles (XYZ) of the map. Can be used with various libraries to display a raster map (e.g. Leaflet, OpenLayers, ...). It's usually better (if possible) to use the TileJSON rather than using the tile URL directly."
+        },
+        {
+          "info": {
+            "name": "TileJSON",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/maps/:mapId/:tileSize//tiles.json",
+            "params": [
+              {
+                "name": "mapId",
+                "value": "streets-v4",
+                "type": "path",
+                "description": "Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+              },
+              {
+                "name": "tileSize/",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "TileJSON describing the metadata of the map as well as link to the XYZ tiles. Can be used with various libraries to display a raster map (e.g. Leaflet, OpenLayers, ...)."
+        },
+        {
+          "info": {
+            "name": "OGC API - Tiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/maps/:mapId/tiles",
+            "params": [
+              {
+                "name": "mapId",
+                "value": "streets-v4",
+                "type": "path",
+                "description": "Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+              }
+            ]
+          },
+          "docs": "Tileset landing page of the rasterized tiles. Can be used in software supporting the OGC API - Tiles v1.0 specification."
+        },
+        {
+          "info": {
+            "name": "OGC API TileMatrixSets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/maps/:mapId/tileMatrixSet",
+            "params": [
+              {
+                "name": "mapId",
+                "value": "streets-v4",
+                "type": "path",
+                "description": "Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+              }
+            ]
+          },
+          "docs": "Description of the tileset tile matrix sets according to the OGC Web API. This resource is linked from the OGC API - Tiles endpoint."
+        },
+        {
+          "info": {
+            "name": "WMTS Capabilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maptiler.com/maps/:mapId/WMTSCapabilities.xml",
+            "params": [
+              {
+                "name": "mapId",
+                "value": "streets-v4",
+                "type": "path",
+                "description": "Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/)."
+              }
+            ]
+          },
+          "docs": "WMTS Capabilities XML document describing the metadata of the map as well as link to the XYZ tiles. Can be used with various GIS software (e.g. QGIS) to display the map."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
