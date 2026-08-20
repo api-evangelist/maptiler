@@ -84,6 +84,10 @@ apis:
     and auto-fitted viewports with optional markers and path overlays. Requires a paid plan.
   tags:
   - Static Maps
+  - Image
+  - Maps
+  tags_raw:
+  - Static Maps
   - Images
   - Maps
   properties:
@@ -169,6 +173,8 @@ apis:
   name: MapTiler Images API
   description: The Images API from MapTiler — 2 operation(s) for images.
   tags:
+  - Image
+  tags_raw:
   - Images
   properties:
   - type: OpenAPI
@@ -184,7 +190,8 @@ apis:
 - aid: maptiler:maptiler-other-api
   name: MapTiler Other API
   description: The Other API from MapTiler — 3 operation(s) for other.
-  tags:
+  tags: []
+  tags_raw:
   - Other
   properties:
   - type: OpenAPI
@@ -193,6 +200,8 @@ apis:
   name: MapTiler Static maps API
   description: The Static maps API from MapTiler — 3 operation(s) for static maps.
   tags:
+  - Static Maps
+  tags_raw:
   - Static maps
   properties:
   - type: OpenAPI
