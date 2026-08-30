@@ -212,7 +212,7 @@ apis:
   name: MapTiler Static maps API
   description: The Static maps API from MapTiler — 3 operation(s) for static maps.
   tags:
-  - Static Maps
+  - Static maps
   tags_raw:
   - Static maps
   properties:
