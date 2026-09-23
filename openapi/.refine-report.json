@@ -1,17 +1,7 @@
 {
   "provider": "maptiler",
   "sources": [
-    "maptiler-coordinates-api-openapi.yml",
-    "maptiler-data-api-openapi.yml",
-    "maptiler-elevation-api-openapi.yml",
-    "maptiler-geocoding-api-openapi.yml",
-    "maptiler-geolocation-api-openapi.yml",
-    "maptiler-images-api-openapi.yml",
-    "maptiler-maps-api-openapi.yml",
-    "maptiler-other-api-openapi.yml",
-    "maptiler-static-maps-api-openapi.yml",
-    "maptiler-tiles-api-openapi.yml",
-    "maptiler-weather-api-openapi.yml"
+    "_original/maptiler-maptiler-openapi.yml"
   ],
   "outputs": [
     "maptiler-coordinates-api-openapi.yml",
@@ -29,6 +19,22 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "maptiler-maptiler-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "maptiler-coordinates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "maptiler-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "maptiler-elevation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "maptiler-geocoding-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "maptiler-geolocation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "maptiler-images-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "maptiler-maps-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "maptiler-other-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "maptiler-static-maps-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "maptiler-tiles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "maptiler-weather-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: MapTiler Coordinates Tiles API
+  title: MapTiler Tiles API
   version: '1.0'
-  description: "MapTiler API allows you to programmatically access all the data, maps, services, and resources available in your MapTiler account. \n\nAccess to your resources via MapTiler API is read-only, and therefore safe and well suited for public end-user applications. You can use it to add a map directly to your website, request map tiles, create an image with a location map for your business, search for addresses, and more. \n\nThe universal public API request format is:\n\n```\nhttps://api.maptiler.com/{METHOD}/{QUERY}.json?{PARAMS}&key=YOUR_MAPTILER_API_KEY_HERE\n```\n\n> [!KEY]\n> You need a **MapTiler API key** to use this service. [Get it here](https://cloud.maptiler.com/account/keys/){:target=\"_blank\" rel=\"noopener noreferrer\"} and [learn how to protect it](/guides/maps-apis/maps-platform/how-to-protect-your-map-key/).\n"
+  description: MapTiler API allows you to programmatically access all the data, maps, services, and resources available in your MapTiler account.
   termsOfService: https://www.maptiler.com/terms/
   contact:
     name: Support
@@ -29,6 +29,8 @@ paths:
           description: ''
           content:
             text/html: {}
+      operationId: getTilesByTilesId
+      x-operation-id-source: derived
   /tiles/{tilesId}/{z}/{x}/{y}:
     parameters:
     - $ref: '#/components/parameters/tilesId'
@@ -52,6 +54,8 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
+      operationId: getTilesByTilesIdByZByXByY
+      x-operation-id-source: derived
   /tiles/{tilesId}/tiles.json:
     parameters:
     - $ref: '#/components/parameters/tilesId'
@@ -66,6 +70,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TileJSON'
+      operationId: getTilesByTilesIdTilesJson
+      x-operation-id-source: derived
   /tiles/{tilesId}/tiles:
     parameters:
     - $ref: '#/components/parameters/tilesId'
@@ -80,6 +86,8 @@ paths:
             application/json:
               schema:
                 type: string
+      operationId: getTilesByTilesIdTiles
+      x-operation-id-source: derived
   /tiles/{tilesId}/tileMatrixSet:
     parameters:
     - $ref: '#/components/parameters/tilesId'
@@ -94,6 +102,8 @@ paths:
             application/json:
               schema:
                 type: string
+      operationId: getTilesByTilesIdTileMatrixSet
+      x-operation-id-source: derived
   /tiles/{tilesId}/WMTSCapabilities.xml:
     parameters:
     - $ref: '#/components/parameters/tilesId'
@@ -108,8 +118,18 @@ paths:
             text/xml:
               schema:
                 type: string
+      operationId: getTilesByTilesIdWMTSCapabilitiesXml
+      x-operation-id-source: derived
 components:
   parameters:
+    tilesId:
+      name: tilesId
+      in: path
+      description: Identifier of the tiles. See [MapTiler Tiles](https://cloud.maptiler.com/tiles/).
+      example: satellite-v4
+      required: true
+      schema:
+        type: string
     z:
       name: z
       description: Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
@@ -124,14 +144,6 @@ components:
       required: true
       schema:
         type: integer
-    tilesId:
-      name: tilesId
-      in: path
-      description: Identifier of the tiles. See [MapTiler Tiles](https://cloud.maptiler.com/tiles/).
-      example: satellite-v4
-      required: true
-      schema:
-        type: string
     y:
       name: y
       description: Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
@@ -140,10 +152,10 @@ components:
       schema:
         type: integer
   responses:
-    '403':
-      description: Key is missing, invalid or restricted
     '404':
       description: The item does not exist
+    '403':
+      description: Key is missing, invalid or restricted
   schemas:
     TileJSON:
       type: object

@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: MapTiler Coordinates Geocoding API
+  title: MapTiler Geocoding API
   version: '1.0'
-  description: "MapTiler API allows you to programmatically access all the data, maps, services, and resources available in your MapTiler account. \n\nAccess to your resources via MapTiler API is read-only, and therefore safe and well suited for public end-user applications. You can use it to add a map directly to your website, request map tiles, create an image with a location map for your business, search for addresses, and more. \n\nThe universal public API request format is:\n\n```\nhttps://api.maptiler.com/{METHOD}/{QUERY}.json?{PARAMS}&key=YOUR_MAPTILER_API_KEY_HERE\n```\n\n> [!KEY]\n> You need a **MapTiler API key** to use this service. [Get it here](https://cloud.maptiler.com/account/keys/){:target=\"_blank\" rel=\"noopener noreferrer\"} and [learn how to protect it](/guides/maps-apis/maps-platform/how-to-protect-your-map-key/).\n"
+  description: MapTiler API allows you to programmatically access all the data, maps, services, and resources available in your MapTiler account.
   termsOfService: https://www.maptiler.com/terms/
   contact:
     name: Support
@@ -44,7 +44,7 @@ paths:
     - $ref: '#/components/parameters/worldview'
     get:
       summary: Search by name (forward)
-      description: Forward <a href="https://www.maptiler.com/cloud/geocoding/">geocoding (search by place name)</a>.
+      description: Forward geocoding (search by place name).
       tags:
       - Geocoding
       responses:
@@ -54,6 +54,8 @@ paths:
           description: Query too long / Invalid parameters
         '403':
           $ref: '#/components/responses/403'
+      operationId: getGeocoding{query}Json
+      x-operation-id-source: derived
   /geocoding/{longitude},{latitude}.json:
     parameters:
     - name: longitude
@@ -89,6 +91,8 @@ paths:
           description: Query too long / Invalid parameters
         '403':
           $ref: '#/components/responses/403'
+      operationId: getGeocoding{longitude},{latitude}Json
+      x-operation-id-source: derived
   /geocoding/{id}.json:
     parameters:
     - name: id
@@ -113,6 +117,8 @@ paths:
           description: Query too long / Invalid parameters
         '403':
           $ref: '#/components/responses/403'
+      operationId: getGeocoding{id}Json
+      x-operation-id-source: derived
   /geocoding/{queries}.json:
     parameters:
     - in: path
@@ -134,7 +140,7 @@ paths:
     - $ref: '#/components/parameters/worldview'
     get:
       summary: Batch geocoding API
-      description: Perform geocoding of more than one request in a single API call. Check out the <a href="https://docs.maptiler.com/guides/geocoding/batch-geocoding-api/">Batch Geocoding guide</a> for an example.
+      description: Perform geocoding of more than one request in a single API call. Check out the Batch Geocoding guide for an example.
       tags:
       - Geocoding
       responses:
@@ -150,30 +156,19 @@ paths:
           description: Query too long / Invalid parameters
         '403':
           $ref: '#/components/responses/403'
+      operationId: getGeocoding{queries}Json
+      x-operation-id-source: derived
 components:
+  responses:
+    ok:
+      description: Search result represented as FeatureCollection where every item is represented as a GeoJSON Feature
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/result'
+    '403':
+      description: Key is missing, invalid or restricted
   schemas:
-    placeType:
-      type: string
-      title: PlaceType
-      description: Check out the [descriptions and default values](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) of each of the PlaceType values
-      enum:
-      - continental_marine
-      - country
-      - major_landform
-      - region
-      - subregion
-      - county
-      - joint_municipality
-      - joint_submunicipality
-      - municipality
-      - municipal_district
-      - locality
-      - neighbourhood
-      - place
-      - postal_code
-      - address
-      - road
-      - poi
     bbox:
       example:
       - 5.9559
@@ -199,6 +194,28 @@ components:
         minimum: -90
         maximum: 90
         description: maximal latitude
+    placeType:
+      type: string
+      title: PlaceType
+      description: Check out the [descriptions and default values](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) of each of the PlaceType values
+      enum:
+      - continental_marine
+      - country
+      - major_landform
+      - region
+      - subregion
+      - county
+      - joint_municipality
+      - joint_submunicipality
+      - municipality
+      - municipal_district
+      - locality
+      - neighbourhood
+      - place
+      - postal_code
+      - address
+      - road
+      - poi
     featureProperties:
       title: FeatureProperties
       type: object
@@ -243,11 +260,6 @@ components:
       required:
       - ref
       - country_code
-    ip:
-      type: string
-      title: IP
-      description: Server-side IP based geolocation
-      const: ip
     commonProperties:
       title: CommonProperties
       type: object
@@ -275,6 +287,11 @@ components:
       required:
       - id
       - text
+    ip:
+      type: string
+      title: IP
+      description: Server-side IP based geolocation
+      const: ip
     coordinates:
       example:
       - 8.528509
@@ -572,35 +589,16 @@ components:
       - query
       - attribution
   parameters:
-    fuzzyMatch:
-      schema:
-        type: boolean
-        default: true
-      in: query
-      name: fuzzyMatch
-      required: false
-      description: Set to `false` to disable fuzzy search.
-    excludeTypes:
-      schema:
-        type: boolean
-        default: false
-      in: query
-      name: excludeTypes
-      required: false
-      description: Set to `true` to use all available feature types except those specified in `types`.
-    country:
+    types:
       schema:
         type: array
         uniqueItems: true
         items:
-          type: string
-        example: sk,cz
-      example: sk,cz
+          $ref: '#/components/schemas/placeType'
       in: query
-      name: country
+      name: types
       required: false
-      description: Limit search to specific country/countries.
-      explode: false
+      description: Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned.
     language:
       schema:
         type: array
@@ -801,6 +799,43 @@ components:
       required: false
       description: Prefer results in specific language specified as ISO 639-1 code. Only the first language code is used when prioritizing forward geocode results to be matched. If this query parameter is omited then Accept-Language HTTP header will be analyzed. If the parameter is provided but is empty then no language preference is made.
       explode: false
+    proximity:
+      schema:
+        anyOf:
+        - $ref: '#/components/schemas/coordinates'
+        - $ref: '#/components/schemas/ip'
+      example: 8.528509,47.3774434
+      in: query
+      name: proximity
+      required: false
+      description: A `[lon, lat]` array to use for biasing search results or the string `ip` to do server-side IP based geolocation. Specify to prefer results close to a specific location - features closer to the proximity value will be given priority over those further from the proximity value.
+      explode: false
+    excludeTypes:
+      schema:
+        type: boolean
+        default: false
+      in: query
+      name: excludeTypes
+      required: false
+      description: Set to `true` to use all available feature types except those specified in `types`.
+    limit:
+      schema:
+        type: integer
+        default: 5
+        minimum: 1
+        maximum: 10
+      in: query
+      name: limit
+      required: false
+      description: Maximum number of results to return. For reverse geocoding with multiple types this must not be set or must be set to 1.
+    autocomplete:
+      schema:
+        type: boolean
+      in: query
+      name: autocomplete
+      required: false
+      description: Set to `true` to use autocomplete, `false` to disable autocomplete.
+      default: true
     worldview:
       schema:
         type: string
@@ -818,35 +853,6 @@ components:
         '
       example: ch
       default: default
-    autocomplete:
-      schema:
-        type: boolean
-      in: query
-      name: autocomplete
-      required: false
-      description: Set to `true` to use autocomplete, `false` to disable autocomplete.
-      default: true
-    proximity:
-      schema:
-        anyOf:
-        - $ref: '#/components/schemas/coordinates'
-        - $ref: '#/components/schemas/ip'
-      example: 8.528509,47.3774434
-      in: query
-      name: proximity
-      required: false
-      description: A `[lon, lat]` array to use for biasing search results or the string `ip` to do server-side IP based geolocation. Specify to prefer results close to a specific location - features closer to the proximity value will be given priority over those further from the proximity value.
-      explode: false
-    types:
-      schema:
-        type: array
-        uniqueItems: true
-        items:
-          $ref: '#/components/schemas/placeType'
-      in: query
-      name: types
-      required: false
-      description: Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned.
     bbox:
       schema:
         $ref: '#/components/schemas/bbox'
@@ -856,25 +862,27 @@ components:
       required: false
       description: A `[w, s, e, n]` bounding box array to use for limiting search results. Only features inside the provided bounding box will be included.
       explode: false
-    limit:
+    fuzzyMatch:
       schema:
-        type: integer
-        default: 5
-        minimum: 1
-        maximum: 10
+        type: boolean
+        default: true
       in: query
-      name: limit
+      name: fuzzyMatch
       required: false
-      description: Maximum number of results to return. For reverse geocoding with multiple types this must not be set or must be set to 1.
-  responses:
-    ok:
-      description: Search result represented as FeatureCollection where every item is represented as a GeoJSON Feature
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/result'
-    '403':
-      description: Key is missing, invalid or restricted
+      description: Set to `false` to disable fuzzy search.
+    country:
+      schema:
+        type: array
+        uniqueItems: true
+        items:
+          type: string
+        example: sk,cz
+      example: sk,cz
+      in: query
+      name: country
+      required: false
+      description: Limit search to specific country/countries.
+      explode: false
   securitySchemes:
     key:
       description: Your own API key from https://cloud.maptiler.com/
