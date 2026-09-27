@@ -159,15 +159,301 @@ paths:
       operationId: getGeocoding{queries}Json
       x-operation-id-source: derived
 components:
-  responses:
-    ok:
-      description: Search result represented as FeatureCollection where every item is represented as a GeoJSON Feature
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/result'
-    '403':
-      description: Key is missing, invalid or restricted
+  parameters:
+    language:
+      schema:
+        type: array
+        maxItems: 20
+        uniqueItems: true
+        items:
+          type: string
+          example: en
+          enum:
+          - aa
+          - ab
+          - ae
+          - af
+          - ak
+          - am
+          - an
+          - ar
+          - as
+          - av
+          - ay
+          - az
+          - ba
+          - be
+          - bg
+          - bh
+          - bi
+          - bm
+          - bn
+          - bo
+          - br
+          - bs
+          - ca
+          - ce
+          - ch
+          - co
+          - cr
+          - cs
+          - cu
+          - cv
+          - cy
+          - da
+          - de
+          - dv
+          - dz
+          - ee
+          - el
+          - en
+          - eo
+          - es
+          - et
+          - eu
+          - fa
+          - ff
+          - fi
+          - fj
+          - fo
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - gn
+          - gu
+          - gv
+          - ha
+          - he
+          - hi
+          - ho
+          - hr
+          - ht
+          - hu
+          - hy
+          - hz
+          - ia
+          - id
+          - ie
+          - ig
+          - ii
+          - ik
+          - io
+          - is
+          - it
+          - iu
+          - ja
+          - jv
+          - ka
+          - kg
+          - ki
+          - kj
+          - kk
+          - kl
+          - km
+          - kn
+          - ko
+          - kr
+          - ks
+          - ku
+          - kv
+          - kw
+          - ky
+          - la
+          - lb
+          - lg
+          - li
+          - ln
+          - lo
+          - lt
+          - lu
+          - lv
+          - mg
+          - mh
+          - mi
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - mt
+          - my
+          - na
+          - nb
+          - nd
+          - ne
+          - ng
+          - nl
+          - nn
+          - 'no'
+          - nr
+          - nv
+          - ny
+          - oc
+          - oj
+          - om
+          - or
+          - os
+          - pa
+          - pi
+          - pl
+          - ps
+          - pt
+          - qu
+          - rm
+          - rn
+          - ro
+          - ru
+          - rw
+          - sa
+          - sc
+          - sd
+          - se
+          - sg
+          - si
+          - sk
+          - sl
+          - sm
+          - sn
+          - so
+          - sq
+          - sr
+          - ss
+          - st
+          - su
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - ti
+          - tk
+          - tl
+          - tn
+          - to
+          - tr
+          - ts
+          - tt
+          - tw
+          - ty
+          - ug
+          - uk
+          - ur
+          - uz
+          - ve
+          - vi
+          - vo
+          - wa
+          - wo
+          - xh
+          - yi
+          - yo
+          - za
+          - zh
+          - zu
+        example: de,en
+      example: de,en
+      in: query
+      name: language
+      required: false
+      description: Prefer results in specific language specified as ISO 639-1 code. Only the first language code is used when prioritizing forward geocode results to be matched. If this query parameter is omited then Accept-Language HTTP header will be analyzed. If the parameter is provided but is empty then no language preference is made.
+      explode: false
+    excludeTypes:
+      schema:
+        type: boolean
+        default: false
+      in: query
+      name: excludeTypes
+      required: false
+      description: Set to `true` to use all available feature types except those specified in `types`.
+    autocomplete:
+      schema:
+        type: boolean
+      in: query
+      name: autocomplete
+      required: false
+      description: Set to `true` to use autocomplete, `false` to disable autocomplete.
+      default: true
+    fuzzyMatch:
+      schema:
+        type: boolean
+        default: true
+      in: query
+      name: fuzzyMatch
+      required: false
+      description: Set to `false` to disable fuzzy search.
+    worldview:
+      schema:
+        type: string
+        example: ch
+        enum:
+        - default
+        - auto
+        - ch
+        - us
+      name: worldview
+      required: false
+      in: query
+      description: 'Some of the geographical boundaries and names are disputed. When `worldview` option is selected, the Geocoding API responses will be aligned with the borders and names recognized by the selected country (US or Switzerland). This affects filtering by country, the context returned with the given feature and also some of the labels (e.g., Gulf of Mexico vs. Gulf of America). Special values include: `auto` - the worldview is determined by the location of the client, `default` - disputed areas are returned without country information, countries with disputed borders are returned without full geometry.
+
+        '
+      example: ch
+      default: default
+    types:
+      schema:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: '#/components/schemas/placeType'
+      in: query
+      name: types
+      required: false
+      description: Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned.
+    proximity:
+      schema:
+        anyOf:
+        - $ref: '#/components/schemas/coordinates'
+        - $ref: '#/components/schemas/ip'
+      example: 8.528509,47.3774434
+      in: query
+      name: proximity
+      required: false
+      description: A `[lon, lat]` array to use for biasing search results or the string `ip` to do server-side IP based geolocation. Specify to prefer results close to a specific location - features closer to the proximity value will be given priority over those further from the proximity value.
+      explode: false
+    bbox:
+      schema:
+        $ref: '#/components/schemas/bbox'
+      example: 5.9559,45.818,10.4921,47.8084
+      in: query
+      name: bbox
+      required: false
+      description: A `[w, s, e, n]` bounding box array to use for limiting search results. Only features inside the provided bounding box will be included.
+      explode: false
+    country:
+      schema:
+        type: array
+        uniqueItems: true
+        items:
+          type: string
+        example: sk,cz
+      example: sk,cz
+      in: query
+      name: country
+      required: false
+      description: Limit search to specific country/countries.
+      explode: false
+    limit:
+      schema:
+        type: integer
+        default: 5
+        minimum: 1
+        maximum: 10
+      in: query
+      name: limit
+      required: false
+      description: Maximum number of results to return. For reverse geocoding with multiple types this must not be set or must be set to 1.
   schemas:
     bbox:
       example:
@@ -194,28 +480,6 @@ components:
         minimum: -90
         maximum: 90
         description: maximal latitude
-    placeType:
-      type: string
-      title: PlaceType
-      description: Check out the [descriptions and default values](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) of each of the PlaceType values
-      enum:
-      - continental_marine
-      - country
-      - major_landform
-      - region
-      - subregion
-      - county
-      - joint_municipality
-      - joint_submunicipality
-      - municipality
-      - municipal_district
-      - locality
-      - neighbourhood
-      - place
-      - postal_code
-      - address
-      - road
-      - poi
     featureProperties:
       title: FeatureProperties
       type: object
@@ -260,53 +524,6 @@ components:
       required:
       - ref
       - country_code
-    commonProperties:
-      title: CommonProperties
-      type: object
-      additionalProperties: true
-      properties:
-        id:
-          description: Unique feature ID
-          type: string
-          example: municipality.46425
-        text:
-          description: Localized feature name
-          type: string
-          example: Paris
-        language:
-          description: Query's primary ISO 639-1 language code
-          type: string
-          example: en
-      patternProperties:
-        ^text_(\w\w):
-          type: string
-          description: A string analogous to the `text` field that matches the query in the requested language. This field is only returned when multiple languages are requested using the `language` parameter, and will be present for each requested language.
-        ^language_(\w\w):
-          type: string
-          description: A ISO 639-1 query's fallback language code. This field is only returned when multiple languages are requested using the `language` parameter, and will be present for each requested language.
-      required:
-      - id
-      - text
-    ip:
-      type: string
-      title: IP
-      description: Server-side IP based geolocation
-      const: ip
-    coordinates:
-      example:
-      - 8.528509
-      - 47.3774434
-      type: array
-      title: Coordinates
-      prefixItems:
-      - type: number
-        minimum: -180
-        maximum: 180
-        description: longitude
-      - type: number
-        minimum: -90
-        maximum: 90
-        description: latitude
     result:
       description: Search result represented by FeatureCollection where every item is represented as a GeoJSON Feature
       type: object
@@ -588,301 +805,84 @@ components:
       - features
       - query
       - attribution
-  parameters:
-    types:
-      schema:
-        type: array
-        uniqueItems: true
-        items:
-          $ref: '#/components/schemas/placeType'
-      in: query
-      name: types
-      required: false
-      description: Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned.
-    language:
-      schema:
-        type: array
-        maxItems: 20
-        uniqueItems: true
-        items:
+    coordinates:
+      example:
+      - 8.528509
+      - 47.3774434
+      type: array
+      title: Coordinates
+      prefixItems:
+      - type: number
+        minimum: -180
+        maximum: 180
+        description: longitude
+      - type: number
+        minimum: -90
+        maximum: 90
+        description: latitude
+    ip:
+      type: string
+      title: IP
+      description: Server-side IP based geolocation
+      const: ip
+    commonProperties:
+      title: CommonProperties
+      type: object
+      additionalProperties: true
+      properties:
+        id:
+          description: Unique feature ID
+          type: string
+          example: municipality.46425
+        text:
+          description: Localized feature name
+          type: string
+          example: Paris
+        language:
+          description: Query's primary ISO 639-1 language code
           type: string
           example: en
-          enum:
-          - aa
-          - ab
-          - ae
-          - af
-          - ak
-          - am
-          - an
-          - ar
-          - as
-          - av
-          - ay
-          - az
-          - ba
-          - be
-          - bg
-          - bh
-          - bi
-          - bm
-          - bn
-          - bo
-          - br
-          - bs
-          - ca
-          - ce
-          - ch
-          - co
-          - cr
-          - cs
-          - cu
-          - cv
-          - cy
-          - da
-          - de
-          - dv
-          - dz
-          - ee
-          - el
-          - en
-          - eo
-          - es
-          - et
-          - eu
-          - fa
-          - ff
-          - fi
-          - fj
-          - fo
-          - fr
-          - fy
-          - ga
-          - gd
-          - gl
-          - gn
-          - gu
-          - gv
-          - ha
-          - he
-          - hi
-          - ho
-          - hr
-          - ht
-          - hu
-          - hy
-          - hz
-          - ia
-          - id
-          - ie
-          - ig
-          - ii
-          - ik
-          - io
-          - is
-          - it
-          - iu
-          - ja
-          - jv
-          - ka
-          - kg
-          - ki
-          - kj
-          - kk
-          - kl
-          - km
-          - kn
-          - ko
-          - kr
-          - ks
-          - ku
-          - kv
-          - kw
-          - ky
-          - la
-          - lb
-          - lg
-          - li
-          - ln
-          - lo
-          - lt
-          - lu
-          - lv
-          - mg
-          - mh
-          - mi
-          - mk
-          - ml
-          - mn
-          - mr
-          - ms
-          - mt
-          - my
-          - na
-          - nb
-          - nd
-          - ne
-          - ng
-          - nl
-          - nn
-          - 'no'
-          - nr
-          - nv
-          - ny
-          - oc
-          - oj
-          - om
-          - or
-          - os
-          - pa
-          - pi
-          - pl
-          - ps
-          - pt
-          - qu
-          - rm
-          - rn
-          - ro
-          - ru
-          - rw
-          - sa
-          - sc
-          - sd
-          - se
-          - sg
-          - si
-          - sk
-          - sl
-          - sm
-          - sn
-          - so
-          - sq
-          - sr
-          - ss
-          - st
-          - su
-          - sv
-          - sw
-          - ta
-          - te
-          - tg
-          - th
-          - ti
-          - tk
-          - tl
-          - tn
-          - to
-          - tr
-          - ts
-          - tt
-          - tw
-          - ty
-          - ug
-          - uk
-          - ur
-          - uz
-          - ve
-          - vi
-          - vo
-          - wa
-          - wo
-          - xh
-          - yi
-          - yo
-          - za
-          - zh
-          - zu
-        example: de,en
-      example: de,en
-      in: query
-      name: language
-      required: false
-      description: Prefer results in specific language specified as ISO 639-1 code. Only the first language code is used when prioritizing forward geocode results to be matched. If this query parameter is omited then Accept-Language HTTP header will be analyzed. If the parameter is provided but is empty then no language preference is made.
-      explode: false
-    proximity:
-      schema:
-        anyOf:
-        - $ref: '#/components/schemas/coordinates'
-        - $ref: '#/components/schemas/ip'
-      example: 8.528509,47.3774434
-      in: query
-      name: proximity
-      required: false
-      description: A `[lon, lat]` array to use for biasing search results or the string `ip` to do server-side IP based geolocation. Specify to prefer results close to a specific location - features closer to the proximity value will be given priority over those further from the proximity value.
-      explode: false
-    excludeTypes:
-      schema:
-        type: boolean
-        default: false
-      in: query
-      name: excludeTypes
-      required: false
-      description: Set to `true` to use all available feature types except those specified in `types`.
-    limit:
-      schema:
-        type: integer
-        default: 5
-        minimum: 1
-        maximum: 10
-      in: query
-      name: limit
-      required: false
-      description: Maximum number of results to return. For reverse geocoding with multiple types this must not be set or must be set to 1.
-    autocomplete:
-      schema:
-        type: boolean
-      in: query
-      name: autocomplete
-      required: false
-      description: Set to `true` to use autocomplete, `false` to disable autocomplete.
-      default: true
-    worldview:
-      schema:
-        type: string
-        example: ch
-        enum:
-        - default
-        - auto
-        - ch
-        - us
-      name: worldview
-      required: false
-      in: query
-      description: 'Some of the geographical boundaries and names are disputed. When `worldview` option is selected, the Geocoding API responses will be aligned with the borders and names recognized by the selected country (US or Switzerland). This affects filtering by country, the context returned with the given feature and also some of the labels (e.g., Gulf of Mexico vs. Gulf of America). Special values include: `auto` - the worldview is determined by the location of the client, `default` - disputed areas are returned without country information, countries with disputed borders are returned without full geometry.
-
-        '
-      example: ch
-      default: default
-    bbox:
-      schema:
-        $ref: '#/components/schemas/bbox'
-      example: 5.9559,45.818,10.4921,47.8084
-      in: query
-      name: bbox
-      required: false
-      description: A `[w, s, e, n]` bounding box array to use for limiting search results. Only features inside the provided bounding box will be included.
-      explode: false
-    fuzzyMatch:
-      schema:
-        type: boolean
-        default: true
-      in: query
-      name: fuzzyMatch
-      required: false
-      description: Set to `false` to disable fuzzy search.
-    country:
-      schema:
-        type: array
-        uniqueItems: true
-        items:
+      patternProperties:
+        ^text_(\w\w):
           type: string
-        example: sk,cz
-      example: sk,cz
-      in: query
-      name: country
-      required: false
-      description: Limit search to specific country/countries.
-      explode: false
+          description: A string analogous to the `text` field that matches the query in the requested language. This field is only returned when multiple languages are requested using the `language` parameter, and will be present for each requested language.
+        ^language_(\w\w):
+          type: string
+          description: A ISO 639-1 query's fallback language code. This field is only returned when multiple languages are requested using the `language` parameter, and will be present for each requested language.
+      required:
+      - id
+      - text
+    placeType:
+      type: string
+      title: PlaceType
+      description: Check out the [descriptions and default values](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) of each of the PlaceType values
+      enum:
+      - continental_marine
+      - country
+      - major_landform
+      - region
+      - subregion
+      - county
+      - joint_municipality
+      - joint_submunicipality
+      - municipality
+      - municipal_district
+      - locality
+      - neighbourhood
+      - place
+      - postal_code
+      - address
+      - road
+      - poi
+  responses:
+    '403':
+      description: Key is missing, invalid or restricted
+    ok:
+      description: Search result represented as FeatureCollection where every item is represented as a GeoJSON Feature
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/result'
   securitySchemes:
     key:
       description: Your own API key from https://cloud.maptiler.com/

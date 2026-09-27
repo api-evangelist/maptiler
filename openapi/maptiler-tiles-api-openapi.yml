@@ -122,6 +122,20 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
+    z:
+      name: z
+      description: Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
+    y:
+      name: y
+      description: Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
     tilesId:
       name: tilesId
       in: path
@@ -130,23 +144,9 @@ components:
       required: true
       schema:
         type: string
-    z:
-      name: z
-      description: Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
-      in: path
-      required: true
-      schema:
-        type: integer
     x:
       name: x
       description: Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
-      in: path
-      required: true
-      schema:
-        type: integer
-    y:
-      name: y
-      description: Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
       in: path
       required: true
       schema:

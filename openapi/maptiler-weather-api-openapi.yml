@@ -34,6 +34,9 @@ paths:
       operationId: getWeatherLatestJson
       x-operation-id-source: derived
 components:
+  responses:
+    '403':
+      description: Key is missing, invalid or restricted
   schemas:
     TilesetDefinition:
       type: object
@@ -200,9 +203,6 @@ components:
                       timestamp:
                         type: string
                         description: ISO timestamp of the tileset
-  responses:
-    '403':
-      description: Key is missing, invalid or restricted
   securitySchemes:
     key:
       description: Your own API key from https://cloud.maptiler.com/

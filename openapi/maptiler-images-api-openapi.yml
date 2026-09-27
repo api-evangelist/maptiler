@@ -59,11 +59,6 @@ paths:
       operationId: getImagesByImageIdByZByXByY
       x-operation-id-source: derived
 components:
-  responses:
-    '404':
-      description: The item does not exist
-    '403':
-      description: Key is missing, invalid or restricted
   parameters:
     z:
       name: z
@@ -79,13 +74,6 @@ components:
       required: true
       schema:
         type: string
-    x:
-      name: x
-      description: Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
-      in: path
-      required: true
-      schema:
-        type: integer
     y:
       name: y
       description: Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
@@ -93,6 +81,18 @@ components:
       required: true
       schema:
         type: integer
+    x:
+      name: x
+      description: Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '404':
+      description: The item does not exist
+    '403':
+      description: Key is missing, invalid or restricted
   schemas:
     ImageJSON:
       title: ImageJSON Schema
