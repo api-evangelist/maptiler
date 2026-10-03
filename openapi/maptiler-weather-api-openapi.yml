@@ -38,6 +38,33 @@ components:
     '403':
       description: Key is missing, invalid or restricted
   schemas:
+    WeatherCatalogResult:
+      type: object
+      title: WeatherCatalogResult
+      properties:
+        variables:
+          type: array
+          description: List of all the available weather variables
+          title: CatalogResult
+          items:
+            allOf:
+            - $ref: '#/components/schemas/TilesetDefinition'
+            - type: object
+              properties:
+                keyframes:
+                  type: array
+                  title: Keyframes
+                  description: List of the available keyframes for this variable
+                  items:
+                    type: object
+                    title: Keyframe
+                    properties:
+                      id:
+                        type: string
+                        description: UUID of the tileset
+                      timestamp:
+                        type: string
+                        description: ISO timestamp of the tileset
     TilesetDefinition:
       type: object
       title: TilesetDefinition
@@ -176,33 +203,6 @@ components:
       - bounds
       - tile_matrix_set
       - keyframes
-    WeatherCatalogResult:
-      type: object
-      title: WeatherCatalogResult
-      properties:
-        variables:
-          type: array
-          description: List of all the available weather variables
-          title: CatalogResult
-          items:
-            allOf:
-            - $ref: '#/components/schemas/TilesetDefinition'
-            - type: object
-              properties:
-                keyframes:
-                  type: array
-                  title: Keyframes
-                  description: List of the available keyframes for this variable
-                  items:
-                    type: object
-                    title: Keyframe
-                    properties:
-                      id:
-                        type: string
-                        description: UUID of the tileset
-                      timestamp:
-                        type: string
-                        description: ISO timestamp of the tileset
   securitySchemes:
     key:
       description: Your own API key from https://cloud.maptiler.com/

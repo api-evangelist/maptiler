@@ -160,6 +160,54 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
+    bbox:
+      schema:
+        $ref: '#/components/schemas/bbox'
+      example: 5.9559,45.818,10.4921,47.8084
+      in: query
+      name: bbox
+      required: false
+      description: A `[w, s, e, n]` bounding box array to use for limiting search results. Only features inside the provided bounding box will be included.
+      explode: false
+    fuzzyMatch:
+      schema:
+        type: boolean
+        default: true
+      in: query
+      name: fuzzyMatch
+      required: false
+      description: Set to `false` to disable fuzzy search.
+    limit:
+      schema:
+        type: integer
+        default: 5
+        minimum: 1
+        maximum: 10
+      in: query
+      name: limit
+      required: false
+      description: Maximum number of results to return. For reverse geocoding with multiple types this must not be set or must be set to 1.
+    proximity:
+      schema:
+        anyOf:
+        - $ref: '#/components/schemas/coordinates'
+        - $ref: '#/components/schemas/ip'
+      example: 8.528509,47.3774434
+      in: query
+      name: proximity
+      required: false
+      description: A `[lon, lat]` array to use for biasing search results or the string `ip` to do server-side IP based geolocation. Specify to prefer results close to a specific location - features closer to the proximity value will be given priority over those further from the proximity value.
+      explode: false
+    types:
+      schema:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: '#/components/schemas/placeType'
+      in: query
+      name: types
+      required: false
+      description: Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned.
     language:
       schema:
         type: array
@@ -360,30 +408,6 @@ components:
       required: false
       description: Prefer results in specific language specified as ISO 639-1 code. Only the first language code is used when prioritizing forward geocode results to be matched. If this query parameter is omited then Accept-Language HTTP header will be analyzed. If the parameter is provided but is empty then no language preference is made.
       explode: false
-    excludeTypes:
-      schema:
-        type: boolean
-        default: false
-      in: query
-      name: excludeTypes
-      required: false
-      description: Set to `true` to use all available feature types except those specified in `types`.
-    autocomplete:
-      schema:
-        type: boolean
-      in: query
-      name: autocomplete
-      required: false
-      description: Set to `true` to use autocomplete, `false` to disable autocomplete.
-      default: true
-    fuzzyMatch:
-      schema:
-        type: boolean
-        default: true
-      in: query
-      name: fuzzyMatch
-      required: false
-      description: Set to `false` to disable fuzzy search.
     worldview:
       schema:
         type: string
@@ -401,36 +425,22 @@ components:
         '
       example: ch
       default: default
-    types:
+    autocomplete:
       schema:
-        type: array
-        uniqueItems: true
-        items:
-          $ref: '#/components/schemas/placeType'
+        type: boolean
       in: query
-      name: types
+      name: autocomplete
       required: false
-      description: Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned.
-    proximity:
+      description: Set to `true` to use autocomplete, `false` to disable autocomplete.
+      default: true
+    excludeTypes:
       schema:
-        anyOf:
-        - $ref: '#/components/schemas/coordinates'
-        - $ref: '#/components/schemas/ip'
-      example: 8.528509,47.3774434
+        type: boolean
+        default: false
       in: query
-      name: proximity
+      name: excludeTypes
       required: false
-      description: A `[lon, lat]` array to use for biasing search results or the string `ip` to do server-side IP based geolocation. Specify to prefer results close to a specific location - features closer to the proximity value will be given priority over those further from the proximity value.
-      explode: false
-    bbox:
-      schema:
-        $ref: '#/components/schemas/bbox'
-      example: 5.9559,45.818,10.4921,47.8084
-      in: query
-      name: bbox
-      required: false
-      description: A `[w, s, e, n]` bounding box array to use for limiting search results. Only features inside the provided bounding box will be included.
-      explode: false
+      description: Set to `true` to use all available feature types except those specified in `types`.
     country:
       schema:
         type: array
@@ -444,86 +454,22 @@ components:
       required: false
       description: Limit search to specific country/countries.
       explode: false
-    limit:
-      schema:
-        type: integer
-        default: 5
-        minimum: 1
-        maximum: 10
-      in: query
-      name: limit
-      required: false
-      description: Maximum number of results to return. For reverse geocoding with multiple types this must not be set or must be set to 1.
   schemas:
-    bbox:
+    coordinates:
       example:
-      - 5.9559
-      - 45.818
-      - 10.4921
-      - 47.8084
+      - 8.528509
+      - 47.3774434
       type: array
-      title: BoundingBox
+      title: Coordinates
       prefixItems:
       - type: number
         minimum: -180
         maximum: 180
-        description: minimal longitude
+        description: longitude
       - type: number
         minimum: -90
         maximum: 90
-        description: minimal latitude
-      - type: number
-        minimum: -180
-        maximum: 180
-        description: maximal longitude
-      - type: number
-        minimum: -90
-        maximum: 90
-        description: maximal latitude
-    featureProperties:
-      title: FeatureProperties
-      type: object
-      additionalProperties: true
-      properties:
-        ref:
-          description: (experimental) External reference of the feature used for debugging purposes. The exact format of this field may change without notice, and should not be relied on at the moment.
-          type: string
-          example: osm:r71525
-        country_code:
-          type: string
-          description: ISO 3166-1 alpha-2 country code of the feature
-          example: fr
-        kind:
-          type: string
-          description: (experimental) Kind of the feature
-          enum:
-          - road
-          - road_relation
-          - admin_area
-          - place
-          - street
-          - virtual_street
-        categories:
-          type: array
-          description: Array of [POI category](https://docs.maptiler.com/cloud/api/geocoding/#PoiCategory). Only available for `poi` type. Category values may change in the near future.
-          minItems: 1
-          items:
-            type: string
-            example: restaurant
-        feature_tags:
-          type: object
-          title: Feature tags
-          description: (experimental) Feature tags, only available for `poi` type. They can include e.g. working hours, type of amenity or wheelchair access.
-          additionalProperties:
-            type: string
-        place_designation:
-          type: string
-          title: Place designation
-          description: (experimental) Additional information about the place. The main use case is to determine if the administrative area represents a town, a city or a village. This field is especially useful in cases, where a large city is a region, land or prefecture from administrative point of view (typical examples are Berlin and Tokyo).
-          example: city
-      required:
-      - ref
-      - country_code
+        description: latitude
     result:
       description: Search result represented by FeatureCollection where every item is represented as a GeoJSON Feature
       type: object
@@ -805,26 +751,75 @@ components:
       - features
       - query
       - attribution
-    coordinates:
+    bbox:
       example:
-      - 8.528509
-      - 47.3774434
+      - 5.9559
+      - 45.818
+      - 10.4921
+      - 47.8084
       type: array
-      title: Coordinates
+      title: BoundingBox
       prefixItems:
       - type: number
         minimum: -180
         maximum: 180
-        description: longitude
+        description: minimal longitude
       - type: number
         minimum: -90
         maximum: 90
-        description: latitude
-    ip:
-      type: string
-      title: IP
-      description: Server-side IP based geolocation
-      const: ip
+        description: minimal latitude
+      - type: number
+        minimum: -180
+        maximum: 180
+        description: maximal longitude
+      - type: number
+        minimum: -90
+        maximum: 90
+        description: maximal latitude
+    featureProperties:
+      title: FeatureProperties
+      type: object
+      additionalProperties: true
+      properties:
+        ref:
+          description: (experimental) External reference of the feature used for debugging purposes. The exact format of this field may change without notice, and should not be relied on at the moment.
+          type: string
+          example: osm:r71525
+        country_code:
+          type: string
+          description: ISO 3166-1 alpha-2 country code of the feature
+          example: fr
+        kind:
+          type: string
+          description: (experimental) Kind of the feature
+          enum:
+          - road
+          - road_relation
+          - admin_area
+          - place
+          - street
+          - virtual_street
+        categories:
+          type: array
+          description: Array of [POI category](https://docs.maptiler.com/cloud/api/geocoding/#PoiCategory). Only available for `poi` type. Category values may change in the near future.
+          minItems: 1
+          items:
+            type: string
+            example: restaurant
+        feature_tags:
+          type: object
+          title: Feature tags
+          description: (experimental) Feature tags, only available for `poi` type. They can include e.g. working hours, type of amenity or wheelchair access.
+          additionalProperties:
+            type: string
+        place_designation:
+          type: string
+          title: Place designation
+          description: (experimental) Additional information about the place. The main use case is to determine if the administrative area represents a town, a city or a village. This field is especially useful in cases, where a large city is a region, land or prefecture from administrative point of view (typical examples are Berlin and Tokyo).
+          example: city
+      required:
+      - ref
+      - country_code
     commonProperties:
       title: CommonProperties
       type: object
@@ -852,6 +847,11 @@ components:
       required:
       - id
       - text
+    ip:
+      type: string
+      title: IP
+      description: Server-side IP based geolocation
+      const: ip
     placeType:
       type: string
       title: PlaceType

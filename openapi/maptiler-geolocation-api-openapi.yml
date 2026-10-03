@@ -41,6 +41,9 @@ paths:
       operationId: getGeolocationIpJson
       x-operation-id-source: derived
 components:
+  responses:
+    '403':
+      description: Key is missing, invalid or restricted
   schemas:
     GeolocationResult:
       type: object
@@ -131,9 +134,6 @@ components:
           type: number
           description: Elevation of the location in meters
           example: 433
-  responses:
-    '403':
-      description: Key is missing, invalid or restricted
   securitySchemes:
     key:
       description: Your own API key from https://cloud.maptiler.com/

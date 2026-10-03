@@ -181,21 +181,6 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
-    mapId:
-      name: mapId
-      in: path
-      description: Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/).
-      example: streets-v4
-      required: true
-      schema:
-        type: string
-    z:
-      name: z
-      description: Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
-      in: path
-      required: true
-      schema:
-        type: integer
     rasterizationFormat:
       name: format
       in: path
@@ -206,6 +191,28 @@ components:
         - png
         - jpg
         - webp
+    mapId:
+      name: mapId
+      in: path
+      description: Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/).
+      example: streets-v4
+      required: true
+      schema:
+        type: string
+    y:
+      name: y
+      description: Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
+    z:
+      name: z
+      description: Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
     rasterizationScale:
       name: scale
       in: path
@@ -215,13 +222,6 @@ components:
         type: string
         enum:
         - '@2x'
-    y:
-      name: y
-      description: Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
-      in: path
-      required: true
-      schema:
-        type: integer
     x:
       name: x
       description: Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)

@@ -265,16 +265,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ExportItem:
-      properties:
-        proj4:
-          title: Proj4
-          type: string
-        wkt:
-          title: Wkt
-          type: string
-      title: ExportItem
-      type: object
     Id:
       properties:
         authority:
@@ -287,6 +277,16 @@ components:
       - authority
       - code
       title: Id
+      type: object
+    ExportItem:
+      properties:
+        proj4:
+          title: Proj4
+          type: string
+        wkt:
+          title: Wkt
+          type: string
+      title: ExportItem
       type: object
   securitySchemes:
     key:
