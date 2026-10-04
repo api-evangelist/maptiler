@@ -160,54 +160,6 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
-    bbox:
-      schema:
-        $ref: '#/components/schemas/bbox'
-      example: 5.9559,45.818,10.4921,47.8084
-      in: query
-      name: bbox
-      required: false
-      description: A `[w, s, e, n]` bounding box array to use for limiting search results. Only features inside the provided bounding box will be included.
-      explode: false
-    fuzzyMatch:
-      schema:
-        type: boolean
-        default: true
-      in: query
-      name: fuzzyMatch
-      required: false
-      description: Set to `false` to disable fuzzy search.
-    limit:
-      schema:
-        type: integer
-        default: 5
-        minimum: 1
-        maximum: 10
-      in: query
-      name: limit
-      required: false
-      description: Maximum number of results to return. For reverse geocoding with multiple types this must not be set or must be set to 1.
-    proximity:
-      schema:
-        anyOf:
-        - $ref: '#/components/schemas/coordinates'
-        - $ref: '#/components/schemas/ip'
-      example: 8.528509,47.3774434
-      in: query
-      name: proximity
-      required: false
-      description: A `[lon, lat]` array to use for biasing search results or the string `ip` to do server-side IP based geolocation. Specify to prefer results close to a specific location - features closer to the proximity value will be given priority over those further from the proximity value.
-      explode: false
-    types:
-      schema:
-        type: array
-        uniqueItems: true
-        items:
-          $ref: '#/components/schemas/placeType'
-      in: query
-      name: types
-      required: false
-      description: Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned.
     language:
       schema:
         type: array
@@ -408,6 +360,24 @@ components:
       required: false
       description: Prefer results in specific language specified as ISO 639-1 code. Only the first language code is used when prioritizing forward geocode results to be matched. If this query parameter is omited then Accept-Language HTTP header will be analyzed. If the parameter is provided but is empty then no language preference is made.
       explode: false
+    autocomplete:
+      schema:
+        type: boolean
+      in: query
+      name: autocomplete
+      required: false
+      description: Set to `true` to use autocomplete, `false` to disable autocomplete.
+      default: true
+    limit:
+      schema:
+        type: integer
+        default: 5
+        minimum: 1
+        maximum: 10
+      in: query
+      name: limit
+      required: false
+      description: Maximum number of results to return. For reverse geocoding with multiple types this must not be set or must be set to 1.
     worldview:
       schema:
         type: string
@@ -425,14 +395,6 @@ components:
         '
       example: ch
       default: default
-    autocomplete:
-      schema:
-        type: boolean
-      in: query
-      name: autocomplete
-      required: false
-      description: Set to `true` to use autocomplete, `false` to disable autocomplete.
-      default: true
     excludeTypes:
       schema:
         type: boolean
@@ -441,6 +403,16 @@ components:
       name: excludeTypes
       required: false
       description: Set to `true` to use all available feature types except those specified in `types`.
+    types:
+      schema:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: '#/components/schemas/placeType'
+      in: query
+      name: types
+      required: false
+      description: Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned.
     country:
       schema:
         type: array
@@ -454,22 +426,40 @@ components:
       required: false
       description: Limit search to specific country/countries.
       explode: false
+    proximity:
+      schema:
+        anyOf:
+        - $ref: '#/components/schemas/coordinates'
+        - $ref: '#/components/schemas/ip'
+      example: 8.528509,47.3774434
+      in: query
+      name: proximity
+      required: false
+      description: A `[lon, lat]` array to use for biasing search results or the string `ip` to do server-side IP based geolocation. Specify to prefer results close to a specific location - features closer to the proximity value will be given priority over those further from the proximity value.
+      explode: false
+    bbox:
+      schema:
+        $ref: '#/components/schemas/bbox'
+      example: 5.9559,45.818,10.4921,47.8084
+      in: query
+      name: bbox
+      required: false
+      description: A `[w, s, e, n]` bounding box array to use for limiting search results. Only features inside the provided bounding box will be included.
+      explode: false
+    fuzzyMatch:
+      schema:
+        type: boolean
+        default: true
+      in: query
+      name: fuzzyMatch
+      required: false
+      description: Set to `false` to disable fuzzy search.
   schemas:
-    coordinates:
-      example:
-      - 8.528509
-      - 47.3774434
-      type: array
-      title: Coordinates
-      prefixItems:
-      - type: number
-        minimum: -180
-        maximum: 180
-        description: longitude
-      - type: number
-        minimum: -90
-        maximum: 90
-        description: latitude
+    ip:
+      type: string
+      title: IP
+      description: Server-side IP based geolocation
+      const: ip
     result:
       description: Search result represented by FeatureCollection where every item is represented as a GeoJSON Feature
       type: object
@@ -751,31 +741,70 @@ components:
       - features
       - query
       - attribution
-    bbox:
+    commonProperties:
+      title: CommonProperties
+      type: object
+      additionalProperties: true
+      properties:
+        id:
+          description: Unique feature ID
+          type: string
+          example: municipality.46425
+        text:
+          description: Localized feature name
+          type: string
+          example: Paris
+        language:
+          description: Query's primary ISO 639-1 language code
+          type: string
+          example: en
+      patternProperties:
+        ^text_(\w\w):
+          type: string
+          description: A string analogous to the `text` field that matches the query in the requested language. This field is only returned when multiple languages are requested using the `language` parameter, and will be present for each requested language.
+        ^language_(\w\w):
+          type: string
+          description: A ISO 639-1 query's fallback language code. This field is only returned when multiple languages are requested using the `language` parameter, and will be present for each requested language.
+      required:
+      - id
+      - text
+    placeType:
+      type: string
+      title: PlaceType
+      description: Check out the [descriptions and default values](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) of each of the PlaceType values
+      enum:
+      - continental_marine
+      - country
+      - major_landform
+      - region
+      - subregion
+      - county
+      - joint_municipality
+      - joint_submunicipality
+      - municipality
+      - municipal_district
+      - locality
+      - neighbourhood
+      - place
+      - postal_code
+      - address
+      - road
+      - poi
+    coordinates:
       example:
-      - 5.9559
-      - 45.818
-      - 10.4921
-      - 47.8084
+      - 8.528509
+      - 47.3774434
       type: array
-      title: BoundingBox
+      title: Coordinates
       prefixItems:
       - type: number
         minimum: -180
         maximum: 180
-        description: minimal longitude
+        description: longitude
       - type: number
         minimum: -90
         maximum: 90
-        description: minimal latitude
-      - type: number
-        minimum: -180
-        maximum: 180
-        description: maximal longitude
-      - type: number
-        minimum: -90
-        maximum: 90
-        description: maximal latitude
+        description: latitude
     featureProperties:
       title: FeatureProperties
       type: object
@@ -820,69 +849,40 @@ components:
       required:
       - ref
       - country_code
-    commonProperties:
-      title: CommonProperties
-      type: object
-      additionalProperties: true
-      properties:
-        id:
-          description: Unique feature ID
-          type: string
-          example: municipality.46425
-        text:
-          description: Localized feature name
-          type: string
-          example: Paris
-        language:
-          description: Query's primary ISO 639-1 language code
-          type: string
-          example: en
-      patternProperties:
-        ^text_(\w\w):
-          type: string
-          description: A string analogous to the `text` field that matches the query in the requested language. This field is only returned when multiple languages are requested using the `language` parameter, and will be present for each requested language.
-        ^language_(\w\w):
-          type: string
-          description: A ISO 639-1 query's fallback language code. This field is only returned when multiple languages are requested using the `language` parameter, and will be present for each requested language.
-      required:
-      - id
-      - text
-    ip:
-      type: string
-      title: IP
-      description: Server-side IP based geolocation
-      const: ip
-    placeType:
-      type: string
-      title: PlaceType
-      description: Check out the [descriptions and default values](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) of each of the PlaceType values
-      enum:
-      - continental_marine
-      - country
-      - major_landform
-      - region
-      - subregion
-      - county
-      - joint_municipality
-      - joint_submunicipality
-      - municipality
-      - municipal_district
-      - locality
-      - neighbourhood
-      - place
-      - postal_code
-      - address
-      - road
-      - poi
+    bbox:
+      example:
+      - 5.9559
+      - 45.818
+      - 10.4921
+      - 47.8084
+      type: array
+      title: BoundingBox
+      prefixItems:
+      - type: number
+        minimum: -180
+        maximum: 180
+        description: minimal longitude
+      - type: number
+        minimum: -90
+        maximum: 90
+        description: minimal latitude
+      - type: number
+        minimum: -180
+        maximum: 180
+        description: maximal longitude
+      - type: number
+        minimum: -90
+        maximum: 90
+        description: maximal latitude
   responses:
-    '403':
-      description: Key is missing, invalid or restricted
     ok:
       description: Search result represented as FeatureCollection where every item is represented as a GeoJSON Feature
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/result'
+    '403':
+      description: Key is missing, invalid or restricted
   securitySchemes:
     key:
       description: Your own API key from https://cloud.maptiler.com/

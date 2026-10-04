@@ -121,12 +121,21 @@ paths:
       operationId: getTilesByTilesIdWMTSCapabilitiesXml
       x-operation-id-source: derived
 components:
-  responses:
-    '403':
-      description: Key is missing, invalid or restricted
-    '404':
-      description: The item does not exist
   parameters:
+    z:
+      name: z
+      description: Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
+    x:
+      name: x
+      description: Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
     tilesId:
       name: tilesId
       in: path
@@ -142,20 +151,11 @@ components:
       required: true
       schema:
         type: integer
-    z:
-      name: z
-      description: Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
-      in: path
-      required: true
-      schema:
-        type: integer
-    x:
-      name: x
-      description: Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
-      in: path
-      required: true
-      schema:
-        type: integer
+  responses:
+    '404':
+      description: The item does not exist
+    '403':
+      description: Key is missing, invalid or restricted
   schemas:
     TileJSON:
       type: object

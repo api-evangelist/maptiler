@@ -59,11 +59,40 @@ paths:
       operationId: getImagesByImageIdByZByXByY
       x-operation-id-source: derived
 components:
+  parameters:
+    imageId:
+      name: imageId
+      in: path
+      description: Identifier of the image.
+      required: true
+      schema:
+        type: string
+    z:
+      name: z
+      description: Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
+    x:
+      name: x
+      description: Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
+    y:
+      name: y
+      description: Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
   responses:
-    '403':
-      description: Key is missing, invalid or restricted
     '404':
       description: The item does not exist
+    '403':
+      description: Key is missing, invalid or restricted
   schemas:
     ImageJSON:
       title: ImageJSON Schema
@@ -98,35 +127,6 @@ components:
           description: Tile size in pixels.
           type: integer
           required: true
-  parameters:
-    y:
-      name: y
-      description: Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
-      in: path
-      required: true
-      schema:
-        type: integer
-    z:
-      name: z
-      description: Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
-      in: path
-      required: true
-      schema:
-        type: integer
-    imageId:
-      name: imageId
-      in: path
-      description: Identifier of the image.
-      required: true
-      schema:
-        type: string
-    x:
-      name: x
-      description: Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
-      in: path
-      required: true
-      schema:
-        type: integer
   securitySchemes:
     key:
       description: Your own API key from https://cloud.maptiler.com/

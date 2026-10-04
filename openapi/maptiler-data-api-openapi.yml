@@ -34,11 +34,6 @@ paths:
       operationId: getDataByDataIdFeaturesJson
       x-operation-id-source: derived
 components:
-  schemas:
-    GeoJSON:
-      type: object
-      externalDocs:
-        url: https://tools.ietf.org/html/rfc7946
   parameters:
     dataId:
       name: dataId
@@ -47,6 +42,11 @@ components:
       required: true
       schema:
         type: string
+  schemas:
+    GeoJSON:
+      type: object
+      externalDocs:
+        url: https://tools.ietf.org/html/rfc7946
   securitySchemes:
     key:
       description: Your own API key from https://cloud.maptiler.com/

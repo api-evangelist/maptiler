@@ -180,7 +180,45 @@ paths:
       operationId: getMapsByMapIdWMTSCapabilitiesXml
       x-operation-id-source: derived
 components:
+  responses:
+    RasterizedImage:
+      content:
+        image/*:
+          schema:
+            type: string
+            format: binary
   parameters:
+    rasterizationScale:
+      name: scale
+      in: path
+      description: Use "@2x" to get "retina"/HiDPI image.
+      required: false
+      schema:
+        type: string
+        enum:
+        - '@2x'
+    z:
+      name: z
+      description: Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
+    mapId:
+      name: mapId
+      in: path
+      description: Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/).
+      example: streets-v4
+      required: true
+      schema:
+        type: string
+    x:
+      name: x
+      description: Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
     rasterizationFormat:
       name: format
       in: path
@@ -191,40 +229,9 @@ components:
         - png
         - jpg
         - webp
-    mapId:
-      name: mapId
-      in: path
-      description: Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/).
-      example: streets-v4
-      required: true
-      schema:
-        type: string
     y:
       name: y
       description: Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
-      in: path
-      required: true
-      schema:
-        type: integer
-    z:
-      name: z
-      description: Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
-      in: path
-      required: true
-      schema:
-        type: integer
-    rasterizationScale:
-      name: scale
-      in: path
-      description: Use "@2x" to get "retina"/HiDPI image.
-      required: false
-      schema:
-        type: string
-        enum:
-        - '@2x'
-    x:
-      name: x
-      description: Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
       in: path
       required: true
       schema:
@@ -239,13 +246,6 @@ components:
       type: object
       externalDocs:
         url: https://raw.githubusercontent.com/maptiler/tilejson-spec/master/2.2.0/schema.json
-  responses:
-    RasterizedImage:
-      content:
-        image/*:
-          schema:
-            type: string
-            format: binary
   securitySchemes:
     key:
       description: Your own API key from https://cloud.maptiler.com/

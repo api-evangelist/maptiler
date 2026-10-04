@@ -164,16 +164,28 @@ paths:
       operationId: getMapsByMapIdStaticAutoByWidth}x{height}{scale}{format
       x-operation-id-source: derived
 components:
+  responses:
+    RasterizedImage:
+      content:
+        image/*:
+          schema:
+            type: string
+            format: binary
+    '404':
+      description: The item does not exist
+    '414':
+      description: URI Too Long. Maximum allowed length is 8192 bytes.
+    '403':
+      description: Key is missing, invalid or restricted
   parameters:
-    imageHeight:
-      name: height
-      in: path
-      description: Height of the image in pixels.
-      required: true
+    width:
+      name: width
+      in: query
+      description: Width of the stroke line when drawing polygons (in pixels). Deprecated, use "path" instead.
+      deprecated: true
+      default: 1
       schema:
-        type: integer
-        minimum: 1
-        maximum: 2048
+        type: number
     rasterizationFormat:
       name: format
       in: path
@@ -184,30 +196,6 @@ components:
         - png
         - jpg
         - webp
-    mapId:
-      name: mapId
-      in: path
-      description: Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/).
-      example: streets-v4
-      required: true
-      schema:
-        type: string
-    shortest:
-      name: shortest
-      in: query
-      description: Draw the shortest paths, allow to cross the dateline.
-      default: false
-      schema:
-        type: boolean
-    rasterizationScale:
-      name: scale
-      in: path
-      description: Use "@2x" to get "retina"/HiDPI image.
-      required: false
-      schema:
-        type: string
-        enum:
-        - '@2x'
     imageWidth:
       name: width
       in: path
@@ -217,28 +205,21 @@ components:
         type: integer
         minimum: 1
         maximum: 2048
-    fill:
-      name: fill
-      in: query
-      description: Color to use as a fill when drawing polygons. Deprecated, use "path" instead.
-      deprecated: true
-      default: rgba(255,255,255,0.4)
+    mapId:
+      name: mapId
+      in: path
+      description: Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/).
+      example: streets-v4
+      required: true
       schema:
         type: string
-    markers:
-      name: markers
+    latlng:
+      name: latlng
       in: query
-      description: Define marker(s) to be drawn on top of the map. Can be used multiple times. See [Static map with markers](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-markers/).
+      description: Use [latitude, longitude] order for coordinates instead of [longitude, latitude].
+      default: false
       schema:
-        type: string
-        pattern: ((icon|anchor|scale)\:[^\|]+\|)*((-?\d+\.?\d*,-?\d+\.?\d*(,[^\|]+)?\|)*(-?\d+\.?\d*,-?\d+\.?\d*(,[^\|]+)?))
-    padding:
-      name: padding
-      in: query
-      description: Ensures the autofitted bounds or features are comfortably visible in the resulting area. E.g. use 0.1 to add 10% margin (at least) of the size to each side.
-      default: 0.1
-      schema:
-        type: number
+        type: boolean
     attribution:
       name: attribution
       in: query
@@ -252,13 +233,30 @@ components:
         - topleft
         - topright
         - 'false'
-    path:
-      name: path
+    fill:
+      name: fill
       in: query
-      description: Define path(s) to be drawn on top of the map. Can be used multiple times. See [Static map with lines or polygons](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-lines/).
+      description: Color to use as a fill when drawing polygons. Deprecated, use "path" instead.
+      deprecated: true
+      default: rgba(255,255,255,0.4)
       schema:
         type: string
-        pattern: ((fill|stroke|width|shortest)\:[^\|]+\|)*((enc:.+)|((-?\d+\.?\d*,-?\d+\.?\d*\|)+(-?\d+\.?\d*,-?\d+\.?\d*)))
+    padding:
+      name: padding
+      in: query
+      description: Ensures the autofitted bounds or features are comfortably visible in the resulting area. E.g. use 0.1 to add 10% margin (at least) of the size to each side.
+      default: 0.1
+      schema:
+        type: number
+    imageHeight:
+      name: height
+      in: path
+      description: Height of the image in pixels.
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 2048
     stroke:
       name: stroke
       in: query
@@ -267,21 +265,6 @@ components:
       default: rgba(0,64,255,0.7)
       schema:
         type: string
-    latlng:
-      name: latlng
-      in: query
-      description: Use [latitude, longitude] order for coordinates instead of [longitude, latitude].
-      default: false
-      schema:
-        type: boolean
-    width:
-      name: width
-      in: query
-      description: Width of the stroke line when drawing polygons (in pixels). Deprecated, use "path" instead.
-      deprecated: true
-      default: 1
-      schema:
-        type: number
     encodedpath:
       name: encodedpath
       in: query
@@ -289,19 +272,36 @@ components:
       deprecated: true
       schema:
         type: string
-  responses:
-    '414':
-      description: URI Too Long. Maximum allowed length is 8192 bytes.
-    RasterizedImage:
-      content:
-        image/*:
-          schema:
-            type: string
-            format: binary
-    '403':
-      description: Key is missing, invalid or restricted
-    '404':
-      description: The item does not exist
+    rasterizationScale:
+      name: scale
+      in: path
+      description: Use "@2x" to get "retina"/HiDPI image.
+      required: false
+      schema:
+        type: string
+        enum:
+        - '@2x'
+    markers:
+      name: markers
+      in: query
+      description: Define marker(s) to be drawn on top of the map. Can be used multiple times. See [Static map with markers](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-markers/).
+      schema:
+        type: string
+        pattern: ((icon|anchor|scale)\:[^\|]+\|)*((-?\d+\.?\d*,-?\d+\.?\d*(,[^\|]+)?\|)*(-?\d+\.?\d*,-?\d+\.?\d*(,[^\|]+)?))
+    shortest:
+      name: shortest
+      in: query
+      description: Draw the shortest paths, allow to cross the dateline.
+      default: false
+      schema:
+        type: boolean
+    path:
+      name: path
+      in: query
+      description: Define path(s) to be drawn on top of the map. Can be used multiple times. See [Static map with lines or polygons](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-lines/).
+      schema:
+        type: string
+        pattern: ((fill|stroke|width|shortest)\:[^\|]+\|)*((enc:.+)|((-?\d+\.?\d*,-?\d+\.?\d*\|)+(-?\d+\.?\d*,-?\d+\.?\d*)))
   securitySchemes:
     key:
       description: Your own API key from https://cloud.maptiler.com/
