@@ -164,28 +164,40 @@ paths:
       operationId: getMapsByMapIdStaticAutoByWidth}x{height}{scale}{format
       x-operation-id-source: derived
 components:
-  responses:
-    RasterizedImage:
-      content:
-        image/*:
-          schema:
-            type: string
-            format: binary
-    '404':
-      description: The item does not exist
-    '414':
-      description: URI Too Long. Maximum allowed length is 8192 bytes.
-    '403':
-      description: Key is missing, invalid or restricted
   parameters:
-    width:
-      name: width
+    fill:
+      name: fill
       in: query
-      description: Width of the stroke line when drawing polygons (in pixels). Deprecated, use "path" instead.
+      description: Color to use as a fill when drawing polygons. Deprecated, use "path" instead.
       deprecated: true
-      default: 1
+      default: rgba(255,255,255,0.4)
       schema:
-        type: number
+        type: string
+    stroke:
+      name: stroke
+      in: query
+      description: Color to use as a stroke when drawing polygons. Deprecated, use "path" instead.
+      deprecated: true
+      default: rgba(0,64,255,0.7)
+      schema:
+        type: string
+    mapId:
+      name: mapId
+      in: path
+      description: Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/).
+      example: streets-v4
+      required: true
+      schema:
+        type: string
+    imageHeight:
+      name: height
+      in: path
+      description: Height of the image in pixels.
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 2048
     rasterizationFormat:
       name: format
       in: path
@@ -196,30 +208,15 @@ components:
         - png
         - jpg
         - webp
-    imageWidth:
-      name: width
+    rasterizationScale:
+      name: scale
       in: path
-      description: Width of the image in pixels.
-      required: true
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 2048
-    mapId:
-      name: mapId
-      in: path
-      description: Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/).
-      example: streets-v4
-      required: true
+      description: Use "@2x" to get "retina"/HiDPI image.
+      required: false
       schema:
         type: string
-    latlng:
-      name: latlng
-      in: query
-      description: Use [latitude, longitude] order for coordinates instead of [longitude, latitude].
-      default: false
-      schema:
-        type: boolean
+        enum:
+        - '@2x'
     attribution:
       name: attribution
       in: query
@@ -233,61 +230,6 @@ components:
         - topleft
         - topright
         - 'false'
-    fill:
-      name: fill
-      in: query
-      description: Color to use as a fill when drawing polygons. Deprecated, use "path" instead.
-      deprecated: true
-      default: rgba(255,255,255,0.4)
-      schema:
-        type: string
-    padding:
-      name: padding
-      in: query
-      description: Ensures the autofitted bounds or features are comfortably visible in the resulting area. E.g. use 0.1 to add 10% margin (at least) of the size to each side.
-      default: 0.1
-      schema:
-        type: number
-    imageHeight:
-      name: height
-      in: path
-      description: Height of the image in pixels.
-      required: true
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 2048
-    stroke:
-      name: stroke
-      in: query
-      description: Color to use as a stroke when drawing polygons. Deprecated, use "path" instead.
-      deprecated: true
-      default: rgba(0,64,255,0.7)
-      schema:
-        type: string
-    encodedpath:
-      name: encodedpath
-      in: query
-      description: Path in [Google Encoded Polyline Format](https://developers.google.com/maps/documentation/utilities/polylinealgorithm). Deprecated, use "path" instead.
-      deprecated: true
-      schema:
-        type: string
-    rasterizationScale:
-      name: scale
-      in: path
-      description: Use "@2x" to get "retina"/HiDPI image.
-      required: false
-      schema:
-        type: string
-        enum:
-        - '@2x'
-    markers:
-      name: markers
-      in: query
-      description: Define marker(s) to be drawn on top of the map. Can be used multiple times. See [Static map with markers](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-markers/).
-      schema:
-        type: string
-        pattern: ((icon|anchor|scale)\:[^\|]+\|)*((-?\d+\.?\d*,-?\d+\.?\d*(,[^\|]+)?\|)*(-?\d+\.?\d*,-?\d+\.?\d*(,[^\|]+)?))
     shortest:
       name: shortest
       in: query
@@ -302,6 +244,64 @@ components:
       schema:
         type: string
         pattern: ((fill|stroke|width|shortest)\:[^\|]+\|)*((enc:.+)|((-?\d+\.?\d*,-?\d+\.?\d*\|)+(-?\d+\.?\d*,-?\d+\.?\d*)))
+    encodedpath:
+      name: encodedpath
+      in: query
+      description: Path in [Google Encoded Polyline Format](https://developers.google.com/maps/documentation/utilities/polylinealgorithm). Deprecated, use "path" instead.
+      deprecated: true
+      schema:
+        type: string
+    imageWidth:
+      name: width
+      in: path
+      description: Width of the image in pixels.
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 2048
+    latlng:
+      name: latlng
+      in: query
+      description: Use [latitude, longitude] order for coordinates instead of [longitude, latitude].
+      default: false
+      schema:
+        type: boolean
+    width:
+      name: width
+      in: query
+      description: Width of the stroke line when drawing polygons (in pixels). Deprecated, use "path" instead.
+      deprecated: true
+      default: 1
+      schema:
+        type: number
+    markers:
+      name: markers
+      in: query
+      description: Define marker(s) to be drawn on top of the map. Can be used multiple times. See [Static map with markers](https://docs.maptiler.com/guides/maps-apis/static-maps/static-map-with-markers/).
+      schema:
+        type: string
+        pattern: ((icon|anchor|scale)\:[^\|]+\|)*((-?\d+\.?\d*,-?\d+\.?\d*(,[^\|]+)?\|)*(-?\d+\.?\d*,-?\d+\.?\d*(,[^\|]+)?))
+    padding:
+      name: padding
+      in: query
+      description: Ensures the autofitted bounds or features are comfortably visible in the resulting area. E.g. use 0.1 to add 10% margin (at least) of the size to each side.
+      default: 0.1
+      schema:
+        type: number
+  responses:
+    '414':
+      description: URI Too Long. Maximum allowed length is 8192 bytes.
+    RasterizedImage:
+      content:
+        image/*:
+          schema:
+            type: string
+            format: binary
+    '403':
+      description: Key is missing, invalid or restricted
+    '404':
+      description: The item does not exist
   securitySchemes:
     key:
       description: Your own API key from https://cloud.maptiler.com/

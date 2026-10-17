@@ -122,6 +122,21 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
+    y:
+      name: y
+      description: Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
+    tilesId:
+      name: tilesId
+      in: path
+      description: Identifier of the tiles. See [MapTiler Tiles](https://cloud.maptiler.com/tiles/).
+      example: satellite-v4
+      required: true
+      schema:
+        type: string
     z:
       name: z
       description: Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
@@ -136,26 +151,11 @@ components:
       required: true
       schema:
         type: integer
-    tilesId:
-      name: tilesId
-      in: path
-      description: Identifier of the tiles. See [MapTiler Tiles](https://cloud.maptiler.com/tiles/).
-      example: satellite-v4
-      required: true
-      schema:
-        type: string
-    y:
-      name: y
-      description: Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
-      in: path
-      required: true
-      schema:
-        type: integer
   responses:
-    '404':
-      description: The item does not exist
     '403':
       description: Key is missing, invalid or restricted
+    '404':
+      description: The item does not exist
   schemas:
     TileJSON:
       type: object

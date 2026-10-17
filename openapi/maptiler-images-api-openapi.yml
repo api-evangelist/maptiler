@@ -60,6 +60,13 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
+    y:
+      name: y
+      description: Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
     imageId:
       name: imageId
       in: path
@@ -81,18 +88,11 @@ components:
       required: true
       schema:
         type: integer
-    y:
-      name: y
-      description: Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
-      in: path
-      required: true
-      schema:
-        type: integer
   responses:
-    '404':
-      description: The item does not exist
     '403':
       description: Key is missing, invalid or restricted
+    '404':
+      description: The item does not exist
   schemas:
     ImageJSON:
       title: ImageJSON Schema

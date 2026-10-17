@@ -160,6 +160,67 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
+    excludeTypes:
+      schema:
+        type: boolean
+        default: false
+      in: query
+      name: excludeTypes
+      required: false
+      description: Set to `true` to use all available feature types except those specified in `types`.
+    limit:
+      schema:
+        type: integer
+        default: 5
+        minimum: 1
+        maximum: 10
+      in: query
+      name: limit
+      required: false
+      description: Maximum number of results to return. For reverse geocoding with multiple types this must not be set or must be set to 1.
+    autocomplete:
+      schema:
+        type: boolean
+      in: query
+      name: autocomplete
+      required: false
+      description: Set to `true` to use autocomplete, `false` to disable autocomplete.
+      default: true
+    worldview:
+      schema:
+        type: string
+        example: ch
+        enum:
+        - default
+        - auto
+        - ch
+        - us
+      name: worldview
+      required: false
+      in: query
+      description: 'Some of the geographical boundaries and names are disputed. When `worldview` option is selected, the Geocoding API responses will be aligned with the borders and names recognized by the selected country (US or Switzerland). This affects filtering by country, the context returned with the given feature and also some of the labels (e.g., Gulf of Mexico vs. Gulf of America). Special values include: `auto` - the worldview is determined by the location of the client, `default` - disputed areas are returned without country information, countries with disputed borders are returned without full geometry.
+
+        '
+      example: ch
+      default: default
+    fuzzyMatch:
+      schema:
+        type: boolean
+        default: true
+      in: query
+      name: fuzzyMatch
+      required: false
+      description: Set to `false` to disable fuzzy search.
+    types:
+      schema:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: '#/components/schemas/placeType'
+      in: query
+      name: types
+      required: false
+      description: Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned.
     language:
       schema:
         type: array
@@ -360,59 +421,6 @@ components:
       required: false
       description: Prefer results in specific language specified as ISO 639-1 code. Only the first language code is used when prioritizing forward geocode results to be matched. If this query parameter is omited then Accept-Language HTTP header will be analyzed. If the parameter is provided but is empty then no language preference is made.
       explode: false
-    autocomplete:
-      schema:
-        type: boolean
-      in: query
-      name: autocomplete
-      required: false
-      description: Set to `true` to use autocomplete, `false` to disable autocomplete.
-      default: true
-    limit:
-      schema:
-        type: integer
-        default: 5
-        minimum: 1
-        maximum: 10
-      in: query
-      name: limit
-      required: false
-      description: Maximum number of results to return. For reverse geocoding with multiple types this must not be set or must be set to 1.
-    worldview:
-      schema:
-        type: string
-        example: ch
-        enum:
-        - default
-        - auto
-        - ch
-        - us
-      name: worldview
-      required: false
-      in: query
-      description: 'Some of the geographical boundaries and names are disputed. When `worldview` option is selected, the Geocoding API responses will be aligned with the borders and names recognized by the selected country (US or Switzerland). This affects filtering by country, the context returned with the given feature and also some of the labels (e.g., Gulf of Mexico vs. Gulf of America). Special values include: `auto` - the worldview is determined by the location of the client, `default` - disputed areas are returned without country information, countries with disputed borders are returned without full geometry.
-
-        '
-      example: ch
-      default: default
-    excludeTypes:
-      schema:
-        type: boolean
-        default: false
-      in: query
-      name: excludeTypes
-      required: false
-      description: Set to `true` to use all available feature types except those specified in `types`.
-    types:
-      schema:
-        type: array
-        uniqueItems: true
-        items:
-          $ref: '#/components/schemas/placeType'
-      in: query
-      name: types
-      required: false
-      description: Filter types of which features to return. If not specified, default configuration of API is used (see [PlaceTypeValues](https://docs.maptiler.com/cloud/api/geocoding/#PlaceTypeValues) for the list). In case of reverse geocoding if just a single type is specified, then multiple nearby features of the single type can be returned, otherwise single feature for every specified type (or default types) can be returned.
     country:
       schema:
         type: array
@@ -446,20 +454,7 @@ components:
       required: false
       description: A `[w, s, e, n]` bounding box array to use for limiting search results. Only features inside the provided bounding box will be included.
       explode: false
-    fuzzyMatch:
-      schema:
-        type: boolean
-        default: true
-      in: query
-      name: fuzzyMatch
-      required: false
-      description: Set to `false` to disable fuzzy search.
   schemas:
-    ip:
-      type: string
-      title: IP
-      description: Server-side IP based geolocation
-      const: ip
     result:
       description: Search result represented by FeatureCollection where every item is represented as a GeoJSON Feature
       type: object
@@ -741,6 +736,21 @@ components:
       - features
       - query
       - attribution
+    coordinates:
+      example:
+      - 8.528509
+      - 47.3774434
+      type: array
+      title: Coordinates
+      prefixItems:
+      - type: number
+        minimum: -180
+        maximum: 180
+        description: longitude
+      - type: number
+        minimum: -90
+        maximum: 90
+        description: latitude
     commonProperties:
       title: CommonProperties
       type: object
@@ -768,6 +778,36 @@ components:
       required:
       - id
       - text
+    ip:
+      type: string
+      title: IP
+      description: Server-side IP based geolocation
+      const: ip
+    bbox:
+      example:
+      - 5.9559
+      - 45.818
+      - 10.4921
+      - 47.8084
+      type: array
+      title: BoundingBox
+      prefixItems:
+      - type: number
+        minimum: -180
+        maximum: 180
+        description: minimal longitude
+      - type: number
+        minimum: -90
+        maximum: 90
+        description: minimal latitude
+      - type: number
+        minimum: -180
+        maximum: 180
+        description: maximal longitude
+      - type: number
+        minimum: -90
+        maximum: 90
+        description: maximal latitude
     placeType:
       type: string
       title: PlaceType
@@ -790,21 +830,6 @@ components:
       - address
       - road
       - poi
-    coordinates:
-      example:
-      - 8.528509
-      - 47.3774434
-      type: array
-      title: Coordinates
-      prefixItems:
-      - type: number
-        minimum: -180
-        maximum: 180
-        description: longitude
-      - type: number
-        minimum: -90
-        maximum: 90
-        description: latitude
     featureProperties:
       title: FeatureProperties
       type: object
@@ -849,31 +874,6 @@ components:
       required:
       - ref
       - country_code
-    bbox:
-      example:
-      - 5.9559
-      - 45.818
-      - 10.4921
-      - 47.8084
-      type: array
-      title: BoundingBox
-      prefixItems:
-      - type: number
-        minimum: -180
-        maximum: 180
-        description: minimal longitude
-      - type: number
-        minimum: -90
-        maximum: 90
-        description: minimal latitude
-      - type: number
-        minimum: -180
-        maximum: 180
-        description: maximal longitude
-      - type: number
-        minimum: -90
-        maximum: 90
-        description: maximal latitude
   responses:
     ok:
       description: Search result represented as FeatureCollection where every item is represented as a GeoJSON Feature

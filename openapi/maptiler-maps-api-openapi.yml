@@ -188,33 +188,9 @@ components:
             type: string
             format: binary
   parameters:
-    rasterizationScale:
-      name: scale
-      in: path
-      description: Use "@2x" to get "retina"/HiDPI image.
-      required: false
-      schema:
-        type: string
-        enum:
-        - '@2x'
-    z:
-      name: z
-      description: Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
-      in: path
-      required: true
-      schema:
-        type: integer
-    mapId:
-      name: mapId
-      in: path
-      description: Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/).
-      example: streets-v4
-      required: true
-      schema:
-        type: string
-    x:
-      name: x
-      description: Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+    y:
+      name: y
+      description: Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
       in: path
       required: true
       schema:
@@ -229,9 +205,33 @@ components:
         - png
         - jpg
         - webp
-    y:
-      name: y
-      description: Row. Specifies the tile's row. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+    rasterizationScale:
+      name: scale
+      in: path
+      description: Use "@2x" to get "retina"/HiDPI image.
+      required: false
+      schema:
+        type: string
+        enum:
+        - '@2x'
+    mapId:
+      name: mapId
+      in: path
+      description: Identifier of the map. See [MapTiler Maps](https://cloud.maptiler.com/maps/).
+      example: streets-v4
+      required: true
+      schema:
+        type: string
+    z:
+      name: z
+      description: Zoom level. Specifies the tile's zoom level. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
+      in: path
+      required: true
+      schema:
+        type: integer
+    x:
+      name: x
+      description: Column. Specifies the tile's column. See [Tiles à la Google Maps](https://docs.maptiler.com/google-maps-coordinates-tile-bounds-projection/)
       in: path
       required: true
       schema:
