@@ -1,4 +1,4 @@
-# MapTiler (maptiler)
+# MapTiler
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,56 +64,181 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-MapTiler is a map hosting and geospatial API platform providing vector tiles, satellite imagery, geocoding, static maps, elevation data, geolocation, and coordinate transformation via REST APIs and SDKs for web, mobile, and server-side developers. Based in Switzerland, MapTiler powers mapping for startups, enterprises, and GIS professionals worldwide through its MapTiler Cloud service.
+MapTiler is a map hosting and geospatial API platform providing vector tiles, satellite imagery, geocoding, reverse geocoding, static maps, elevation data, geolocation, and coordinate transformation via REST APIs and SDKs for web, mobile, and server-side developers.
 
-APIs.json: https://raw.githubusercontent.com/api-evangelist/maptiler/refs/heads/main/apis.yml
+**Areas:** Maps · Geospatial · Tiles · Vector Tiles · Satellite Imagery · Geocoding · Reverse Geocoding · Static Maps · Elevation · Geolocation · Coordinate Transformation · GIS
 
-Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=maptiler-api-evangelist&utm_content=repo
+## MapTiler on APIs.io
 
-## Tags
+Everything profiled for MapTiler is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/maptiler/](https://apis.io/providers/maptiler/)** — or go straight to one of the APIs or properties below.
 
-Maps, Geospatial, Tiles, Vector Tiles, Satellite Imagery, Geocoding, Reverse Geocoding, Static Maps, Elevation, Geolocation, Coordinate Transformation, GIS, Mapping Platform
+### APIs (18)
 
-## APIs
+- [MapTiler Maps API](https://apis.io/apis/maptiler/maptiler-maps-api/) — Provides access to MapTiler Cloud map styles including embeddable viewers, style configuration, raster tiles, and OGC-compatible endpoints for rendering and…
+- [MapTiler Tiles API](https://apis.io/apis/maptiler/maptiler-tiles-api/) — Delivers map tile datasets including satellite imagery, terrain, and other raster or vector tile collections via XYZ, OGC API - Tiles, and WMTS-compatible…
+- [MapTiler Geocoding API](https://apis.io/apis/maptiler/maptiler-geocoding-api/) — Enables forward and reverse geocoding to search for places and addresses anywhere on Earth and convert coordinates to location data. Supports batch…
+- [MapTiler Static Maps API](https://apis.io/apis/maptiler/maptiler-static-maps-api/) — Generates static non-interactive map images in PNG, JPG, or WebP formats. Supports center-based, bounding-box-based, and auto-fitted viewports with optional…
+- [MapTiler Elevation API](https://apis.io/apis/maptiler/maptiler-elevation-api/) — Provides accurate altitude above mean sea level for any location on Earth. Accepts up to 50 coordinate pairs per request and returns elevation in meters or…
+- [MapTiler Geolocation API](https://apis.io/apis/maptiler/maptiler-geolocation-api/) — Returns approximate geographic location based on the incoming request's IP address, including country, city, coordinates, timezone, and optional elevation…
+- [MapTiler Coordinates API](https://apis.io/apis/maptiler/maptiler-coordinates-api/) — Enables searching the EPSG coordinate system database and transforming coordinates between different projections and coordinate reference systems. Supports…
+- [MapTiler Coordinates API](https://apis.io/apis/maptiler/maptiler-coordinates-api/) — The Coordinates API from MapTiler — 2 operation(s) for coordinates.
+- [MapTiler Data API](https://apis.io/apis/maptiler/maptiler-data-api/) — The Data API from MapTiler — 1 operation(s) for data.
+- [MapTiler Elevation API](https://apis.io/apis/maptiler/maptiler-elevation-api/) — The Elevation API from MapTiler — 1 operation(s) for elevation.
+- [MapTiler Geocoding API](https://apis.io/apis/maptiler/maptiler-geocoding-api/) — The Geocoding API from MapTiler — 4 operation(s) for geocoding.
+- [MapTiler Geolocation API](https://apis.io/apis/maptiler/maptiler-geolocation-api/) — The Geolocation API from MapTiler — 1 operation(s) for geolocation.
+- [MapTiler Images API](https://apis.io/apis/maptiler/maptiler-images-api/) — The Images API from MapTiler — 2 operation(s) for images.
+- [MapTiler Maps API](https://apis.io/apis/maptiler/maptiler-maps-api/) — The Maps API from MapTiler — 8 operation(s) for maps.
+- [MapTiler Other API](https://apis.io/apis/maptiler/maptiler-other-api/) — The Other API from MapTiler — 3 operation(s) for other.
+- [MapTiler Static maps API](https://apis.io/apis/maptiler/maptiler-static-maps-api/) — The Static maps API from MapTiler — 3 operation(s) for static maps.
+- [MapTiler Tiles API](https://apis.io/apis/maptiler/maptiler-tiles-api/) — The Tiles API from MapTiler — 6 operation(s) for tiles.
+- [MapTiler Weather API](https://apis.io/apis/maptiler/maptiler-weather-api/) — The Weather API from MapTiler — 1 operation(s) for weather.
 
-| Name | Description |
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Maptiler Agentic Access](https://apis.io/agentic-access/maptiler/maptiler-agentic-access/)
+
+#### JSON Schema (2)
+
+The data models the API reads and writes.
+
+- [SearchResults](https://apis.io/schemas/maptiler/maptiler-geocoding-result/)
+- [GeolocationResult](https://apis.io/schemas/maptiler/maptiler-geolocation-result/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Maptiler Context](https://apis.io/jsonld/maptiler/maptiler-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Maptiler Vocabulary](https://apis.io/vocabularies/maptiler/maptiler-vocabulary/)
+
+#### Examples (4)
+
+Example requests and responses.
+
+- [Maptiler Elevation](https://apis.io/examples/maptiler/maptiler-elevation/)
+- [Maptiler Geocoding Forward](https://apis.io/examples/maptiler/maptiler-geocoding-forward/)
+- [Maptiler Geolocation Ip](https://apis.io/examples/maptiler/maptiler-geolocation-ip/)
+- [Maptiler Static Map](https://apis.io/examples/maptiler/maptiler-static-map/)
+
+#### Collections (11)
+
+Postman and Open Collection request collections.
+
+- [MapTiler Coordinates API](https://apis.io/collections/maptiler/open-maptiler-coordinates-api/)
+- [MapTiler Coordinates Data API](https://apis.io/collections/maptiler/open-maptiler-data-api/)
+- [MapTiler Coordinates Elevation API](https://apis.io/collections/maptiler/open-maptiler-elevation-api/)
+- [MapTiler Coordinates Geocoding API](https://apis.io/collections/maptiler/open-maptiler-geocoding-api/)
+- [MapTiler Coordinates Geolocation API](https://apis.io/collections/maptiler/open-maptiler-geolocation-api/)
+- [MapTiler Coordinates Images API](https://apis.io/collections/maptiler/open-maptiler-images-api/)
+- [MapTiler Coordinates Maps API](https://apis.io/collections/maptiler/open-maptiler-maps-api/)
+- [MapTiler Coordinates Other API](https://apis.io/collections/maptiler/open-maptiler-other-api/)
+- [MapTiler Coordinates Static maps API](https://apis.io/collections/maptiler/open-maptiler-static-maps-api/)
+- [MapTiler Coordinates Tiles API](https://apis.io/collections/maptiler/open-maptiler-tiles-api/)
+- [MapTiler Coordinates Weather API](https://apis.io/collections/maptiler/open-maptiler-weather-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [MapTiler — jsonschema rules](https://apis.io/rules/maptiler/maptiler-jsonschema-spectral-rules/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Maptiler Authentication](https://apis.io/security/maptiler/maptiler-authentication/)
+- [Maptiler Domain Security](https://apis.io/security/maptiler/maptiler-domain-security/)
+- [Maptiler Trust Center](https://apis.io/security/maptiler/maptiler-trust-center/)
+- [Maptiler Vulnerability Disclosure](https://apis.io/security/maptiler/maptiler-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Maptiler Plans Pricing](https://apis.io/plans/maptiler/maptiler-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Maptiler Rate Limits](https://apis.io/rate-limits/maptiler/maptiler-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Maptiler Finops](https://apis.io/finops/maptiler/maptiler-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.maptiler.com/)
+- [Documentation](https://docs.maptiler.com/)
+- [Pricing](https://www.maptiler.com/cloud/pricing/)
+- [Blog](https://www.maptiler.com/news/)
+- [Status](https://status.maptiler.com)
+
+## API Evangelist rating
+
+**Kin Score 37.6** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
 |---|---|
-| Maps API | Access MapTiler Cloud map styles including embeddable viewers, style configuration, raster tiles, and OGC-compatible endpoints |
-| Tiles API | Delivers tile datasets including satellite imagery, terrain, and vector or raster tile collections via XYZ, OGC API - Tiles, and WMTS |
-| Geocoding API | Forward and reverse geocoding to search for places and addresses globally; batch support for up to 50 queries |
-| Static Maps API | Generates static non-interactive map images in PNG, JPG, or WebP with optional markers and paths (paid plans only) |
-| Elevation API | Accurate altitude above mean sea level for up to 50 coordinate pairs per request in meters or feet |
-| Geolocation API | Approximate location detection from IP address including country, city, coordinates, and timezone |
-| Coordinates API | Search the EPSG coordinate system database and transform coordinates between projections for up to 50 pairs per request |
+| Discoverability | 48.2 |
+| Contract quality | 57.1 |
+| Contract governance | 23.5 |
+| Operational transparency | 28.9 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 26.3 |
 
-## Plans, Rate Limits, and FinOps
+**Agent readiness 23.6** — agent-aware
 
-| Resource | Description |
+| Agent-readiness dimension | Result |
 |---|---|
-| [Plans and Pricing](plans/maptiler-plans-pricing.yml) | Four tiers: Free ($0), Flex ($25/mo), Unlimited ($295/mo), and Custom. Priced on sessions, requests, and storage. |
-| [Rate Limits](rate-limits/maptiler-rate-limits.yml) | Monthly session and request quotas per plan. Free plan suspends on overage; paid plans charge per-unit overages. |
-| [FinOps](finops/maptiler-finops.yml) | FOCUS-aligned cost optimization guidance including tile caching, lazy initialization, batch geocoding, and API key segmentation. |
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
 
-## Timestamps
+**Regulatory alignment 27.5** — Horizontal (data, software, accessibility, platform)
 
-- Created: 2026-06-12
-- Modified: 2026-06-12
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/maptiler/](https://apis.io/providers/maptiler/).
 
-## Common
+## How this profile is made
 
-| Type | URL |
-|---|---|
-| Website | https://www.maptiler.com/ |
-| Documentation | https://docs.maptiler.com/ |
-| GitHub | https://github.com/maptiler |
-| LinkedIn | https://www.linkedin.com/company/maptiler/ |
-| Blog | https://www.maptiler.com/news/ |
-| Pricing | https://www.maptiler.com/cloud/pricing/ |
-| Status Page | https://status.maptiler.com |
-| X | https://x.com/MapTiler |
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-## Maintainers
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for MapTiler: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-| Name | Email |
-|---|---|
-| Kin Lane | kin@apievangelist.com |
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/maptiler/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
